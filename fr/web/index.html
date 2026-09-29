@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="fr"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="alternate" hreflang="fr" href="https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/fr/web/"><link rel="alternate" hreflang="en" href="https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/en/web/"></head><body>
 <title>CGS SDK Docs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 <style>
@@ -116,6 +116,10 @@
   .brandmark .dot{width:10px;height:10px;border-radius:3px;background:var(--brand);flex:none;}
   .topbar .ver{font-family:var(--font-mono);font-size:11px;color:var(--fg-faint);border:1px solid var(--border);border-radius:20px;padding:2px 8px;flex:none;}
   .topbar .tagline{margin-left:auto;color:var(--fg-faint);font-size:12.5px;flex:none;}
+  .lang-switch{display:flex;gap:2px;flex:none;font:600 11.5px var(--font-text);letter-spacing:.04em;}
+  .lang-switch a,.lang-switch span{padding:3px 8px;border-radius:6px;color:var(--fg-faint);}
+  .lang-switch a:hover{color:var(--fg);background:var(--bg-inset);text-decoration:none;}
+  .lang-switch [aria-current]{color:var(--brand);background:var(--brand-wash);}
   .menu-toggle{
     display:none;flex:none;width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
     background:var(--bg-elevated);color:var(--fg);align-items:center;justify-content:center;cursor:pointer;
@@ -292,6 +296,7 @@
     .content{max-width:640px;padding:0 18px 100px;}
     .hero h1{font-size:32px;}
     .topbar .tagline{display:none;}
+    .lang-switch{margin-left:auto;}
     .snippet-tabbar .tab-btn{padding:9px 11px 8px;}
   }
 </style>
@@ -300,6 +305,7 @@
   <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
   <div class="brandmark"><span class="dot"></span>CGS <span class="ver">v1.2.2</span></div>
   <span class="tagline">SDK de contenu Cafeyn — JavaScript · React · Vue</span>
+  <nav class="lang-switch" aria-label="Langue"><span aria-current="true">FR</span><a href="../../en/web/" hreflang="en" lang="en" data-lang="en">EN</a></nav>
 </div>
 
 <div class="backdrop" id="backdrop"></div>
@@ -409,14 +415,14 @@
       <div class="prose"><p>Récupérez les fichiers ci-dessous et hébergez-les sur votre site (par exemple sous <code class="inline">/cgs/</code>, comme dans l'exemple ci-dessus). Ces liens pointent toujours vers la dernière version publiée.</p></div>
       <div class="table-wrap"><table class="props">
         <tr><th>Fichier</th><th>Contenu</th></tr>
-        <tr><td class="name"><a style="color:var(--brand)" href="downloads/vanilla/latest/core/index.iife.js" download>core/index.iife.js</a></td><td>Core SDK, expose <code class="inline">window.CGS</code></td></tr>
-        <tr><td class="name"><a style="color:var(--brand)" href="downloads/vanilla/latest/core/index.css" download>core/index.css</a></td><td>Styles du core</td></tr>
-        <tr><td class="name"><a style="color:var(--brand)" href="downloads/vanilla/latest/components/index.js" download>components/index.js</a></td><td>Composants, expose <code class="inline">window.CGSComponents</code></td></tr>
-        <tr><td class="name"><a style="color:var(--brand)" href="downloads/vanilla/latest/components/index.css" download>components/index.css</a></td><td>Styles des composants</td></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="../../downloads/vanilla/latest/core/index.iife.js" download>core/index.iife.js</a></td><td>Core SDK, expose <code class="inline">window.CGS</code></td></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="../../downloads/vanilla/latest/core/index.css" download>core/index.css</a></td><td>Styles du core</td></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="../../downloads/vanilla/latest/components/index.js" download>components/index.js</a></td><td>Composants, expose <code class="inline">window.CGSComponents</code></td></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="../../downloads/vanilla/latest/components/index.css" download>components/index.css</a></td><td>Styles des composants</td></tr>
       </table></div>
       <div class="note info">
         <div class="ic">i</div>
-        <p>Pour figer une version, remplacez <code class="inline">latest</code> par le numéro voulu dans l'URL, par exemple <code class="inline">https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/sdk-web/downloads/vanilla/v1.2.2/core/index.iife.js</code>.</p>
+        <p>Pour figer une version, remplacez <code class="inline">latest</code> par le numéro voulu dans l'URL, par exemple <code class="inline">https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/downloads/vanilla/v1.2.2/core/index.iife.js</code>.</p>
       </div>
 
       <h3 class="sub-h" id="gs-init">2. Initialisation</h3>
@@ -1509,7 +1515,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
   tutorial: { enabled: <span class="tok-kw">true</span> },
 
   <span class="tok-com">// — Session & callbacks —</span>
-  renewTicket: { enabled: <span class="tok-kw">false</span>, lifetime: <span class="tok-str">0</span>, headers: {}, url: <span class="tok-str">""</span> }, <span class="tok-com">// mécanisme non actif, voir l'avertissement plus haut</span>
+  renewTicket: { enabled: <span class="tok-kw">false</span>, lifetime: <span class="tok-str">0</span>, headers: {}, url: <span class="tok-str">""</span> }, <span class="tok-com">// mécanisme non actif, voir l'avertissement plus bas</span>
   closeButton: () =&gt; history.go(-<span class="tok-str">1</span>),
   downloadButton: () =&gt; window.open(downloadUrl, <span class="tok-str">"_blank"</span>),
   triggerDoublePagesEvent: <span class="tok-kw">true</span>,
@@ -1633,6 +1639,13 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
           btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copier</span>';
         }, 1800);
       });
+    });
+  });
+
+  document.querySelectorAll(".lang-switch a[data-lang]").forEach(function(a){
+    a.addEventListener("click", function(){
+      try { localStorage.setItem("cgs-docs-lang", a.getAttribute("data-lang")); } catch(e) {}
+      a.href = a.getAttribute("href").split("#")[0] + location.hash;
     });
   });
 

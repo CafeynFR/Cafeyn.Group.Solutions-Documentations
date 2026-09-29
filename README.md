@@ -1,47 +1,54 @@
-# Cafeyn Group Solutions — Documentations
+# Cafeyn Group Solutions — Documentation
 
-Documentation publique des stacks CGS, publiée via GitHub Pages :
+Public documentation for the CGS stacks, published with GitHub Pages:
 https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/
 
 ## Structure
 
+The documentation is available in French (`fr/`) and English (`en/`), with one HTML file per language and per stack.
+
 ```
-index.html                  Portail d'accueil (liste des stacks)
-sdk-web/index.html          Documentation du SDK Web (dont la section « Télécharger la version vanilla »)
-sdk-web/downloads/vanilla/latest/   Dernière version du SDK vanilla (core/ + components/)
-sdk-web/downloads/vanilla/vX.Y.Z/   Versions archivées
-backend/index.html          Documentation Backend (à venir)
-ios/index.html              Documentation iOS (à venir)
-android/index.html          Documentation Android (à venir)
-tools/sdk-repo/             Workflow à copier dans le repo du SDK
-.nojekyll                   Désactive Jekyll (fichiers servis tels quels)
+index.html                  Redirects to fr/ or en/ (saved language, otherwise the browser's)
+fr/index.html               Home portal (list of stacks), in French
+fr/web/index.html           Web SDK documentation, in French (including "Download the vanilla build")
+fr/backend|ios|android/     Upcoming documentation, in French
+en/…                        Same tree, in English
+downloads/vanilla/latest/   Latest vanilla SDK release (core/ + components/)
+downloads/vanilla/vX.Y.Z/   Archived releases
 ```
 
-Chaque documentation est un fichier HTML autonome : aucun build n'est nécessaire.
+Each documentation page is a standalone HTML file: no build step is required.
 
-## Mettre à jour une documentation
+## Languages
 
-1. Modifier le fichier `<stack>/index.html` (dans Claude, un éditeur, ou Claude Code directement dans ce repo).
-2. Ouvrir une PR (ou pousser sur `main`).
-3. GitHub Pages redéploie automatiquement en 1 à 2 minutes.
+- Every page has an FR / EN switcher that leads to the same page (and the same anchor) in the other language, and remembers the choice (`localStorage`, key `cgs-docs-lang`).
+- Pages declare their language (`<html lang>`) and their translations (`<link rel="alternate" hreflang>`).
+- **Any change to a page must be applied to the other language in the same PR.** Element `id`s and anchors must stay identical between `fr/` and `en/`.
+- To add a language: copy `en/` to `<code>/`, translate it, then add the language to the switcher, the `hreflang` tags and the redirect script of the root page.
 
-## Ajouter une nouvelle stack
+## Updating a documentation page
 
-1. Remplacer le `index.html` du dossier concerné par la documentation.
-2. Dans le `index.html` racine, transformer la ligne `<span class="soon">` de la stack en `<a href="dossier/">` et passer son statut à « Disponible ».
+1. Edit `fr/<stack>/index.html` **and** `en/<stack>/index.html` (in Claude, an editor, or Claude Code directly in this repo).
+2. Open a PR (or push to `main`).
+3. GitHub Pages redeploys automatically within 1 to 2 minutes.
 
-## Publier une nouvelle version du SDK vanilla
+## Adding a new stack
 
-Automatique : le workflow `tools/sdk-repo/publish-to-docs.yml`, installé dans le repo du SDK,
-copie le build dans `sdk-web/downloads/vanilla/vX.Y.Z/` et `sdk-web/downloads/vanilla/latest/` à chaque tag `vX.Y.Z`.
+1. Replace `fr/<stack>/index.html` and `en/<stack>/index.html` with the documentation.
+2. In `fr/index.html` and `en/index.html`, turn the stack's `<span class="soon">` line into `<a href="folder/">` and set its status to "Disponible" / "Available".
 
-Manuel : copier les dossiers `core/` et `components/` dans `sdk-web/downloads/vanilla/vX.Y.Z/` et `sdk-web/downloads/vanilla/latest/`, puis commit.
-Penser à mettre à jour le badge de version et l'exemple d'URL figée dans `sdk-web/index.html`.
+## Publishing a new vanilla SDK release
 
-URLs d'intégration :
-- Pages : `https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/sdk-web/downloads/vanilla/latest/core/index.iife.js`
-- CDN (jsDelivr, version figée) : `https://cdn.jsdelivr.net/gh/CafeynFR/Cafeyn.Group.Solutions-Documentations@main/sdk-web/downloads/vanilla/vX.Y.Z/core/index.iife.js`
+Automatic: the `publish-to-docs.yml` workflow, installed in the SDK repo,
+copies the build to `downloads/vanilla/vX.Y.Z/` and `downloads/vanilla/latest/` on every `vX.Y.Z` tag.
 
-## Rappel
+Manual: copy the `core/` and `components/` folders to `downloads/vanilla/vX.Y.Z/` and `downloads/vanilla/latest/`, then commit.
+Remember to update the version badge and the pinned-version URL example in `fr/web/index.html` and `en/web/index.html`.
 
-Ce repo est **public** : ne jamais y committer de clés, tokens, URLs internes ou données clients.
+Integration URLs:
+- Pages: `https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/downloads/vanilla/latest/core/index.iife.js`
+- CDN (jsDelivr, pinned version): `https://cdn.jsdelivr.net/gh/CafeynFR/Cafeyn.Group.Solutions-Documentations@main/downloads/vanilla/vX.Y.Z/core/index.iife.js`
+
+## Reminder
+
+This repo is **public**: never commit keys, tokens, internal URLs or customer data.

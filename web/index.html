@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="alternate" hreflang="fr" href="https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/fr/web/"><link rel="alternate" hreflang="en" href="https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/en/web/"></head><body>
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>CGS SDK Docs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 <style>
@@ -116,10 +116,6 @@
   .brandmark .dot{width:10px;height:10px;border-radius:3px;background:var(--brand);flex:none;}
   .topbar .ver{font-family:var(--font-mono);font-size:11px;color:var(--fg-faint);border:1px solid var(--border);border-radius:20px;padding:2px 8px;flex:none;}
   .topbar .tagline{margin-left:auto;color:var(--fg-faint);font-size:12.5px;flex:none;}
-  .lang-switch{display:flex;gap:2px;flex:none;font:600 11.5px var(--font-text);letter-spacing:.04em;}
-  .lang-switch a,.lang-switch span{padding:3px 8px;border-radius:6px;color:var(--fg-faint);}
-  .lang-switch a:hover{color:var(--fg);background:var(--bg-inset);text-decoration:none;}
-  .lang-switch [aria-current]{color:var(--brand);background:var(--brand-wash);}
   .menu-toggle{
     display:none;flex:none;width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
     background:var(--bg-elevated);color:var(--fg);align-items:center;justify-content:center;cursor:pointer;
@@ -296,7 +292,6 @@
     .content{max-width:640px;padding:0 18px 100px;}
     .hero h1{font-size:32px;}
     .topbar .tagline{display:none;}
-    .lang-switch{margin-left:auto;}
     .snippet-tabbar .tab-btn{padding:9px 11px 8px;}
   }
 </style>
@@ -304,8 +299,7 @@
 <div class="topbar">
   <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
   <div class="brandmark"><span class="dot"></span>CGS <span class="ver">v1.2.2</span></div>
-  <span class="tagline">SDK de contenu Cafeyn — JavaScript · React · Vue</span>
-  <nav class="lang-switch" aria-label="Langue"><span aria-current="true">FR</span><a href="../../en/web/" hreflang="en" lang="en" data-lang="en">EN</a></nav>
+  <span class="tagline">Cafeyn content SDK — JavaScript · React · Vue</span>
 </div>
 
 <div class="backdrop" id="backdrop"></div>
@@ -313,25 +307,25 @@
 <div class="shell">
   <nav class="sidebar" id="sidebar">
     <h5>Introduction</h5>
-    <a href="#overview" class="nav-link">Vue d'ensemble</a>
+    <a href="#overview" class="nav-link">Overview</a>
 
-    <h5>Démarrage</h5>
+    <h5>Quick start</h5>
     <a href="#getting-started" class="nav-link">Getting started</a>
     <a href="#gs-install" class="nav-link sub">1. Installation</a>
-    <a href="#gs-download" class="nav-link sub">Télécharger (vanilla)</a>
-    <a href="#gs-init" class="nav-link sub">2. Initialisation</a>
-    <a href="#gs-auth" class="nav-link sub">3. Authentification</a>
-    <a href="#gs-first" class="nav-link sub">4. Premier composant</a>
+    <a href="#gs-download" class="nav-link sub">Download (vanilla)</a>
+    <a href="#gs-init" class="nav-link sub">2. Initialization</a>
+    <a href="#gs-auth" class="nav-link sub">3. Authentication</a>
+    <a href="#gs-first" class="nav-link sub">4. First component</a>
 
     <h5>Core SDK</h5>
-    <a href="#core" class="nav-link">Vue d'ensemble</a>
+    <a href="#core" class="nav-link">Overview</a>
     <a href="#core-auth" class="nav-link sub">Auth</a>
     <a href="#core-issues" class="nav-link sub">Issues</a>
-    <a href="#core-catalog" class="nav-link sub">Publications · Médias · Vidéos</a>
+    <a href="#core-catalog" class="nav-link sub">Publications · Media · Videos</a>
     <a href="#core-articles" class="nav-link sub">Articles</a>
     <a href="#core-reader" class="nav-link sub">Reader tickets</a>
 
-    <h5>Composants</h5>
+    <h5>Components</h5>
     <a href="#comp-headerblock" class="nav-link sub">HeaderBlock</a>
     <a href="#comp-contentinfo" class="nav-link sub">ContentInfo</a>
     <a href="#comp-articlecell" class="nav-link sub">ArticleCell</a>
@@ -349,9 +343,9 @@
   <main class="content">
 
     <div class="hero">
-      <span class="kicker">Documentation d'implémentation</span>
+      <span class="kicker">Implementation guide</span>
       <h1>CGS SDK</h1>
-      <p class="lede">Le kit de développement pour intégrer le contenu Cafeyn — articles, magazines et éditions — dans n'importe quel produit web : authentification, catalogue de contenu, composants prêts à l'emploi et moteurs de lecture embarquables.</p>
+      <p class="lede">The development kit for integrating Cafeyn content — articles, magazines and issues — into any web product: authentication, content catalog, ready-to-use components and embeddable reading engines.</p>
       <div class="pkgpills">
         <span class="pkgpill"><b>core</b> 0.1.4</span>
         <span class="pkgpill"><b>articlereader</b> 1.0.0-alpha.1</span>
@@ -363,26 +357,26 @@
     <!-- ================= OVERVIEW ================= -->
     <section id="overview">
       <div class="eyebrow">Introduction</div>
-      <h2>Vue d'ensemble</h2>
-      <p class="dek">CGS (<em>Content &amp; General Services</em>) est organisé en six packages du monorepo <code class="inline">web-cgs</code>, chacun avec une responsabilité précise.</p>
+      <h2>Overview</h2>
+      <p class="dek">CGS (<em>Content &amp; General Services</em>) is organized into six packages in the <code class="inline">web-cgs</code> monorepo, each with a specific responsibility.</p>
       <div class="prose">
-        <p>Le SDK s'utilise à deux niveaux :</p>
+        <p>The SDK can be used at two levels:</p>
         <ul>
-          <li><strong>Le cœur (<code class="inline">core</code>)</strong> — une classe <code class="inline">CGS</code> unique qui gère l'authentification et expose l'API de contenu (articles, éditions, publications, médias, vidéos). Elle est utilisée par tous les autres packages et peut aussi être consommée directement.</li>
-          <li><strong>Les librairies de composants (<code class="inline">react</code>, <code class="inline">vue</code>, <code class="inline">vanilla</code>)</strong> — un même catalogue de 9 composants (blocs, cellules, en-têtes, lecteurs) implémenté dans les trois écosystèmes avec la même API de props.</li>
+          <li><strong>The core (<code class="inline">core</code>)</strong> — a single <code class="inline">CGS</code> class that handles authentication and exposes the content API (articles, issues, publications, media, videos). It is used by all the other packages and can also be consumed directly.</li>
+          <li><strong>The component libraries (<code class="inline">react</code>, <code class="inline">vue</code>, <code class="inline">vanilla</code>)</strong> — the same catalog of 9 components (blocks, cells, headers, readers) implemented in all three ecosystems with the same props API.</li>
         </ul>
-        <p>Deux moteurs de lecture spécialisés, <strong>articlereader</strong> et <strong>pdfreader</strong>, sont packagés indépendamment (Svelte, compilés en scripts autonomes) et embarqués par les composants <code class="inline">ArticleReader</code> / <code class="inline">PDFReader</code> — ou utilisables directement, sans framework.</p>
+        <p>Two specialized reading engines, <strong>articlereader</strong> and <strong>pdfreader</strong>, are packaged independently (Svelte, compiled into standalone scripts) and embedded by the <code class="inline">ArticleReader</code> / <code class="inline">PDFReader</code> components — or usable directly, without a framework.</p>
       </div>
     </section>
 
     <!-- ================= GETTING STARTED ================= -->
     <section id="getting-started">
-      <div class="eyebrow">Démarrage</div>
+      <div class="eyebrow">Quick start</div>
       <h2>Getting started</h2>
-      <p class="dek">Quatre étapes pour afficher votre premier composant. Chaque bloc de code ci-dessous propose un onglet par framework.</p>
+      <p class="dek">Four steps to display your first component. Each code block below has one tab per framework.</p>
 
       <h3 class="sub-h" id="gs-install">1. Installation</h3>
-      <div class="prose"><p>Dans un projet React ou Vue existant, ajoutez la librairie de composants CGS, le <code class="inline">core</code>, et les deux moteurs de lecture (nécessaires en <em>peer dependency</em> dès que vous utilisez <code class="inline">ArticleReader</code> ou <code class="inline">PDFReader</code>) — le framework lui-même est déjà dans vos dépendances.</p></div>
+      <div class="prose"><p>In an existing React or Vue project, add the CGS component library, the <code class="inline">core</code>, and the two reading engines (required as <em>peer dependencies</em> as soon as you use <code class="inline">ArticleReader</code> or <code class="inline">PDFReader</code>) — the framework itself is already in your dependencies.</p></div>
 
       <div class="code-tabs">
         <div class="snippet-tabbar">
@@ -402,31 +396,31 @@
         </div>
         <div class="snippet-group active" data-fw="vanilla">
           <div class="snippet"><div class="bar"><span class="fname">index.html</span></div>
-          <pre><span class="tok-com">&lt;!-- pas d'installation npm : la librairie vanilla est distribuée en scripts prêts à l'emploi --&gt;</span>
+          <pre><span class="tok-com">&lt;!-- no npm install: the vanilla library is distributed as ready-to-use scripts --&gt;</span>
 <span class="tok-tag">&lt;link</span> <span class="tok-attr">rel</span>=<span class="tok-str">"stylesheet"</span> <span class="tok-attr">href</span>=<span class="tok-str">"/cgs/core/index.css"</span><span class="tok-tag">&gt;</span>
-<span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-str">"/cgs/core/index.iife.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>  <span class="tok-com">&lt;!-- expose window.CGS --&gt;</span>
+<span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-str">"/cgs/core/index.iife.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>  <span class="tok-com">&lt;!-- exposes window.CGS --&gt;</span>
 
 <span class="tok-tag">&lt;link</span> <span class="tok-attr">rel</span>=<span class="tok-str">"stylesheet"</span> <span class="tok-attr">href</span>=<span class="tok-str">"/cgs/components/index.css"</span><span class="tok-tag">&gt;</span>
-<span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-str">"/cgs/components/index.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>  <span class="tok-com">&lt;!-- expose window.CGSComponents --&gt;</span></pre></div>
+<span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-str">"/cgs/components/index.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>  <span class="tok-com">&lt;!-- exposes window.CGSComponents --&gt;</span></pre></div>
         </div>
       </div>
 
-      <h3 class="sub-h" id="gs-download">Télécharger la version vanilla</h3>
-      <div class="prose"><p>Récupérez les fichiers ci-dessous et hébergez-les sur votre site (par exemple sous <code class="inline">/cgs/</code>, comme dans l'exemple ci-dessus). Ces liens pointent toujours vers la dernière version publiée.</p></div>
+      <h3 class="sub-h" id="gs-download">Download the vanilla build</h3>
+      <div class="prose"><p>Download the files below and host them on your site (for example under <code class="inline">/cgs/</code>, as in the example above). These links always point to the latest published version.</p></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Fichier</th><th>Contenu</th></tr>
-        <tr><td class="name"><a style="color:var(--brand)" href="../../downloads/vanilla/latest/core/index.iife.js" download>core/index.iife.js</a></td><td>Core SDK, expose <code class="inline">window.CGS</code></td></tr>
-        <tr><td class="name"><a style="color:var(--brand)" href="../../downloads/vanilla/latest/core/index.css" download>core/index.css</a></td><td>Styles du core</td></tr>
-        <tr><td class="name"><a style="color:var(--brand)" href="../../downloads/vanilla/latest/components/index.js" download>components/index.js</a></td><td>Composants, expose <code class="inline">window.CGSComponents</code></td></tr>
-        <tr><td class="name"><a style="color:var(--brand)" href="../../downloads/vanilla/latest/components/index.css" download>components/index.css</a></td><td>Styles des composants</td></tr>
+        <tr><th>File</th><th>Contents</th></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="../downloads/vanilla/latest/core/index.iife.js" download>core/index.iife.js</a></td><td>Core SDK, exposes <code class="inline">window.CGS</code></td></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="../downloads/vanilla/latest/core/index.css" download>core/index.css</a></td><td>Core styles</td></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="../downloads/vanilla/latest/components/index.js" download>components/index.js</a></td><td>Components, exposes <code class="inline">window.CGSComponents</code></td></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="../downloads/vanilla/latest/components/index.css" download>components/index.css</a></td><td>Component styles</td></tr>
       </table></div>
       <div class="note info">
         <div class="ic">i</div>
-        <p>Pour figer une version, remplacez <code class="inline">latest</code> par le numéro voulu dans l'URL, par exemple <code class="inline">https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/downloads/vanilla/v1.2.2/core/index.iife.js</code>.</p>
+        <p>To pin a version, replace <code class="inline">latest</code> with the desired version number in the URL, for example <code class="inline">https://cafeynfr.github.io/Cafeyn.Group.Solutions-Documentations/downloads/vanilla/v1.2.2/core/index.iife.js</code>.</p>
       </div>
 
-      <h3 class="sub-h" id="gs-init">2. Initialisation</h3>
-      <div class="prose"><p>Créez une instance CGS avec votre <strong>clé de licence</strong>. À ce stade, aucune notion d'utilisateur n'entre en jeu — c'est uniquement ce qui identifie votre application auprès de l'API Cafeyn.</p></div>
+      <h3 class="sub-h" id="gs-init">2. Initialization</h3>
+      <div class="prose"><p>Create a CGS instance with your <strong>license key</strong>. At this stage, no user is involved — the key only identifies your application to the Cafeyn API.</p></div>
 
       <div class="code-tabs">
         <div class="snippet-tabbar">
@@ -471,24 +465,24 @@ app.mount(<span class="tok-str">"#app"</span>);</pre></div>
 
       <div class="note info">
         <div class="ic">i</div>
-        <p><code class="inline">env</code> est optionnel partout (défaut <code class="inline">"production"</code>), <strong>sauf pour <code class="inline">createCgs</code></strong> (Vue) : son type le rend obligatoire, même si <code class="inline">CGS</code> retombe sur <code class="inline">"production"</code> en interne.</p>
+        <p><code class="inline">env</code> is optional everywhere (default <code class="inline">"production"</code>), <strong>except for <code class="inline">createCgs</code></strong> (Vue): its type makes it required, even though <code class="inline">CGS</code> falls back to <code class="inline">"production"</code> internally.</p>
       </div>
 
-      <h3 class="sub-h" id="gs-auth">3. Authentification</h3>
-      <div class="prose"><p>CGS ne gère pas lui-même la connexion de l'utilisateur : c'est votre application qui authentifie la personne (identifiants, SSO…) auprès de <strong>votre propre backend</strong>, puis transmet le token obtenu à CGS pour ouvrir une session.</p></div>
+      <h3 class="sub-h" id="gs-auth">3. Authentication</h3>
+      <div class="prose"><p>CGS does not handle user sign-in itself: your application authenticates the user (credentials, SSO…) against <strong>your own backend</strong>, then passes the resulting token to CGS to open a session.</p></div>
 
       <ol class="flow-list">
         <li>
-          <h5>Votre backend authentifie l'utilisateur</h5>
-          <p>Formulaire, SSO, etc. — géré entièrement par votre application. Vous en récupérez un <strong>token externe</strong>.</p>
+          <h5>Your backend authenticates the user</h5>
+          <p>Form, SSO, etc. — handled entirely by your application. You get back an <strong>external token</strong>.</p>
         </li>
         <li>
-          <h5>Le token est transmis à CGS</h5>
-          <p><code class="inline">CGS.auth.validate(externalToken)</code> échange ce token contre une session CGS (access &amp; refresh token, persistés en cookies).</p>
+          <h5>The token is passed to CGS</h5>
+          <p><code class="inline">CGS.auth.validate(externalToken)</code> exchanges this token for a CGS session (access &amp; refresh tokens, persisted in cookies).</p>
         </li>
         <li>
-          <h5>Le résultat se lit comme un booléen</h5>
-          <p>La promesse résout <code class="inline">true</code> ou <code class="inline">false</code> — elle ne lève jamais d'exception pour un échec d'échange. <code class="inline">false</code> signifie un token invalide ou expiré : c'est à votre application de réagir (écran de connexion, nouvelle tentative…).</p>
+          <h5>The result is read as a boolean</h5>
+          <p>The promise resolves to <code class="inline">true</code> or <code class="inline">false</code> — it never throws on a failed exchange. <code class="inline">false</code> means an invalid or expired token: it is up to your application to react (login screen, retry…).</p>
         </li>
       </ol>
 
@@ -509,7 +503,7 @@ app.mount(<span class="tok-str">"#app"</span>);</pre></div>
 
   useEffect(() =&gt; {
     <span class="tok-kw">async function</span> authenticate() {
-      <span class="tok-com">// externalToken provient de VOTRE backend d'authentification</span>
+      <span class="tok-com">// externalToken comes from YOUR authentication backend</span>
       <span class="tok-kw">const</span> success = <span class="tok-kw">await</span> CGS.auth.validate(externalToken);
       <span class="tok-kw">if</span> (!success) setAuthFailed(<span class="tok-kw">true</span>);
     }
@@ -530,7 +524,7 @@ app.mount(<span class="tok-str">"#app"</span>);</pre></div>
 <span class="tok-kw">const</span> authFailed = ref(<span class="tok-kw">false</span>);
 
 onMounted(<span class="tok-kw">async</span> () =&gt; {
-  <span class="tok-com">// externalToken provient de VOTRE backend d'authentification</span>
+  <span class="tok-com">// externalToken comes from YOUR authentication backend</span>
   <span class="tok-kw">const</span> success = <span class="tok-kw">await</span> CGS.auth.validate(externalToken);
   <span class="tok-kw">if</span> (!success) authFailed.value = <span class="tok-kw">true</span>;
 });
@@ -544,7 +538,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
           <div class="snippet"><div class="bar"><span class="fname">index.html</span></div>
           <pre><span class="tok-tag">&lt;script&gt;</span>
   document.addEventListener(<span class="tok-str">"DOMContentLoaded"</span>, <span class="tok-kw">async</span> () =&gt; {
-    <span class="tok-com">// externalToken provient de VOTRE backend d'authentification</span>
+    <span class="tok-com">// externalToken comes from YOUR authentication backend</span>
     <span class="tok-kw">const</span> success = <span class="tok-kw">await</span> cgsComponents.core.auth.validate(externalToken);
     <span class="tok-kw">if</span> (!success) {
       window.location.href = <span class="tok-str">"/login"</span>;
@@ -556,11 +550,11 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
       <div class="note warn">
         <div class="ic">!</div>
-        <p>Ne codez jamais en dur une clé de licence ou un token dans un dépôt public. Les exemples ci-dessus utilisent des espaces réservés — injectez ces valeurs via votre configuration d'environnement ou votre flux d'authentification.</p>
+        <p>Never hard-code a license key or a token in a public repository. The examples above use placeholders — inject these values through your environment configuration or your authentication flow.</p>
       </div>
 
-      <h3 class="sub-h" id="gs-first">4. Votre premier composant</h3>
-      <div class="prose"><p>Une fois le fournisseur en place, chaque composant se charge lui-même d'appeler l'API — vous n'avez qu'à lui passer un identifiant.</p></div>
+      <h3 class="sub-h" id="gs-first">4. Your first component</h3>
+      <div class="prose"><p>Once the provider is in place, each component makes its own API calls — you only need to pass it an identifier.</p></div>
 
       <div class="code-tabs">
         <div class="snippet-tabbar">
@@ -610,8 +604,8 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
     <!-- ================= CORE ================= -->
     <section id="core">
       <div class="eyebrow">Core SDK</div>
-      <h2>La classe <code class="inline" style="font-size:.85em;">CGS</code></h2>
-      <p class="dek">Le point d'entrée unique de <code class="inline">@lekiosquefr/web-cgs-core</code> : une instance par application, injectée dans les composants ou utilisée directement. Identique quel que soit le framework choisi.</p>
+      <h2>The <code class="inline" style="font-size:.85em;">CGS</code> class</h2>
+      <p class="dek">The single entry point of <code class="inline">@lekiosquefr/web-cgs-core</code>: one instance per application, injected into the components or used directly. Identical whichever framework you choose.</p>
 
       <div class="snippet"><div class="bar"><span class="fname">core</span></div><pre><span class="tok-kw">class</span> CGS {
   <span class="tok-kw">constructor</span>(licenseKey: <span class="tok-kw">string</span>, env: Env = <span class="tok-str">"production"</span>)
@@ -627,190 +621,190 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
 <span class="tok-kw">type</span> Env = <span class="tok-str">"development"</span> | <span class="tok-str">"staging"</span> | <span class="tok-str">"preprod"</span> | <span class="tok-str">"production"</span>;</pre></div>
 
-      <p class="dek" style="margin-top:22px;">Toutes les ressources de contenu suivent le même schéma : <code class="inline">get{X}(id)</code> pour un élément unique, <code class="inline">get{X}s(filter, orderBy?, paging?)</code> pour une recherche paginée.</p>
+      <p class="dek" style="margin-top:22px;">All content resources follow the same pattern: <code class="inline">get{X}(id)</code> for a single item, <code class="inline">get{X}s(filter, orderBy?, paging?)</code> for a paginated search.</p>
 
       <h3 class="sub-h" id="core-auth">Auth</h3>
-      <div class="prose"><p>Voir <a href="#gs-auth">Getting started → Authentification</a> pour la marche à suivre complète et la gestion des erreurs.</p></div>
+      <div class="prose"><p>See <a href="#gs-auth">Getting started → Authentication</a> for the complete walkthrough and error handling.</p></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Retour</th><th>Description</th></tr>
-        <tr><td class="name">validate(externalToken)</td><td class="type">Promise&lt;boolean&gt;</td><td>Échange un token externe (émis par votre backend) contre une session CGS ; persiste les tokens en cookies.</td></tr>
-        <tr><td class="name">refresh()</td><td class="type">Promise&lt;boolean&gt;</td><td>Rafraîchit la session à partir du refresh token stocké. Appelée automatiquement par le SDK sur une réponse 401.</td></tr>
-        <tr><td class="name">logout()</td><td class="type">void</td><td>Efface la session locale (cookies + état en mémoire).</td></tr>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td class="name">validate(externalToken)</td><td class="type">Promise&lt;boolean&gt;</td><td>Exchanges an external token (issued by your backend) for a CGS session; persists the tokens in cookies.</td></tr>
+        <tr><td class="name">refresh()</td><td class="type">Promise&lt;boolean&gt;</td><td>Refreshes the session using the stored refresh token. Called automatically by the SDK on a 401 response.</td></tr>
+        <tr><td class="name">logout()</td><td class="type">void</td><td>Clears the local session (cookies + in-memory state).</td></tr>
       </table></div>
 
       <h3 class="sub-h" id="core-issues">Issues</h3>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Retour</th><th>Description</th></tr>
-        <tr><td class="name">getIssue(issueId)</td><td class="type">Promise&lt;Issue&gt;</td><td>Une édition (magazine) complète.</td></tr>
-        <tr><td class="name">getIssues(filter, orderBy?, paging?)</td><td class="type">Promise&lt;IssueContentPage&gt;</td><td>Recherche paginée. <code class="inline">filter</code> requiert <code class="inline">ids</code>, <code class="inline">publicationIds</code> ou <code class="inline">topicIds</code>.</td></tr>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td class="name">getIssue(issueId)</td><td class="type">Promise&lt;Issue&gt;</td><td>A full issue (magazine).</td></tr>
+        <tr><td class="name">getIssues(filter, orderBy?, paging?)</td><td class="type">Promise&lt;IssueContentPage&gt;</td><td>Paginated search. <code class="inline">filter</code> requires <code class="inline">ids</code>, <code class="inline">publicationIds</code> or <code class="inline">topicIds</code>.</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Type</th><th>Forme</th></tr>
+        <tr><th>Type</th><th>Shape</th></tr>
         <tr><td class="name">IssueFilter</td><td class="type">{ ids?, publicationIds?, topicIds?: string[] }</td></tr>
         <tr><td class="name">IssueSort</td><td class="type">"releaseDateAsc" | "releaseDateDesc" | "title"</td></tr>
       </table></div>
 
-      <h3 class="sub-h" id="core-catalog">Publications · Médias · Vidéos</h3>
-      <div class="prose"><p>Trois ressources de catalogue supplémentaires, avec la même paire <code class="inline">get{X}</code> / <code class="inline">get{X}s</code> — mais toutes ne renvoient pas le même niveau de détail sur l'élément unique, voir ci-dessous.</p></div>
+      <h3 class="sub-h" id="core-catalog">Publications · Media · Videos</h3>
+      <div class="prose"><p>Three additional catalog resources, with the same <code class="inline">get{X}</code> / <code class="inline">get{X}s</code> pair — but they do not all return the same level of detail for a single item; see below.</p></div>
 
       <h4 class="sub-h4">Publications</h4>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Retour</th><th>Description</th></tr>
-        <tr><td class="name">getPublication(publicationId)</td><td class="type">Promise&lt;PublicationShort&gt;</td><td>Une publication (le titre/la marque, pas une édition précise).</td></tr>
-        <tr><td class="name">getPublications(filter, orderBy?, paging?)</td><td class="type">Promise&lt;PublicationContentPage&gt;</td><td>Recherche paginée. <code class="inline">filter</code> requiert <code class="inline">ids</code> ou <code class="inline">topicIds</code>.</td></tr>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td class="name">getPublication(publicationId)</td><td class="type">Promise&lt;PublicationShort&gt;</td><td>A publication (the title/brand, not a specific issue).</td></tr>
+        <tr><td class="name">getPublications(filter, orderBy?, paging?)</td><td class="type">Promise&lt;PublicationContentPage&gt;</td><td>Paginated search. <code class="inline">filter</code> requires <code class="inline">ids</code> or <code class="inline">topicIds</code>.</td></tr>
       </table></div>
       <div class="note info">
         <div class="ic">i</div>
-        <p>Contrairement à Article/Issue, il n'existe pas de forme "complète" distincte : <code class="inline">getPublication</code> et <code class="inline">getPublications</code> renvoient toutes les deux des <code class="inline">PublicationShort</code>.</p>
+        <p>Unlike Article/Issue, there is no separate "full" shape: <code class="inline">getPublication</code> and <code class="inline">getPublications</code> both return <code class="inline">PublicationShort</code>.</p>
       </div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Type</th><th>Forme</th></tr>
+        <tr><th>Type</th><th>Shape</th></tr>
         <tr><td class="name">PublicationFilter</td><td class="type">{ ids?, topicIds?: string[] }</td></tr>
         <tr><td class="name">PublicationSort</td><td class="type">"releaseDateAsc" | "releaseDateDesc" | "title"</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Champ (PublicationShort)</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">id / title</td><td class="type">string / string</td><td>Identifiant et titre de la publication.</td></tr>
-        <tr><td class="name">type</td><td class="type">"article" | "pdf" | "unknown" | "video"</td><td>Nature dominante du contenu de la publication.</td></tr>
-        <tr><td class="name">source</td><td class="type">"book" | "comic" | "corporate" | "feed" | "magazine" | "newsPaper" | "sponsored" | "unknown"</td><td>Catégorie éditoriale de la publication.</td></tr>
-        <tr><td class="name">lastIssue</td><td class="type">IssueShortRaw</td><td>Dernière édition parue, en résumé.</td></tr>
-        <tr><td class="name">topicIds</td><td class="type">string[]</td><td>Thématiques associées.</td></tr>
-        <tr><td class="name">releaseFrequencyId</td><td class="type">string</td><td>Fréquence de parution (identifiant interne).</td></tr>
-        <tr><td class="name">mediaId</td><td class="type">string?</td><td>Média auquel appartient la publication, si applicable.</td></tr>
+        <tr><th>Field (PublicationShort)</th><th>Type</th><th>Description</th></tr>
+        <tr><td class="name">id / title</td><td class="type">string / string</td><td>Publication identifier and title.</td></tr>
+        <tr><td class="name">type</td><td class="type">"article" | "pdf" | "unknown" | "video"</td><td>Predominant content type of the publication.</td></tr>
+        <tr><td class="name">source</td><td class="type">"book" | "comic" | "corporate" | "feed" | "magazine" | "newsPaper" | "sponsored" | "unknown"</td><td>Editorial category of the publication.</td></tr>
+        <tr><td class="name">lastIssue</td><td class="type">IssueShortRaw</td><td>Latest released issue, in summary form.</td></tr>
+        <tr><td class="name">topicIds</td><td class="type">string[]</td><td>Associated topics.</td></tr>
+        <tr><td class="name">releaseFrequencyId</td><td class="type">string</td><td>Release frequency (internal identifier).</td></tr>
+        <tr><td class="name">mediaId</td><td class="type">string?</td><td>Media the publication belongs to, if applicable.</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Médias</h4>
+      <h4 class="sub-h4">Media</h4>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Retour</th><th>Description</th></tr>
-        <tr><td class="name">getMedia(mediaId)</td><td class="type">Promise&lt;Media&gt;</td><td>Un média complet — l'éditeur/la marque qui publie une ou plusieurs publications.</td></tr>
-        <tr><td class="name">getMedias(filter, orderBy?, paging?)</td><td class="type">Promise&lt;MediaContentPage&gt;</td><td>Recherche paginée, renvoie des <code class="inline">MediaShort</code>.</td></tr>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td class="name">getMedia(mediaId)</td><td class="type">Promise&lt;Media&gt;</td><td>A full media entity — the publisher/brand that publishes one or more publications.</td></tr>
+        <tr><td class="name">getMedias(filter, orderBy?, paging?)</td><td class="type">Promise&lt;MediaContentPage&gt;</td><td>Paginated search, returns <code class="inline">MediaShort</code>.</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Type</th><th>Forme</th></tr>
+        <tr><th>Type</th><th>Shape</th></tr>
         <tr><td class="name">MediaFilter</td><td class="type">{ ids?, publicationIds?, topicIds?: string[] }</td></tr>
         <tr><td class="name">MediaSort</td><td class="type">"title"</td></tr>
       </table></div>
       <div class="note warn">
         <div class="ic">!</div>
-        <p><code class="inline">MediaSort</code> n'a qu'une seule valeur possible (<code class="inline">"title"</code>) — pas de tri par date sur les médias, contrairement aux autres ressources.</p>
+        <p><code class="inline">MediaSort</code> has only one possible value (<code class="inline">"title"</code>) — no date sorting on media, unlike the other resources.</p>
       </div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Champ (Media, complet)</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">id / name</td><td class="type">string / string</td><td>Identifiant et nom du média.</td></tr>
-        <tr><td class="name">description</td><td class="type">string?</td><td>Description éditoriale du média.</td></tr>
-        <tr><td class="name">creationDate</td><td class="type">string</td><td>Date de création du média.</td></tr>
-        <tr><td class="name">color / logoUrl</td><td class="type">string? / string?</td><td>Couleur de marque et logo, pour l'affichage.</td></tr>
-        <tr><td class="name">certifications</td><td class="type">string[]</td><td>Labels/certifications associés au média.</td></tr>
-        <tr><td class="name">publications</td><td class="type">PublicationReference[]</td><td>Publications rattachées à ce média.</td></tr>
+        <tr><th>Field (Media, full)</th><th>Type</th><th>Description</th></tr>
+        <tr><td class="name">id / name</td><td class="type">string / string</td><td>Media identifier and name.</td></tr>
+        <tr><td class="name">description</td><td class="type">string?</td><td>Editorial description of the media.</td></tr>
+        <tr><td class="name">creationDate</td><td class="type">string</td><td>Media creation date.</td></tr>
+        <tr><td class="name">color / logoUrl</td><td class="type">string? / string?</td><td>Brand color and logo, for display.</td></tr>
+        <tr><td class="name">certifications</td><td class="type">string[]</td><td>Labels/certifications associated with the media.</td></tr>
+        <tr><td class="name">publications</td><td class="type">PublicationReference[]</td><td>Publications linked to this media.</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Champ (MediaShort, dans une liste)</th><th>Type</th></tr>
+        <tr><th>Field (MediaShort, in a list)</th><th>Type</th></tr>
         <tr><td class="name">id / name / creationDate / logoUrl?</td><td class="type">string / string / string / string?</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Vidéos</h4>
+      <h4 class="sub-h4">Videos</h4>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Retour</th><th>Description</th></tr>
-        <tr><td class="name">getVideo(videoId)</td><td class="type">Promise&lt;Video&gt;</td><td>Une vidéo complète, avec son fichier source.</td></tr>
-        <tr><td class="name">getVideos(filter, orderBy?, paging?)</td><td class="type">Promise&lt;VideoContentPage&gt;</td><td>Recherche paginée. Comme pour les articles, la page inclut aussi les <code class="inline">publications</code> référencées.</td></tr>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td class="name">getVideo(videoId)</td><td class="type">Promise&lt;Video&gt;</td><td>A full video, with its source file.</td></tr>
+        <tr><td class="name">getVideos(filter, orderBy?, paging?)</td><td class="type">Promise&lt;VideoContentPage&gt;</td><td>Paginated search. As with articles, the page also includes the referenced <code class="inline">publications</code>.</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Type</th><th>Forme</th></tr>
+        <tr><th>Type</th><th>Shape</th></tr>
         <tr><td class="name">VideoFilter</td><td class="type">{ ids?, publicationIds?, topicIds?: string[] }</td></tr>
         <tr><td class="name">VideoSort</td><td class="type">"releaseDateAsc" | "releaseDateDesc"</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Champ (Video, complet)</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">id / title</td><td class="type">string / string</td><td>Identifiant et titre de la vidéo.</td></tr>
-        <tr><td class="name">publicationId / releaseDate</td><td class="type">string / string</td><td>Publication d'origine et date de mise en ligne.</td></tr>
-        <tr><td class="name">summary</td><td class="type">string?</td><td>Résumé de la vidéo.</td></tr>
-        <tr><td class="name">url</td><td class="type">string</td><td>URL du fichier vidéo source.</td></tr>
-        <tr><td class="name">cover</td><td class="type">Image</td><td>Image de couverture (<code class="inline">{ url }</code>).</td></tr>
-        <tr><td class="name">duration / width / height</td><td class="type">number</td><td>Durée (secondes) et dimensions natives.</td></tr>
-        <tr><td class="name">format</td><td class="type">"short"</td><td>Format de la vidéo — une seule valeur existe actuellement.</td></tr>
-        <tr><td class="name">creators / tags</td><td class="type">string[] / string[]</td><td>Auteurs/intervenants et mots-clés.</td></tr>
-        <tr><td class="name">language</td><td class="type">string</td><td>Langue de la vidéo.</td></tr>
-        <tr><td class="name">isOnline / sponsored</td><td class="type">boolean / boolean</td><td>Disponibilité de la vidéo et statut sponsorisé.</td></tr>
+        <tr><th>Field (Video, full)</th><th>Type</th><th>Description</th></tr>
+        <tr><td class="name">id / title</td><td class="type">string / string</td><td>Video identifier and title.</td></tr>
+        <tr><td class="name">publicationId / releaseDate</td><td class="type">string / string</td><td>Source publication and publish date.</td></tr>
+        <tr><td class="name">summary</td><td class="type">string?</td><td>Video summary.</td></tr>
+        <tr><td class="name">url</td><td class="type">string</td><td>URL of the source video file.</td></tr>
+        <tr><td class="name">cover</td><td class="type">Image</td><td>Cover image (<code class="inline">{ url }</code>).</td></tr>
+        <tr><td class="name">duration / width / height</td><td class="type">number</td><td>Duration (seconds) and native dimensions.</td></tr>
+        <tr><td class="name">format</td><td class="type">"short"</td><td>Video format — only one value currently exists.</td></tr>
+        <tr><td class="name">creators / tags</td><td class="type">string[] / string[]</td><td>Creators/contributors and keywords.</td></tr>
+        <tr><td class="name">language</td><td class="type">string</td><td>Video language.</td></tr>
+        <tr><td class="name">isOnline / sponsored</td><td class="type">boolean / boolean</td><td>Video availability and sponsored status.</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Champ (VideoShort, dans une liste)</th><th>Type</th></tr>
+        <tr><th>Field (VideoShort, in a list)</th><th>Type</th></tr>
         <tr><td class="name">id / title / publicationId / releaseDate</td><td class="type">string</td></tr>
         <tr><td class="name">cover</td><td class="type">Image?</td></tr>
       </table></div>
 
       <h3 class="sub-h" id="core-articles">Articles</h3>
-      <div class="prose"><p><code class="inline">getArticle</code> est aussi le mécanisme utilisé en interne par <a href="#reader-article">ArticleReader</a> pour charger chaque article affiché.</p></div>
+      <div class="prose"><p><code class="inline">getArticle</code> is also the mechanism used internally by <a href="#reader-article">ArticleReader</a> to load each displayed article.</p></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Retour</th><th>Description</th></tr>
-        <tr><td class="name">getArticle(articleId)</td><td class="type">Promise&lt;Article&gt;</td><td>Un article complet, avec son contenu (<code class="inline">elements</code>).</td></tr>
-        <tr><td class="name">getArticles(filter, orderBy?, paging?)</td><td class="type">Promise&lt;ArticleContentPage&gt;</td><td>Recherche paginée. <code class="inline">filter</code> requiert au moins un critère (<code class="inline">ids</code>, <code class="inline">issueIds</code>, <code class="inline">publicationIds</code> ou <code class="inline">topicIds</code>).</td></tr>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td class="name">getArticle(articleId)</td><td class="type">Promise&lt;Article&gt;</td><td>A full article, with its content (<code class="inline">elements</code>).</td></tr>
+        <tr><td class="name">getArticles(filter, orderBy?, paging?)</td><td class="type">Promise&lt;ArticleContentPage&gt;</td><td>Paginated search. <code class="inline">filter</code> requires at least one criterion (<code class="inline">ids</code>, <code class="inline">issueIds</code>, <code class="inline">publicationIds</code> or <code class="inline">topicIds</code>).</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Type</th><th>Forme</th></tr>
+        <tr><th>Type</th><th>Shape</th></tr>
         <tr><td class="name">ArticleFilter</td><td class="type">{ ids?, issueIds?, publicationIds?, topicIds?: string[] }</td></tr>
         <tr><td class="name">ArticleSort</td><td class="type">"releaseDateAsc" | "releaseDateDesc"</td></tr>
       </table></div>
 
       <h3 class="sub-h" id="core-reader">Reader tickets</h3>
-      <div class="prose"><p>Le module <code class="inline">reader</code> délivre un <strong>ticket</strong> de lecture pour une édition — c'est le mécanisme utilisé en interne par <a href="#reader-pdf">PDFReader</a> (voir son <a href="#reader-pdf">schéma de fonctionnement</a>) pour charger les pages, les articles et les enrichissements d'un numéro. Vous pouvez aussi l'appeler directement si vous construisez votre propre affichage.</p></div>
+      <div class="prose"><p>The <code class="inline">reader</code> module issues a reading <strong>ticket</strong> for an issue — this is the mechanism used internally by <a href="#reader-pdf">PDFReader</a> (see its <a href="#reader-pdf">how-it-works flow</a>) to load an issue's pages, articles and enrichments. You can also call it directly if you are building your own display.</p></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Retour</th><th>Description</th></tr>
-        <tr><td class="name">getTicket(issueId)</td><td class="type">Promise&lt;Ticket&gt;</td><td>Ouvre une session de lecture pour une édition.</td></tr>
-        <tr><td class="name">getArticles(ticket)</td><td class="type">Promise&lt;Article[]&gt;</td><td>Articles disponibles dans l'édition — à n'appeler que si <code class="inline">ticket.hasArticles</code> est vrai.</td></tr>
-        <tr><td class="name">getEnrichments(ticket)</td><td class="type">Promise&lt;Box[]&gt;</td><td>Zones interactives ("boxes") positionnées sur les pages — à n'appeler que si <code class="inline">ticket.hasEnrichment</code> est vrai.</td></tr>
-        <tr><td class="name">getTiles(ticket)</td><td class="type">Promise&lt;TilesReaderInfo&gt;</td><td>Tuiles d'images des pages, pour l'affichage progressif du magazine.</td></tr>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td class="name">getTicket(issueId)</td><td class="type">Promise&lt;Ticket&gt;</td><td>Opens a reading session for an issue.</td></tr>
+        <tr><td class="name">getArticles(ticket)</td><td class="type">Promise&lt;Article[]&gt;</td><td>Articles available in the issue — only call this if <code class="inline">ticket.hasArticles</code> is true.</td></tr>
+        <tr><td class="name">getEnrichments(ticket)</td><td class="type">Promise&lt;Box[]&gt;</td><td>Interactive areas ("boxes") positioned on the pages — only call this if <code class="inline">ticket.hasEnrichment</code> is true.</td></tr>
+        <tr><td class="name">getTiles(ticket)</td><td class="type">Promise&lt;TilesReaderInfo&gt;</td><td>Page image tiles, for progressive rendering of the magazine.</td></tr>
       </table></div>
-      <div class="prose"><p><code class="inline">ticket</code> ci-dessus désigne toujours la chaîne <code class="inline">Ticket.ticket</code> (pas l'objet entier) — voir sa forme complète ci-dessous.</p></div>
+      <div class="prose"><p><code class="inline">ticket</code> above always refers to the <code class="inline">Ticket.ticket</code> string (not the whole object) — see its full shape below.</p></div>
 
       <h4 class="sub-h4">Ticket</h4>
       <div class="table-wrap"><table class="props">
-        <tr><th>Champ</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">ticket</td><td class="type">string</td><td>Le jeton à passer à <code class="inline">getArticles</code>/<code class="inline">getEnrichments</code>/<code class="inline">getTiles</code>.</td></tr>
-        <tr><td class="name">hasArticles / hasEnrichment</td><td class="type">boolean</td><td>Indiquent si l'édition propose des articles intégrés et/ou des enrichissements.</td></tr>
-        <tr><td class="name">issueId</td><td class="type">number</td><td>Id de l'édition — notez le type <code class="inline">number</code>, alors que <code class="inline">getTicket</code> prend un <code class="inline">issueId</code> en <code class="inline">string</code>.</td></tr>
-        <tr><td class="name">publicationId / publicationTitle</td><td class="type">number / string</td><td>Publication à laquelle appartient l'édition.</td></tr>
-        <tr><td class="name">paperReleaseDate</td><td class="type">string</td><td>Date de parution papier de l'édition.</td></tr>
-        <tr><td class="name">expirationDate</td><td class="type">string</td><td>Date d'expiration du ticket — passé ce délai, redemandez-en un via <code class="inline">getTicket</code>.</td></tr>
-        <tr><td class="name">preview</td><td class="type">boolean</td><td>Indique si la session est un aperçu à accès limité (ex. utilisateur non abonné).</td></tr>
-        <tr><td class="name">version</td><td class="type">number</td><td>Version du contenu de l'édition.</td></tr>
-        <tr><td class="name">adPageNumber</td><td class="type">number?</td><td>Numéro de la page de publicité de couverture arrière, si l'édition en a une.</td></tr>
-        <tr><td class="name">ratio</td><td class="type">number?</td><td>Ratio d'affichage des pages, s'il est fourni par l'édition.</td></tr>
-        <tr><td class="name">environment / userId</td><td class="type">string / number</td><td>Contexte technique de la session — rarement utile côté intégration.</td></tr>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td class="name">ticket</td><td class="type">string</td><td>The token to pass to <code class="inline">getArticles</code>/<code class="inline">getEnrichments</code>/<code class="inline">getTiles</code>.</td></tr>
+        <tr><td class="name">hasArticles / hasEnrichment</td><td class="type">boolean</td><td>Whether the issue provides embedded articles and/or enrichments.</td></tr>
+        <tr><td class="name">issueId</td><td class="type">number</td><td>Issue id — note the <code class="inline">number</code> type, whereas <code class="inline">getTicket</code> takes an <code class="inline">issueId</code> as a <code class="inline">string</code>.</td></tr>
+        <tr><td class="name">publicationId / publicationTitle</td><td class="type">number / string</td><td>Publication the issue belongs to.</td></tr>
+        <tr><td class="name">paperReleaseDate</td><td class="type">string</td><td>Print release date of the issue.</td></tr>
+        <tr><td class="name">expirationDate</td><td class="type">string</td><td>Ticket expiration date — after that, request a new one via <code class="inline">getTicket</code>.</td></tr>
+        <tr><td class="name">preview</td><td class="type">boolean</td><td>Whether the session is a limited-access preview (e.g. a non-subscribed user).</td></tr>
+        <tr><td class="name">version</td><td class="type">number</td><td>Version of the issue's content.</td></tr>
+        <tr><td class="name">adPageNumber</td><td class="type">number?</td><td>Page number of the back-cover advertisement, if the issue has one.</td></tr>
+        <tr><td class="name">ratio</td><td class="type">number?</td><td>Page display ratio, if provided by the issue.</td></tr>
+        <tr><td class="name">environment / userId</td><td class="type">string / number</td><td>Technical session context — rarely useful for integrations.</td></tr>
       </table></div>
       <div class="note warn">
         <div class="ic">!</div>
-        <p>Un ticket expiré (<code class="inline">expirationDate</code> dépassée) n'est <strong>pas renouvelé automatiquement</strong> — voir la même limitation documentée sur <a href="#reader-pdf">l'option <code class="inline">renewTicket</code> de PDFReader</a>. Il faut rappeler <code class="inline">getTicket</code> pour en obtenir un nouveau.</p>
+        <p>An expired ticket (<code class="inline">expirationDate</code> passed) is <strong>not renewed automatically</strong> — see the same limitation documented for <a href="#reader-pdf">PDFReader's <code class="inline">renewTicket</code> option</a>. You must call <code class="inline">getTicket</code> again to get a new one.</p>
       </div>
 
-      <h4 class="sub-h4">Box (enrichissement)</h4>
+      <h4 class="sub-h4">Box (enrichment)</h4>
       <div class="table-wrap"><table class="props">
-        <tr><th>Champ</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">type</td><td class="type">"article" | "link"</td><td>Nature de la zone cliquable.</td></tr>
-        <tr><td class="name">target</td><td class="type">string</td><td>Cible de la zone : un id d'article si <code class="inline">type</code> vaut <code class="inline">"article"</code>, une URL si <code class="inline">"link"</code>.</td></tr>
-        <tr><td class="name">page</td><td class="type">number</td><td>Numéro de la page portant la zone.</td></tr>
-        <tr><td class="name">top / left</td><td class="type">number</td><td>Position de la zone sur la page.</td></tr>
-        <tr><td class="name">width / height</td><td class="type">number</td><td>Dimensions de la zone.</td></tr>
-        <tr><td class="name">issueId</td><td class="type">string</td><td>Édition à laquelle appartient la zone.</td></tr>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td class="name">type</td><td class="type">"article" | "link"</td><td>Type of clickable area.</td></tr>
+        <tr><td class="name">target</td><td class="type">string</td><td>Target of the area: an article id if <code class="inline">type</code> is <code class="inline">"article"</code>, a URL if <code class="inline">"link"</code>.</td></tr>
+        <tr><td class="name">page</td><td class="type">number</td><td>Number of the page the area is on.</td></tr>
+        <tr><td class="name">top / left</td><td class="type">number</td><td>Position of the area on the page.</td></tr>
+        <tr><td class="name">width / height</td><td class="type">number</td><td>Dimensions of the area.</td></tr>
+        <tr><td class="name">issueId</td><td class="type">string</td><td>Issue the area belongs to.</td></tr>
       </table></div>
 
       <h4 class="sub-h4">TilesReaderInfo</h4>
       <div class="table-wrap"><table class="props">
-        <tr><th>Champ</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">host</td><td class="type">string</td><td>Hôte à préfixer aux chemins d'image relatifs des tuiles.</td></tr>
-        <tr><td class="name">pages</td><td class="type">array</td><td>Une entrée par page : <code class="inline">number</code> (numéro), <code class="inline">tn</code> (miniature), <code class="inline">ld</code> (basse définition), et <code class="inline">hd</code> (tuiles haute définition, avec dimensions et grille de découpe) pour l'affichage progressif.</td></tr>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td class="name">host</td><td class="type">string</td><td>Host to prepend to the tiles' relative image paths.</td></tr>
+        <tr><td class="name">pages</td><td class="type">array</td><td>One entry per page: <code class="inline">number</code> (page number), <code class="inline">tn</code> (thumbnail), <code class="inline">ld</code> (low definition), and <code class="inline">hd</code> (high-definition tiles, with dimensions and slicing grid) for progressive rendering.</td></tr>
       </table></div>
 
-      <div class="snippet"><div class="bar"><span class="fname">Exemple — flux complet d'ouverture d'une édition</span></div><pre><span class="tok-kw">const</span> ticket = <span class="tok-kw">await</span> CGS.reader.getTicket(<span class="tok-str">"17"</span>);
+      <div class="snippet"><div class="bar"><span class="fname">Example — full flow for opening an issue</span></div><pre><span class="tok-kw">const</span> ticket = <span class="tok-kw">await</span> CGS.reader.getTicket(<span class="tok-str">"17"</span>);
 
 <span class="tok-kw">if</span> (!ticket) {
-  <span class="tok-com">// édition introuvable, ou accès refusé pour cet utilisateur</span>
+  <span class="tok-com">// issue not found, or access denied for this user</span>
   <span class="tok-kw">return</span>;
 }
 
-<span class="tok-com">// toujours disponible : les tuiles de page</span>
+<span class="tok-com">// always available: the page tiles</span>
 <span class="tok-kw">const</span> tiles = <span class="tok-kw">await</span> CGS.reader.getTiles(ticket.ticket);
 
-<span class="tok-com">// conditionnels : à ne demander que si l'édition les propose</span>
+<span class="tok-com">// conditional: only request them if the issue provides them</span>
 <span class="tok-kw">const</span> articles = ticket.hasArticles
   ? <span class="tok-kw">await</span> CGS.reader.getArticles(ticket.ticket)
   : [];
@@ -822,22 +816,22 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
     <!-- ================= COMPONENTS ================= -->
     <section id="components-intro">
-      <div class="eyebrow">Composants</div>
-      <h2>Catalogue de composants</h2>
-      <p class="dek">Les mêmes 9 composants existent en JavaScript, React et Vue, avec des props identiques. Ceux qui interrogent le catalogue nécessitent que l'app ait initialisé CGS (<a href="#gs-init">étape 2</a>) ; deux composants sont purement présentationnels.</p>
+      <div class="eyebrow">Components</div>
+      <h2>Component catalog</h2>
+      <p class="dek">The same 9 components exist in JavaScript, React and Vue, with identical props. Those that query the catalog require the app to have initialized CGS (<a href="#gs-init">step 2</a>); two components are purely presentational.</p>
     </section>
 
     <section id="comp-headerblock">
       <div class="component">
-        <div class="component-head"><h4>HeaderBlock</h4><span class="ctx-badge pure">Présentationnel</span></div>
-        <p class="desc">En-tête de section : titre, badge, métadonnées et lien optionnel.</p>
+        <div class="component-head"><h4>HeaderBlock</h4><span class="ctx-badge pure">Presentational</span></div>
+        <p class="desc">Section header: title, badge, metadata and optional link.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">title<span class="req">requis</span></td><td class="type">string</td><td>Titre de la section.</td></tr>
-          <tr><td class="name">badgeLabel</td><td class="type">string?</td><td>Badge affiché à côté du titre.</td></tr>
-          <tr><td class="name">infos</td><td class="type">string[]?</td><td>Liste de métadonnées courtes.</td></tr>
-          <tr><td class="name">linkLabel / to</td><td class="type">string?</td><td>Lien optionnel (les deux props sont nécessaires pour l'afficher).</td></tr>
-          <tr><td class="name">size</td><td class="type">"md" | "lg"</td><td>Taille du bloc — défaut <code class="inline">"md"</code>.</td></tr>
+          <tr><td class="name">title<span class="req">required</span></td><td class="type">string</td><td>Section title.</td></tr>
+          <tr><td class="name">badgeLabel</td><td class="type">string?</td><td>Badge displayed next to the title.</td></tr>
+          <tr><td class="name">infos</td><td class="type">string[]?</td><td>List of short metadata items.</td></tr>
+          <tr><td class="name">linkLabel / to</td><td class="type">string?</td><td>Optional link (both props are required to display it).</td></tr>
+          <tr><td class="name">size</td><td class="type">"md" | "lg"</td><td>Block size — default <code class="inline">"md"</code>.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -845,12 +839,12 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
             <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
             <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
           </div>
-          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderBlock</span> <span class="tok-attr">title</span>=<span class="tok-str">"À la une"</span> <span class="tok-attr">linkLabel</span>=<span class="tok-str">"Voir tout"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderBlock</span> <span class="tok-attr">title</span>=<span class="tok-str">"À la une"</span> <span class="tok-attr">link-label</span>=<span class="tok-str">"Voir tout"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderBlock</span> <span class="tok-attr">title</span>=<span class="tok-str">"Top stories"</span> <span class="tok-attr">linkLabel</span>=<span class="tok-str">"See all"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderBlock</span> <span class="tok-attr">title</span>=<span class="tok-str">"Top stories"</span> <span class="tok-attr">link-label</span>=<span class="tok-str">"See all"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.headerBlock({
   selector: <span class="tok-str">"section-head"</span>,
-  title: <span class="tok-str">"À la une"</span>,
-  linkLabel: <span class="tok-str">"Voir tout"</span>,
+  title: <span class="tok-str">"Top stories"</span>,
+  linkLabel: <span class="tok-str">"See all"</span>,
   to: <span class="tok-str">"/articles"</span>,
 });</pre></div></div>
         </div>
@@ -859,13 +853,13 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
     <section id="comp-contentinfo">
       <div class="component">
-        <div class="component-head"><h4>ContentInfo</h4><span class="ctx-badge pure">Présentationnel</span></div>
-        <p class="desc">Bloc de présentation avec titre, métadonnées et bouton d'action — typiquement en tête d'une page publication.</p>
+        <div class="component-head"><h4>ContentInfo</h4><span class="ctx-badge pure">Presentational</span></div>
+        <p class="desc">Presentation block with title, metadata and action button — typically at the top of a publication page.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">title<span class="req">requis</span></td><td class="type">string</td><td>Titre principal.</td></tr>
-          <tr><td class="name">infos</td><td class="type">string[]?</td><td>Métadonnées courtes.</td></tr>
-          <tr><td class="name">buttonLabel</td><td class="type">string?</td><td>Libellé du bouton d'action.</td></tr>
+          <tr><td class="name">title<span class="req">required</span></td><td class="type">string</td><td>Main title.</td></tr>
+          <tr><td class="name">infos</td><td class="type">string[]?</td><td>Short metadata.</td></tr>
+          <tr><td class="name">buttonLabel</td><td class="type">string?</td><td>Action button label.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -873,12 +867,12 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
             <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
             <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
           </div>
-          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;ContentInfo</span> <span class="tok-attr">title</span>=<span class="tok-str">"La Croix"</span> <span class="tok-attr">infos</span>={[<span class="tok-str">"Édition Ariège"</span>]} <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;ContentInfo</span> <span class="tok-attr">title</span>=<span class="tok-str">"La Croix"</span> <span class="tok-attr">:infos</span>=<span class="tok-str">"['Édition Ariège']"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;ContentInfo</span> <span class="tok-attr">title</span>=<span class="tok-str">"La Croix"</span> <span class="tok-attr">infos</span>={[<span class="tok-str">"Ariège edition"</span>]} <span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;ContentInfo</span> <span class="tok-attr">title</span>=<span class="tok-str">"La Croix"</span> <span class="tok-attr">:infos</span>=<span class="tok-str">"['Ariège edition']"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.contentInfo({
   selector: <span class="tok-str">"pub-header"</span>,
   title: <span class="tok-str">"La Croix"</span>,
-  infos: [<span class="tok-str">"Édition Ariège"</span>],
+  infos: [<span class="tok-str">"Ariège edition"</span>],
 });</pre></div></div>
         </div>
       </div>
@@ -886,13 +880,13 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
     <section id="comp-articlecell">
       <div class="component">
-        <div class="component-head"><h4>ArticleCell</h4><span class="ctx-badge needs">Nécessite CGS</span></div>
-        <p class="desc">Charge et affiche un article unique via <code class="inline">core.articles.getArticle(articleId)</code>. Un shimmer s'affiche pendant le chargement.</p>
+        <div class="component-head"><h4>ArticleCell</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <p class="desc">Loads and displays a single article via <code class="inline">core.articles.getArticle(articleId)</code>. A shimmer is shown while loading.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">articleId<span class="req">requis</span></td><td class="type">string</td><td>Identifiant de l'article.</td></tr>
-          <tr><td class="name">baseUrl<span class="req">requis</span></td><td class="type">string</td><td>Base des liens générés vers l'article.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich"</td><td>Gabarit visuel — défaut <code class="inline">"standard"</code>.</td></tr>
+          <tr><td class="name">articleId<span class="req">required</span></td><td class="type">string</td><td>Article identifier.</td></tr>
+          <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated article links.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich"</td><td>Visual template — default <code class="inline">"standard"</code>.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -914,17 +908,17 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
     <section id="comp-articleblock">
       <div class="component">
-        <div class="component-head"><h4>ArticleBlock</h4><span class="ctx-badge needs">Nécessite CGS</span></div>
-        <p class="desc">Grille d'articles paginée via <code class="inline">core.articles.getArticles(filter, orderBy, paging)</code>. <code class="inline">loadMore</code> active un chargement infini par <em>intersection observer</em>.</p>
+        <div class="component-head"><h4>ArticleBlock</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <p class="desc">Paginated article grid via <code class="inline">core.articles.getArticles(filter, orderBy, paging)</code>. <code class="inline">loadMore</code> enables infinite loading via an <em>intersection observer</em>.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">filter<span class="req">requis</span></td><td class="type">ArticleFilter</td><td>Critère de recherche (voir <a href="#core-articles">Core → Articles</a>).</td></tr>
-          <tr><td class="name">baseUrl<span class="req">requis</span></td><td class="type">string</td><td>Base des liens générés.</td></tr>
-          <tr><td class="name">orderBy</td><td class="type">ArticleSort[]?</td><td>Tri des résultats.</td></tr>
-          <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Pagination initiale.</td></tr>
-          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Active le scroll infini.</td></tr>
-          <tr><td class="name">header</td><td class="type">{ title: string }?</td><td>Titre de section optionnel.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich"</td><td>Gabarit des cellules — défaut <code class="inline">"standard"</code>.</td></tr>
+          <tr><td class="name">filter<span class="req">required</span></td><td class="type">ArticleFilter</td><td>Search criteria (see <a href="#core-articles">Core → Articles</a>).</td></tr>
+          <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated links.</td></tr>
+          <tr><td class="name">orderBy</td><td class="type">ArticleSort[]?</td><td>Result sorting.</td></tr>
+          <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
+          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll.</td></tr>
+          <tr><td class="name">header</td><td class="type">{ title: string }?</td><td>Optional section title.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich"</td><td>Cell template — default <code class="inline">"standard"</code>.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -933,7 +927,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
             <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
           </div>
           <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;ArticleBlock</span>
-  <span class="tok-attr">header</span>={{ title: <span class="tok-str">"Derniers articles"</span> }}
+  <span class="tok-attr">header</span>={{ title: <span class="tok-str">"Latest articles"</span> }}
   <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/articles/"</span>
   <span class="tok-attr">filter</span>={{ publicationIds: [<span class="tok-str">"73"</span>] }}
   <span class="tok-attr">paging</span>={{ limit: <span class="tok-str">12</span> }}
@@ -941,7 +935,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
   <span class="tok-attr">variant</span>=<span class="tok-str">"leading"</span>
 <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;ArticleBlock</span>
-  <span class="tok-attr">:header</span>=<span class="tok-str">"{ title: 'Derniers articles' }"</span>
+  <span class="tok-attr">:header</span>=<span class="tok-str">"{ title: 'Latest articles' }"</span>
   <span class="tok-attr">base-url</span>=<span class="tok-str">"/articles/"</span>
   <span class="tok-attr">:filter</span>=<span class="tok-str">"{ publicationIds: ['73'] }"</span>
   <span class="tok-attr">:paging</span>=<span class="tok-str">"{ limit: 12 }"</span>
@@ -950,7 +944,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.articleBlock({
   selector: <span class="tok-str">"latest-articles"</span>,
-  header: { title: <span class="tok-str">"Derniers articles"</span> },
+  header: { title: <span class="tok-str">"Latest articles"</span> },
   baseUrl: <span class="tok-str">"/articles/"</span>,
   filter: { publicationIds: [<span class="tok-str">"73"</span>] },
   paging: { limit: <span class="tok-str">12</span> },
@@ -963,13 +957,13 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
     <section id="comp-issuecell">
       <div class="component">
-        <div class="component-head"><h4>IssueCell</h4><span class="ctx-badge needs">Nécessite CGS</span></div>
-        <p class="desc">Charge et affiche une édition unique via <code class="inline">core.issues.getIssue(issueId)</code>.</p>
+        <div class="component-head"><h4>IssueCell</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <p class="desc">Loads and displays a single issue via <code class="inline">core.issues.getIssue(issueId)</code>.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">issueId<span class="req">requis</span></td><td class="type">string</td><td>Identifiant de l'édition.</td></tr>
-          <tr><td class="name">baseUrl<span class="req">requis</span></td><td class="type">string</td><td>Base des liens générés.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"branded" | "rich" | "standard"</td><td>Gabarit visuel — défaut <code class="inline">"standard"</code>.</td></tr>
+          <tr><td class="name">issueId<span class="req">required</span></td><td class="type">string</td><td>Issue identifier.</td></tr>
+          <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated links.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"branded" | "rich" | "standard"</td><td>Visual template — default <code class="inline">"standard"</code>.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -991,17 +985,17 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
     <section id="comp-issueblock">
       <div class="component">
-        <div class="component-head"><h4>IssueBlock</h4><span class="ctx-badge needs">Nécessite CGS</span></div>
-        <p class="desc">Grille d'éditions paginée via <code class="inline">core.issues.getIssues(filter, orderBy, paging)</code>.</p>
+        <div class="component-head"><h4>IssueBlock</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <p class="desc">Paginated issue grid via <code class="inline">core.issues.getIssues(filter, orderBy, paging)</code>.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">filter<span class="req">requis</span></td><td class="type">IssueFilter</td><td>Critère de recherche (voir <a href="#core-issues">Core → Issues</a>).</td></tr>
-          <tr><td class="name">baseUrl<span class="req">requis</span></td><td class="type">string</td><td>Base des liens générés.</td></tr>
-          <tr><td class="name">orderBy</td><td class="type">IssueSort[]?</td><td>Tri des résultats.</td></tr>
-          <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Pagination initiale.</td></tr>
-          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Active le scroll infini.</td></tr>
-          <tr><td class="name">gridLayout</td><td class="type">"horizontalList" | "verticalColumns"</td><td>Disposition de la grille — défaut <code class="inline">"horizontalList"</code>.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"branded" | "rich" | "standard"</td><td>Gabarit des cellules — défaut <code class="inline">"standard"</code>.</td></tr>
+          <tr><td class="name">filter<span class="req">required</span></td><td class="type">IssueFilter</td><td>Search criteria (see <a href="#core-issues">Core → Issues</a>).</td></tr>
+          <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated links.</td></tr>
+          <tr><td class="name">orderBy</td><td class="type">IssueSort[]?</td><td>Result sorting.</td></tr>
+          <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
+          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll.</td></tr>
+          <tr><td class="name">gridLayout</td><td class="type">"horizontalList" | "verticalColumns"</td><td>Grid layout — default <code class="inline">"horizontalList"</code>.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"branded" | "rich" | "standard"</td><td>Cell template — default <code class="inline">"standard"</code>.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -1031,13 +1025,13 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
     <section id="comp-issuehighlighted">
       <div class="component">
-        <div class="component-head"><h4>IssueHighlighted</h4><span class="ctx-badge needs">Nécessite CGS</span></div>
-        <p class="desc">Mise en avant d'une édition unique — couverture en grand format et bouton d'action, via <code class="inline">core.issues.getIssue(issueId)</code>.</p>
+        <div class="component-head"><h4>IssueHighlighted</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <p class="desc">Highlights a single issue — large-format cover and action button — via <code class="inline">core.issues.getIssue(issueId)</code>.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">issueId<span class="req">requis</span></td><td class="type">string</td><td>Identifiant de l'édition.</td></tr>
-          <tr><td class="name">baseUrl<span class="req">requis</span></td><td class="type">string</td><td>Base des liens générés.</td></tr>
-          <tr><td class="name">buttonLabel</td><td class="type">string?</td><td>Libellé du bouton d'action.</td></tr>
+          <tr><td class="name">issueId<span class="req">required</span></td><td class="type">string</td><td>Issue identifier.</td></tr>
+          <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated links.</td></tr>
+          <tr><td class="name">buttonLabel</td><td class="type">string?</td><td>Action button label.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -1045,13 +1039,13 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
             <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
             <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
           </div>
-          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;IssueHighlighted</span> <span class="tok-attr">issueId</span>=<span class="tok-str">"17"</span> <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/pdf-reader/"</span> <span class="tok-attr">buttonLabel</span>=<span class="tok-str">"Lire ce numéro"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;IssueHighlighted</span> <span class="tok-attr">issue-id</span>=<span class="tok-str">"17"</span> <span class="tok-attr">base-url</span>=<span class="tok-str">"/pdf-reader/"</span> <span class="tok-attr">button-label</span>=<span class="tok-str">"Lire ce numéro"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;IssueHighlighted</span> <span class="tok-attr">issueId</span>=<span class="tok-str">"17"</span> <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/pdf-reader/"</span> <span class="tok-attr">buttonLabel</span>=<span class="tok-str">"Read this issue"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;IssueHighlighted</span> <span class="tok-attr">issue-id</span>=<span class="tok-str">"17"</span> <span class="tok-attr">base-url</span>=<span class="tok-str">"/pdf-reader/"</span> <span class="tok-attr">button-label</span>=<span class="tok-str">"Read this issue"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.issueHighlighted({
   selector: <span class="tok-str">"cover-issue"</span>,
   issueId: <span class="tok-str">"17"</span>,
   baseUrl: <span class="tok-str">"/pdf-reader/"</span>,
-  buttonLabel: <span class="tok-str">"Lire ce numéro"</span>,
+  buttonLabel: <span class="tok-str">"Read this issue"</span>,
 });</pre></div></div>
         </div>
       </div>
@@ -1060,28 +1054,28 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
     <!-- ================= READERS ================= -->
     <section id="readers-intro">
       <div class="eyebrow">Readers</div>
-      <h2>Moteurs de lecture</h2>
-      <p class="dek"><code class="inline">ArticleReader</code> et <code class="inline">PDFReader</code> encapsulent les packages <code class="inline">articlereader</code> / <code class="inline">pdfreader</code> : des moteurs Svelte autonomes montés impérativement dans un <code class="inline">&lt;div&gt;</code>, avec leur propre feuille de style à importer séparément.</p>
-      <div class="note info"><div class="ic">i</div><p>Ces deux moteurs peuvent aussi être utilisés <strong>sans JavaScript/React/Vue</strong> (les librairies de composants), directement via leur API <code class="inline">init()</code> / <code class="inline">destroy()</code> — utile pour tout autre framework.</p></div>
+      <h2>Reading engines</h2>
+      <p class="dek"><code class="inline">ArticleReader</code> and <code class="inline">PDFReader</code> wrap the <code class="inline">articlereader</code> / <code class="inline">pdfreader</code> packages: standalone Svelte engines mounted imperatively into a <code class="inline">&lt;div&gt;</code>, each with its own stylesheet to import separately.</p>
+      <div class="note info"><div class="ic">i</div><p>Both engines can also be used <strong>without JavaScript/React/Vue</strong> (the component libraries), directly through their <code class="inline">init()</code> / <code class="inline">destroy()</code> API — useful for any other framework.</p></div>
 
       <div class="table-wrap">
         <table class="props">
           <tr><th></th><th>ArticleReader</th><th>PDFReader</th></tr>
           <tr><td class="name">Package</td><td class="type">articlereader</td><td class="type">pdfreader</td></tr>
-          <tr><td class="name">Ouvre</td><td>une liste d'articles (<code class="inline">articleIds</code>)</td><td>une édition complète (<code class="inline">issueId</code>)</td></tr>
-          <tr><td class="name">Source du contenu</td><td><a href="#core-articles">core.articles.getArticle(id)</a>, un article à la fois, à la demande</td><td><a href="#core-reader">core.reader.getTicket(issueId)</a>, puis tuiles/articles/enrichissements du ticket</td></tr>
-          <tr><td class="name">Embarque</td><td>—</td><td>articlereader (pour ouvrir un article depuis une page du magazine)</td></tr>
+          <tr><td class="name">Opens</td><td>a list of articles (<code class="inline">articleIds</code>)</td><td>a full issue (<code class="inline">issueId</code>)</td></tr>
+          <tr><td class="name">Content source</td><td><a href="#core-articles">core.articles.getArticle(id)</a>, one article at a time, on demand</td><td><a href="#core-reader">core.reader.getTicket(issueId)</a>, then the ticket's tiles/articles/enrichments</td></tr>
+          <tr><td class="name">Embeds</td><td>—</td><td>articlereader (to open an article from a magazine page)</td></tr>
         </table>
       </div>
     </section>
 
     <section id="reader-article">
       <div class="component">
-        <div class="component-head"><h4>ArticleReader</h4><span class="ctx-badge needs">Nécessite CGS</span></div>
-        <p class="desc">Lecteur plein écran paginé sur une liste d'articles. Options courantes : langue, sélection de texte, partage, synthèse vocale, favoris.</p>
+        <div class="component-head"><h4>ArticleReader</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <p class="desc">Full-screen paginated reader over a list of articles. Common options: language, text selection, sharing, text-to-speech, bookmarks.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">articleIds<span class="req">requis</span></td><td class="type">string[]</td><td>Articles disponibles à la navigation.</td></tr>
+          <tr><td class="name">articleIds<span class="req">required</span></td><td class="type">string[]</td><td>Articles available for navigation.</td></tr>
           <tr><td class="name">config</td><td class="type">object?</td><td><code class="inline">language</code>, <code class="inline">allowTextSelection</code>, <code class="inline">bookmark</code>, <code class="inline">share</code>, <code class="inline">textToSpeech</code>, <code class="inline">events.shareArticle</code>…</td></tr>
         </table></div>
         <div class="code-tabs">
@@ -1105,7 +1099,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 <span class="tok-tag">&lt;template&gt;</span>
   <span class="tok-tag">&lt;ArticleReader</span> <span class="tok-attr">:article-ids</span>=<span class="tok-str">"[articleId]"</span> <span class="tok-tag">/&gt;</span>
 <span class="tok-tag">&lt;/template&gt;</span></pre></div></div>
-          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><div class="bar"><span class="fname">reader.html</span></div><pre><span class="tok-com">&lt;!-- via la librairie de composants --&gt;</span>
+          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><div class="bar"><span class="fname">reader.html</span></div><pre><span class="tok-com">&lt;!-- via the component library --&gt;</span>
 <span class="tok-tag">&lt;link</span> <span class="tok-attr">rel</span>=<span class="tok-str">"stylesheet"</span> <span class="tok-attr">href</span>=<span class="tok-str">"/cgs/articlereader/index.css"</span><span class="tok-tag">&gt;</span>
 <span class="tok-tag">&lt;script</span> <span class="tok-attr">src</span>=<span class="tok-str">"/cgs/articlereader/index.js"</span><span class="tok-tag">&gt;&lt;/script&gt;</span>
 
@@ -1114,151 +1108,151 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
   cgsComponents.articleReader({ selector: <span class="tok-str">"reader"</span>, articleIds: [articleId] });
 <span class="tok-tag">&lt;/script&gt;</span>
 
-<span class="tok-com">&lt;!-- ou directement, sans framework --&gt;</span>
+<span class="tok-com">&lt;!-- or directly, without a framework --&gt;</span>
 <span class="tok-tag">&lt;script&gt;</span>
   Article.init({
     target: document.getElementById(<span class="tok-str">"reader"</span>),
     cgsInstance: cgsComponents.core,
     articleIds: [articleId],
   });
-  <span class="tok-com">// Article.destroy() en quittant la vue</span>
+  <span class="tok-com">// Article.destroy() when leaving the view</span>
 <span class="tok-tag">&lt;/script&gt;</span></pre></div></div>
         </div>
       </div>
 
-      <h4 class="sub-h4">Sous le capot</h4>
-      <div class="prose"><p>Quel que soit le framework, <code class="inline">ArticleReader</code> ne fait qu'appeler l'API impérative du package <code class="inline">articlereader</code> sur un <code class="inline">&lt;div&gt;</code> qu'il monte lui-même.</p></div>
+      <h4 class="sub-h4">Under the hood</h4>
+      <div class="prose"><p>Whatever the framework, <code class="inline">ArticleReader</code> simply calls the imperative API of the <code class="inline">articlereader</code> package on a <code class="inline">&lt;div&gt;</code> that it mounts itself.</p></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Description</th></tr>
-        <tr><td class="name">init(config)</td><td>Monte le lecteur. Requiert <code class="inline">target</code>, <code class="inline">cgsInstance</code> et <code class="inline">articleIds</code>.</td></tr>
-        <tr><td class="name">updateArticles(articleIds)</td><td>Remplace la liste d'articles navigables sans démonter le lecteur.</td></tr>
-        <tr><td class="name">destroy()</td><td>Démonte le lecteur et réinitialise son état interne.</td></tr>
+        <tr><th>Method</th><th>Description</th></tr>
+        <tr><td class="name">init(config)</td><td>Mounts the reader. Requires <code class="inline">target</code>, <code class="inline">cgsInstance</code> and <code class="inline">articleIds</code>.</td></tr>
+        <tr><td class="name">updateArticles(articleIds)</td><td>Replaces the list of navigable articles without unmounting the reader.</td></tr>
+        <tr><td class="name">destroy()</td><td>Unmounts the reader and resets its internal state.</td></tr>
       </table></div>
 
       <ol class="flow-list">
         <li>
-          <h5>Vous fournissez une liste d'identifiants</h5>
-          <p><code class="inline">articleIds</code> définit les articles que la personne peut parcourir, dans l'ordre donné.</p>
+          <h5>You provide a list of identifiers</h5>
+          <p><code class="inline">articleIds</code> defines the articles the user can browse, in the given order.</p>
         </li>
         <li>
-          <h5>Chaque article est chargé à la demande</h5>
-          <p>Le lecteur appelle <a href="#core-articles"><code class="inline">core.articles.getArticle(articleId)</code></a> pour l'article affiché — pas de préchargement global.</p>
+          <h5>Each article is loaded on demand</h5>
+          <p>The reader calls <a href="#core-articles"><code class="inline">core.articles.getArticle(articleId)</code></a> for the displayed article — no global preloading.</p>
         </li>
         <li>
-          <h5>La liste peut évoluer sans redémonter le lecteur</h5>
-          <p><code class="inline">updateArticles()</code> met à jour <code class="inline">articleIds</code> à chaud (utile pour une recherche ou une pagination pendant la lecture).</p>
+          <h5>The list can change without remounting the reader</h5>
+          <p><code class="inline">updateArticles()</code> updates <code class="inline">articleIds</code> on the fly (useful for search or pagination while reading).</p>
         </li>
       </ol>
 
       <h4 class="sub-h4">Configuration</h4>
-      <div class="prose"><p>Tout ce que <code class="inline">config</code> accepte, en plus de <code class="inline">articleIds</code> (déjà couvert par la prop dédiée). Toutes ces clés sont optionnelles.</p></div>
+      <div class="prose"><p>Everything <code class="inline">config</code> accepts, in addition to <code class="inline">articleIds</code> (already covered by its dedicated prop). All of these keys are optional.</p></div>
 
-      <h4 class="sub-h4">Contenu &amp; navigation</h4>
+      <h4 class="sub-h4">Content &amp; navigation</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">language</td><td class="type">"fr" | "en" | "es" | "de" | "it" | "nl" | "ca"</td><td>Langue de l'interface du lecteur.</td></tr>
-        <tr><td class="name">startArticle</td><td class="type">string</td><td>Id de l'article ouvert au montage (sinon le premier de <code class="inline">articleIds</code>).</td></tr>
-        <tr><td class="name">forceTemplate</td><td class="type">"advertisement" | "default" | "full-height" | "half-width"</td><td>Force un gabarit d'affichage plutôt que celui du contenu.</td></tr>
-        <tr><td class="name">croppedImages</td><td class="type">boolean</td><td>Recadre les images en tête d'article.</td></tr>
-        <tr><td class="name">isSearch</td><td class="type">boolean</td><td>Active la mise en forme dédiée "résultat de recherche".</td></tr>
-        <tr><td class="name">adapter</td><td class="type">object</td><td>Adaptateur de mapping si votre contenu ne suit pas exactement le format <code class="inline">Article</code> de CGS.</td></tr>
-        <tr><td class="name">resources / imagesEndpoint</td><td class="type">object / string</td><td>Surcharge des ressources statiques et de l'endpoint d'images.</td></tr>
-        <tr><td class="name">fallbackPublicationLogo / Title / ReleaseDate</td><td class="type">string / string / string|number</td><td>Valeurs affichées si la publication ou l'édition d'origine n'est pas résolue.</td></tr>
-        <tr><td class="name">issueBanner.enabled</td><td class="type">boolean</td><td>Affiche un bandeau qui renvoie vers l'édition d'origine de l'article.</td></tr>
-        <tr><td class="name">issueBanner.generateLink</td><td class="type">(fetchedArticle) =&gt; string</td><td>Construit l'URL du bandeau à partir de l'article chargé.</td></tr>
+        <tr><td class="name">language</td><td class="type">"fr" | "en" | "es" | "de" | "it" | "nl" | "ca"</td><td>Reader interface language.</td></tr>
+        <tr><td class="name">startArticle</td><td class="type">string</td><td>Id of the article opened on mount (otherwise the first one in <code class="inline">articleIds</code>).</td></tr>
+        <tr><td class="name">forceTemplate</td><td class="type">"advertisement" | "default" | "full-height" | "half-width"</td><td>Forces a display template instead of the content's own.</td></tr>
+        <tr><td class="name">croppedImages</td><td class="type">boolean</td><td>Crops the images at the top of the article.</td></tr>
+        <tr><td class="name">isSearch</td><td class="type">boolean</td><td>Enables the dedicated "search result" layout.</td></tr>
+        <tr><td class="name">adapter</td><td class="type">object</td><td>Mapping adapter if your content does not exactly follow the CGS <code class="inline">Article</code> format.</td></tr>
+        <tr><td class="name">resources / imagesEndpoint</td><td class="type">object / string</td><td>Overrides the static resources and the images endpoint.</td></tr>
+        <tr><td class="name">fallbackPublicationLogo / Title / ReleaseDate</td><td class="type">string / string / string|number</td><td>Values displayed if the source publication or issue cannot be resolved.</td></tr>
+        <tr><td class="name">issueBanner.enabled</td><td class="type">boolean</td><td>Displays a banner linking to the article's source issue.</td></tr>
+        <tr><td class="name">issueBanner.generateLink</td><td class="type">(fetchedArticle) =&gt; string</td><td>Builds the banner URL from the loaded article.</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Apparence &amp; lecture</h4>
+      <h4 class="sub-h4">Appearance &amp; reading</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">fontSizeMin / fontSizeMax</td><td class="type">number</td><td>Bornes du réglage de taille de police proposé au lecteur.</td></tr>
-        <tr><td class="name">allowTextSelection</td><td class="type">boolean</td><td>Autorise la sélection de texte dans l'article.</td></tr>
-        <tr><td class="name">ambient.enabled</td><td class="type">boolean</td><td>Affiche le sélecteur de thème de lecture.</td></tr>
-        <tr><td class="name">ambient.default</td><td class="type">"auto" | "dark" | "light"</td><td>Thème appliqué à l'ouverture. <code class="inline">"auto"</code> suit le thème système.</td></tr>
-        <tr><td class="name">ambient.force</td><td class="type">"auto" | "dark" | "light"</td><td>Si renseigné, verrouille le thème sur cette valeur et masque le sélecteur.</td></tr>
-        <tr><td class="name">ambient.callback</td><td class="type">(ambient) =&gt; void</td><td>Appelé à chaque changement de thème par la personne.</td></tr>
-        <tr><td class="name">customScrollHandler</td><td class="type">() =&gt; void</td><td>Remplace le comportement de scroll par défaut.</td></tr>
+        <tr><td class="name">fontSizeMin / fontSizeMax</td><td class="type">number</td><td>Bounds of the font-size setting offered to the user.</td></tr>
+        <tr><td class="name">allowTextSelection</td><td class="type">boolean</td><td>Allows text selection in the article.</td></tr>
+        <tr><td class="name">ambient.enabled</td><td class="type">boolean</td><td>Displays the reading theme picker.</td></tr>
+        <tr><td class="name">ambient.default</td><td class="type">"auto" | "dark" | "light"</td><td>Theme applied on open. <code class="inline">"auto"</code> follows the system theme.</td></tr>
+        <tr><td class="name">ambient.force</td><td class="type">"auto" | "dark" | "light"</td><td>If set, locks the theme to this value and hides the picker.</td></tr>
+        <tr><td class="name">ambient.callback</td><td class="type">(ambient) =&gt; void</td><td>Called each time the user changes the theme.</td></tr>
+        <tr><td class="name">customScrollHandler</td><td class="type">() =&gt; void</td><td>Replaces the default scroll behavior.</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Favoris</h4>
+      <h4 class="sub-h4">Bookmarks</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">bookmark.enabled</td><td class="type">boolean</td><td>Affiche le bouton favoris sur l'article.</td></tr>
-        <tr><td class="name">bookmark.bookmarkedArticles</td><td class="type">string[]</td><td>Ids déjà en favoris — sert uniquement à afficher le bouton dans le bon état au montage.</td></tr>
-        <tr><td class="name">bookmark.set</td><td class="type">(articleId, article) =&gt; boolean</td><td>Appelé quand la personne ajoute l'article aux favoris. À vous de le persister (API, stockage local…) ; retournez <code class="inline">true</code> pour confirmer l'ajout, <code class="inline">false</code> pour l'annuler.</td></tr>
-        <tr><td class="name">bookmark.unset</td><td class="type">(articleId, article) =&gt; boolean</td><td>Symétrique de <code class="inline">set</code>, appelé au retrait des favoris.</td></tr>
+        <tr><td class="name">bookmark.enabled</td><td class="type">boolean</td><td>Displays the bookmark button on the article.</td></tr>
+        <tr><td class="name">bookmark.bookmarkedArticles</td><td class="type">string[]</td><td>Ids already bookmarked — only used to show the button in the correct state on mount.</td></tr>
+        <tr><td class="name">bookmark.set</td><td class="type">(articleId, article) =&gt; boolean</td><td>Called when the user bookmarks the article. It is up to you to persist it (API, local storage…); return <code class="inline">true</code> to confirm the bookmark, <code class="inline">false</code> to cancel it.</td></tr>
+        <tr><td class="name">bookmark.unset</td><td class="type">(articleId, article) =&gt; boolean</td><td>Counterpart of <code class="inline">set</code>, called when the bookmark is removed.</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Écoute</h4>
-      <div class="prose"><p>Deux mécanismes distincts pour écouter un article plutôt que le lire — à ne pas confondre.</p></div>
+      <h4 class="sub-h4">Listening</h4>
+      <div class="prose"><p>Two distinct mechanisms for listening to an article rather than reading it — not to be confused.</p></div>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">audio.enabled</td><td class="type">boolean</td><td>Active la lecture d'une <strong>piste audio pré-enregistrée</strong>, fournie par la publication (ex. un article "lu par" un journaliste). N'affiche rien si l'article n'en a pas.</td></tr>
-        <tr><td class="name">audio.callback</td><td class="type">(articleId, article) =&gt; void</td><td>Appelé au démarrage de la lecture audio.</td></tr>
-        <tr><td class="name">textToSpeech.enabled</td><td class="type">boolean</td><td>Active la <strong>synthèse vocale</strong> du texte de l'article — générée à la volée, disponible pour tout article même sans piste audio dédiée.</td></tr>
-        <tr><td class="name">textToSpeech.portal</td><td class="type">(instance?) =&gt; void</td><td>Point d'extension pour personnaliser l'interface de lecture vocale.</td></tr>
+        <tr><td class="name">audio.enabled</td><td class="type">boolean</td><td>Enables playback of a <strong>pre-recorded audio track</strong> provided by the publication (e.g. an article "read by" a journalist). Displays nothing if the article has none.</td></tr>
+        <tr><td class="name">audio.callback</td><td class="type">(articleId, article) =&gt; void</td><td>Called when audio playback starts.</td></tr>
+        <tr><td class="name">textToSpeech.enabled</td><td class="type">boolean</td><td>Enables <strong>text-to-speech</strong> for the article text — generated on the fly, available for any article, even without a dedicated audio track.</td></tr>
+        <tr><td class="name">textToSpeech.portal</td><td class="type">(instance?) =&gt; void</td><td>Extension point for customizing the text-to-speech interface.</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Partage &amp; impression</h4>
+      <h4 class="sub-h4">Sharing &amp; printing</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">share.enabled</td><td class="type">boolean</td><td>Affiche le bouton de partage.</td></tr>
-        <tr><td class="name">share.default</td><td class="type">boolean</td><td>Ouvre le panneau de partage automatiquement au montage.</td></tr>
-        <tr><td class="name">share.baseUrl</td><td class="type">string</td><td>Base des liens générés lors d'un partage.</td></tr>
-        <tr><td class="name">share.platforms</td><td class="type">("facebook" | "twitter" | "x" | "linkedin" | "email")[]</td><td>Plateformes proposées dans le panneau de partage.</td></tr>
-        <tr><td class="name">share.imagePlaceholder</td><td class="type">string</td><td>Image utilisée si l'article n'a pas d'image principale.</td></tr>
-        <tr><td class="name">events.shareArticle</td><td class="type">(data: { article, platform }) =&gt; void</td><td>Appelé après un partage. <code class="inline">platform</code> peut aussi valoir <code class="inline">"linkCopied"</code> (copie du lien).</td></tr>
-        <tr><td class="name">print.enabled</td><td class="type">boolean</td><td>Affiche le bouton d'impression.</td></tr>
+        <tr><td class="name">share.enabled</td><td class="type">boolean</td><td>Displays the share button.</td></tr>
+        <tr><td class="name">share.default</td><td class="type">boolean</td><td>Opens the share panel automatically on mount.</td></tr>
+        <tr><td class="name">share.baseUrl</td><td class="type">string</td><td>Base URL for the links generated when sharing.</td></tr>
+        <tr><td class="name">share.platforms</td><td class="type">("facebook" | "twitter" | "x" | "linkedin" | "email")[]</td><td>Platforms offered in the share panel.</td></tr>
+        <tr><td class="name">share.imagePlaceholder</td><td class="type">string</td><td>Image used if the article has no main image.</td></tr>
+        <tr><td class="name">events.shareArticle</td><td class="type">(data: { article, platform }) =&gt; void</td><td>Called after a share. <code class="inline">platform</code> can also be <code class="inline">"linkCopied"</code> (link copied).</td></tr>
+        <tr><td class="name">print.enabled</td><td class="type">boolean</td><td>Displays the print button.</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Cycle de vie</h4>
+      <h4 class="sub-h4">Lifecycle</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">closeButton</td><td class="type">() =&gt; void</td><td>Appelé au clic sur le bouton de fermeture du lecteur.</td></tr>
-        <tr><td class="name">onArticleMounted</td><td class="type">(articleId, article, articleRaw) =&gt; void</td><td>Appelé quand un article est affiché.</td></tr>
-        <tr><td class="name">onArticleError</td><td class="type">(articleId) =&gt; void</td><td>Appelé si le chargement d'un article échoue.</td></tr>
+        <tr><td class="name">closeButton</td><td class="type">() =&gt; void</td><td>Called when the reader's close button is clicked.</td></tr>
+        <tr><td class="name">onArticleMounted</td><td class="type">(articleId, article, articleRaw) =&gt; void</td><td>Called when an article is displayed.</td></tr>
+        <tr><td class="name">onArticleError</td><td class="type">(articleId) =&gt; void</td><td>Called if an article fails to load.</td></tr>
       </table></div>
 
-      <div class="snippet"><div class="bar"><span class="fname">Exemple — toutes les options de config</span></div><pre><span class="tok-com">// Cet objet se passe tel quel via la prop/l'option "config",</span>
-<span class="tok-com">// quel que soit le framework (React, Vue, JavaScript).</span>
-<span class="tok-com">// Toutes les clés sont optionnelles ; elles sont listées ici pour référence.</span>
+      <div class="snippet"><div class="bar"><span class="fname">Example — all config options</span></div><pre><span class="tok-com">// This object is passed as-is via the "config" prop/option,</span>
+<span class="tok-com">// whatever the framework (React, Vue, JavaScript).</span>
+<span class="tok-com">// All keys are optional; they are listed here for reference.</span>
 <span class="tok-kw">const</span> config = {
-  <span class="tok-com">// — Contenu & navigation —</span>
+  <span class="tok-com">// — Content & navigation —</span>
   language: <span class="tok-str">"fr"</span>,
   startArticle: articleIds[<span class="tok-str">0</span>],
   forceTemplate: <span class="tok-kw">undefined</span>, <span class="tok-com">// "advertisement" | "default" | "full-height" | "half-width"</span>
   croppedImages: <span class="tok-kw">true</span>,
   isSearch: <span class="tok-kw">false</span>,
-  adapter: myAdapter, <span class="tok-com">// mapping si votre JSON d'article diffère du format Article de CGS</span>
+  adapter: myAdapter, <span class="tok-com">// mapping if your article JSON differs from the CGS Article format</span>
   resources: {},
   imagesEndpoint: <span class="tok-str">"https://images.example.com"</span>,
   fallbackPublicationLogo: <span class="tok-str">"/logo.svg"</span>,
-  fallbackPublicationTitle: <span class="tok-str">"Mon magazine"</span>,
+  fallbackPublicationTitle: <span class="tok-str">"My magazine"</span>,
   fallbackPublicationReleaseDate: <span class="tok-str">"2026-01-01"</span>,
   issueBanner: {
     enabled: <span class="tok-kw">true</span>,
     generateLink: (fetchedArticle) =&gt; <span class="tok-str">`/issues/${fetchedArticle.issueId}`</span>,
   },
 
-  <span class="tok-com">// — Apparence & lecture —</span>
+  <span class="tok-com">// — Appearance & reading —</span>
   fontSizeMin: <span class="tok-str">14</span>,
   fontSizeMax: <span class="tok-str">24</span>,
   allowTextSelection: <span class="tok-kw">true</span>,
   ambient: {
     enabled: <span class="tok-kw">true</span>,
-    default: <span class="tok-str">"auto"</span>,     <span class="tok-com">// "auto" | "dark" | "light" — suit le thème système</span>
-    force: <span class="tok-kw">undefined</span>,       <span class="tok-com">// définir pour verrouiller le thème et masquer le sélecteur</span>
-    callback: (ambient) =&gt; console.log(<span class="tok-str">"Thème :"</span>, ambient),
+    default: <span class="tok-str">"auto"</span>,     <span class="tok-com">// "auto" | "dark" | "light" — follows the system theme</span>
+    force: <span class="tok-kw">undefined</span>,       <span class="tok-com">// set to lock the theme and hide the picker</span>
+    callback: (ambient) =&gt; console.log(<span class="tok-str">"Theme:"</span>, ambient),
   },
-  customScrollHandler: () =&gt; { <span class="tok-com">/* comportement de scroll personnalisé */</span> },
+  customScrollHandler: () =&gt; { <span class="tok-com">/* custom scroll behavior */</span> },
 
-  <span class="tok-com">// — Favoris —</span>
+  <span class="tok-com">// — Bookmarks —</span>
   bookmark: {
     enabled: <span class="tok-kw">true</span>,
-    bookmarkedArticles: userBookmarks, <span class="tok-com">// ids déjà en favoris pour cet utilisateur</span>
+    bookmarkedArticles: userBookmarks, <span class="tok-com">// ids already bookmarked by this user</span>
     set: (articleId, article) =&gt; {
       myApi.addBookmark(articleId);
-      <span class="tok-kw">return true</span>; <span class="tok-com">// confirme visuellement l'ajout</span>
+      <span class="tok-kw">return true</span>; <span class="tok-com">// visually confirms the bookmark</span>
     },
     unset: (articleId, article) =&gt; {
       myApi.removeBookmark(articleId);
@@ -1266,45 +1260,45 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
     },
   },
 
-  <span class="tok-com">// — Écoute —</span>
+  <span class="tok-com">// — Listening —</span>
   audio: {
     enabled: <span class="tok-kw">true</span>,
     callback: (articleId, article) =&gt; analytics.track(<span class="tok-str">"audio_play"</span>, { articleId }),
   },
   textToSpeech: {
     enabled: <span class="tok-kw">true</span>,
-    portal: (instance) =&gt; { <span class="tok-com">/* personnalisation de l'UI de lecture vocale */</span> },
+    portal: (instance) =&gt; { <span class="tok-com">/* text-to-speech UI customization */</span> },
   },
 
-  <span class="tok-com">// — Partage & impression —</span>
+  <span class="tok-com">// — Sharing & printing —</span>
   share: {
     enabled: <span class="tok-kw">true</span>,
     default: <span class="tok-kw">false</span>,
     baseUrl: <span class="tok-str">"https://www.example.com/read"</span>,
-    platforms: [<span class="tok-str">"facebook"</span>, <span class="tok-str">"twitter"</span>, <span class="tok-str">"x"</span>, <span class="tok-str">"linkedin"</span>, <span class="tok-str">"email"</span>], <span class="tok-com">// toutes les valeurs possibles</span>
+    platforms: [<span class="tok-str">"facebook"</span>, <span class="tok-str">"twitter"</span>, <span class="tok-str">"x"</span>, <span class="tok-str">"linkedin"</span>, <span class="tok-str">"email"</span>], <span class="tok-com">// all possible values</span>
     imagePlaceholder: <span class="tok-str">"/share-placeholder.jpg"</span>,
   },
   events: {
     shareArticle: ({ article, platform }) =&gt;
-      analytics.track(<span class="tok-str">"share"</span>, { articleId: article.id, platform }), <span class="tok-com">// platform inclut aussi "linkCopied"</span>
+      analytics.track(<span class="tok-str">"share"</span>, { articleId: article.id, platform }), <span class="tok-com">// platform also includes "linkCopied"</span>
   },
   print: { enabled: <span class="tok-kw">true</span> },
 
-  <span class="tok-com">// — Cycle de vie —</span>
+  <span class="tok-com">// — Lifecycle —</span>
   closeButton: () =&gt; history.go(-<span class="tok-str">1</span>),
   onArticleMounted: (articleId, article, articleRaw) =&gt;
     analytics.track(<span class="tok-str">"article_view"</span>, { articleId }),
-  onArticleError: (articleId) =&gt; console.error(<span class="tok-str">"Échec de chargement :"</span>, articleId),
+  onArticleError: (articleId) =&gt; console.error(<span class="tok-str">"Failed to load:"</span>, articleId),
 };</pre></div>
     </section>
 
     <section id="reader-pdf">
       <div class="component">
-        <div class="component-head"><h4>PDFReader</h4><span class="ctx-badge needs">Nécessite CGS</span></div>
-        <p class="desc">Lecteur de magazine plein écran (feuilletage double/simple page, zoom, recherche, favoris, enrichissements). Ouvre en interne un <a href="#core-reader">ticket de lecture</a> pour l'édition demandée.</p>
+        <div class="component-head"><h4>PDFReader</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <p class="desc">Full-screen magazine reader (double/single-page flipping, zoom, search, bookmarks, enrichments). Internally opens a <a href="#core-reader">reading ticket</a> for the requested issue.</p>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">issueId<span class="req">requis</span></td><td class="type">string</td><td>Édition à ouvrir.</td></tr>
+          <tr><td class="name">issueId<span class="req">required</span></td><td class="type">string</td><td>Issue to open.</td></tr>
           <tr><td class="name">config</td><td class="type">object?</td><td><code class="inline">pageMode</code>, <code class="inline">zoomMin/Max</code>, <code class="inline">bookmarkPage</code>, <code class="inline">search</code>, <code class="inline">share</code>, <code class="inline">events.pageOpen</code>…</td></tr>
         </table></div>
         <div class="code-tabs">
@@ -1337,113 +1331,113 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 <span class="tok-tag">&lt;/script&gt;</span></pre></div></div>
         </div>
       </div>
-      <div class="note warn" style="margin-top:18px;"><div class="ic">!</div><p><code class="inline">pdfreader</code> déclare <code class="inline">articlereader</code> en <em>peer dependency</em> : il l'embarque pour ouvrir un article directement depuis une page du magazine. Installez toujours les deux packages ensemble.</p></div>
+      <div class="note warn" style="margin-top:18px;"><div class="ic">!</div><p><code class="inline">pdfreader</code> declares <code class="inline">articlereader</code> as a <em>peer dependency</em>: it embeds it to open an article directly from a magazine page. Always install both packages together.</p></div>
 
-      <h4 class="sub-h4">Sous le capot</h4>
-      <div class="prose"><p><code class="inline">PDFReader</code> appelle l'API impérative du package <code class="inline">pdfreader</code> sur un <code class="inline">&lt;div&gt;</code> qu'il monte lui-même — même principe qu'<a href="#reader-article">ArticleReader</a>, mais sans équivalent à <code class="inline">updateArticles()</code>.</p></div>
+      <h4 class="sub-h4">Under the hood</h4>
+      <div class="prose"><p><code class="inline">PDFReader</code> calls the imperative API of the <code class="inline">pdfreader</code> package on a <code class="inline">&lt;div&gt;</code> that it mounts itself — same principle as <a href="#reader-article">ArticleReader</a>, but with no equivalent of <code class="inline">updateArticles()</code>.</p></div>
       <div class="table-wrap"><table class="props">
-        <tr><th>Méthode</th><th>Description</th></tr>
-        <tr><td class="name">init(config)</td><td>Monte le lecteur. Requiert <code class="inline">target</code>, <code class="inline">cgsInstance</code> et <code class="inline">issueId</code>.</td></tr>
-        <tr><td class="name">destroy()</td><td>Démonte le lecteur et réinitialise son état interne.</td></tr>
+        <tr><th>Method</th><th>Description</th></tr>
+        <tr><td class="name">init(config)</td><td>Mounts the reader. Requires <code class="inline">target</code>, <code class="inline">cgsInstance</code> and <code class="inline">issueId</code>.</td></tr>
+        <tr><td class="name">destroy()</td><td>Unmounts the reader and resets its internal state.</td></tr>
       </table></div>
-      <div class="note info"><div class="ic">i</div><p>Pour ouvrir une autre édition, il faut <code class="inline">destroy()</code> puis <code class="inline">init()</code> avec un nouvel <code class="inline">issueId</code> — contrairement à <code class="inline">ArticleReader</code>, la liste de contenu ne se met pas à jour à chaud.</p></div>
+      <div class="note info"><div class="ic">i</div><p>To open another issue, you must call <code class="inline">destroy()</code> then <code class="inline">init()</code> with a new <code class="inline">issueId</code> — unlike <code class="inline">ArticleReader</code>, the content list cannot be updated on the fly.</p></div>
 
       <ol class="flow-list">
         <li>
-          <h5>Ouverture d'un ticket de lecture</h5>
-          <p><code class="inline">init()</code> appelle <a href="#core-reader"><code class="inline">core.reader.getTicket(issueId)</code></a> pour ouvrir une session de lecture sur l'édition.</p>
+          <h5>Opening a reading ticket</h5>
+          <p><code class="inline">init()</code> calls <a href="#core-reader"><code class="inline">core.reader.getTicket(issueId)</code></a> to open a reading session on the issue.</p>
         </li>
         <li>
-          <h5>Chargement du contenu du ticket</h5>
-          <p>Le lecteur charge ensuite les tuiles de page (<code class="inline">getTiles</code>), et si l'édition en propose, les articles internes (<code class="inline">getArticles</code>) et les enrichissements interactifs (<code class="inline">getEnrichments</code>).</p>
+          <h5>Loading the ticket's content</h5>
+          <p>The reader then loads the page tiles (<code class="inline">getTiles</code>) and, if the issue provides them, the embedded articles (<code class="inline">getArticles</code>) and the interactive enrichments (<code class="inline">getEnrichments</code>).</p>
         </li>
         <li>
-          <h5>Ouverture d'un article depuis une page</h5>
-          <p>Quand la personne tape sur un article du magazine, <code class="inline">pdfreader</code> réutilise en interne le package <code class="inline">articlereader</code> (<code class="inline">Article.init()</code>) pour l'afficher en plein écran.</p>
+          <h5>Opening an article from a page</h5>
+          <p>When the user taps an article in the magazine, <code class="inline">pdfreader</code> internally reuses the <code class="inline">articlereader</code> package (<code class="inline">Article.init()</code>) to display it full screen.</p>
         </li>
       </ol>
 
       <h4 class="sub-h4">Configuration</h4>
-      <div class="prose"><p>Tout ce que <code class="inline">config</code> accepte, en plus de <code class="inline">issueId</code> (déjà couvert par la prop dédiée). Toutes ces clés sont optionnelles.</p></div>
+      <div class="prose"><p>Everything <code class="inline">config</code> accepts, in addition to <code class="inline">issueId</code> (already covered by its dedicated prop). All of these keys are optional.</p></div>
 
-      <h4 class="sub-h4">Contenu &amp; navigation</h4>
+      <h4 class="sub-h4">Content &amp; navigation</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">language</td><td class="type">"fr" | "en" | "es" | "de" | "it" | "nl" | "ca"</td><td>Langue de l'interface du lecteur.</td></tr>
-        <tr><td class="name">startPage / startArticle</td><td class="type">number / string</td><td>Page ou article ouvert au montage.</td></tr>
-        <tr><td class="name">pageMode</td><td class="type">"double" | "single" | "responsive"</td><td>Mode de feuilletage des pages.</td></tr>
-        <tr><td class="name">scrollMode.enabled</td><td class="type">boolean</td><td>Affiche le bouton de bascule feuilletage / défilement.</td></tr>
-        <tr><td class="name">scrollMode.default</td><td class="type">"horizontal" | "vertical"</td><td>Mode de défilement continu appliqué par défaut.</td></tr>
-        <tr><td class="name">flatplan.enabled / .default</td><td class="type">boolean / boolean</td><td>Active le plan de l'édition (vue miniature de toutes les pages) et son affichage par défaut.</td></tr>
-        <tr><td class="name">logo / titleDateFormat</td><td class="type">string / string</td><td>Personnalisation de l'en-tête du lecteur.</td></tr>
-        <tr><td class="name">fonts</td><td class="type">{ family, source, descriptors }[]</td><td>Polices additionnelles à charger pour le rendu des articles.</td></tr>
-        <tr><td class="name">endpoint</td><td class="type">{ articles?, images?, fallback?, material?, pages?, resources? } | string</td><td>Surcharge des endpoints de contenu de l'édition.</td></tr>
+        <tr><td class="name">language</td><td class="type">"fr" | "en" | "es" | "de" | "it" | "nl" | "ca"</td><td>Reader interface language.</td></tr>
+        <tr><td class="name">startPage / startArticle</td><td class="type">number / string</td><td>Page or article opened on mount.</td></tr>
+        <tr><td class="name">pageMode</td><td class="type">"double" | "single" | "responsive"</td><td>Page-flipping mode.</td></tr>
+        <tr><td class="name">scrollMode.enabled</td><td class="type">boolean</td><td>Displays the flip / scroll toggle button.</td></tr>
+        <tr><td class="name">scrollMode.default</td><td class="type">"horizontal" | "vertical"</td><td>Continuous scroll direction applied by default.</td></tr>
+        <tr><td class="name">flatplan.enabled / .default</td><td class="type">boolean / boolean</td><td>Enables the issue flatplan (thumbnail view of all pages) and whether it is shown by default.</td></tr>
+        <tr><td class="name">logo / titleDateFormat</td><td class="type">string / string</td><td>Customization of the reader header.</td></tr>
+        <tr><td class="name">fonts</td><td class="type">{ family, source, descriptors }[]</td><td>Additional fonts to load for rendering articles.</td></tr>
+        <tr><td class="name">endpoint</td><td class="type">{ articles?, images?, fallback?, material?, pages?, resources? } | string</td><td>Overrides the issue's content endpoints.</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Zoom &amp; articles intégrés</h4>
+      <h4 class="sub-h4">Zoom &amp; embedded articles</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">zoomMin / zoomMax</td><td class="type">number</td><td>Bornes de zoom sur une page.</td></tr>
-        <tr><td class="name">articles.enabled</td><td class="type">boolean</td><td>Autorise l'ouverture des articles depuis une page du magazine.</td></tr>
-        <tr><td class="name">articles.boxes</td><td class="type">boolean</td><td>Affiche les zones cliquables (enrichissements) sur les pages.</td></tr>
-        <tr><td class="name">articles.enrichmentsIconSet</td><td class="type">"custom" | "standard" | false</td><td>Jeu d'icônes des enrichissements, ou <code class="inline">false</code> pour les masquer.</td></tr>
-        <tr><td class="name">articles.allowTextSelection / .croppedImages</td><td class="type">boolean / boolean</td><td>Mêmes réglages que sur <a href="#reader-article">ArticleReader</a>, appliqués aux articles intégrés.</td></tr>
-        <tr><td class="name">articles.forceTemplate</td><td class="type">"default" | "full-height" | "half-width"</td><td>Force un gabarit pour les articles intégrés (pas de variante <code class="inline">"advertisement"</code> ici).</td></tr>
-        <tr><td class="name">ambient / ambientArticle</td><td class="type">{ enabled, default: "auto"|"dark"|"light" }</td><td>Thème du magazine et thème des articles intégrés — deux réglages indépendants.</td></tr>
-        <tr><td class="name">watermark</td><td class="type">{ enabled, text }</td><td>Filigrane superposé aux pages.</td></tr>
+        <tr><td class="name">zoomMin / zoomMax</td><td class="type">number</td><td>Zoom bounds on a page.</td></tr>
+        <tr><td class="name">articles.enabled</td><td class="type">boolean</td><td>Allows opening articles from a magazine page.</td></tr>
+        <tr><td class="name">articles.boxes</td><td class="type">boolean</td><td>Displays the clickable areas (enrichments) on the pages.</td></tr>
+        <tr><td class="name">articles.enrichmentsIconSet</td><td class="type">"custom" | "standard" | false</td><td>Enrichment icon set, or <code class="inline">false</code> to hide them.</td></tr>
+        <tr><td class="name">articles.allowTextSelection / .croppedImages</td><td class="type">boolean / boolean</td><td>Same settings as in <a href="#reader-article">ArticleReader</a>, applied to embedded articles.</td></tr>
+        <tr><td class="name">articles.forceTemplate</td><td class="type">"default" | "full-height" | "half-width"</td><td>Forces a template for embedded articles (no <code class="inline">"advertisement"</code> variant here).</td></tr>
+        <tr><td class="name">ambient / ambientArticle</td><td class="type">{ enabled, default: "auto"|"dark"|"light" }</td><td>Magazine theme and embedded-article theme — two independent settings.</td></tr>
+        <tr><td class="name">watermark</td><td class="type">{ enabled, text }</td><td>Watermark overlaid on the pages.</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Favoris, partage &amp; sommaire</h4>
-      <div class="note info"><div class="ic">i</div><p><code class="inline">set</code>/<code class="inline">unset</code> acceptent ici <strong>un booléen OU une fonction</strong> — contrairement à <a href="#reader-article">ArticleReader</a> où ce sont toujours des callbacks. Passez <code class="inline">true</code> pour un comportement local sans persistance, ou une fonction <code class="inline">(id) =&gt; boolean</code> pour brancher votre propre stockage.</p></div>
+      <h4 class="sub-h4">Bookmarks, sharing &amp; table of contents</h4>
+      <div class="note info"><div class="ic">i</div><p><code class="inline">set</code>/<code class="inline">unset</code> accept <strong>a boolean OR a function</strong> here — unlike <a href="#reader-article">ArticleReader</a>, where they are always callbacks. Pass <code class="inline">true</code> for local behavior without persistence, or a function <code class="inline">(id) =&gt; boolean</code> to plug in your own storage.</p></div>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">bookmarkPage.enabled</td><td class="type">boolean</td><td>Affiche le bouton favoris sur les pages.</td></tr>
-        <tr><td class="name">bookmarkPage.bookmarkedPages</td><td class="type">number[]</td><td>Numéros de page déjà en favoris.</td></tr>
-        <tr><td class="name">bookmarkPage.set / .unset</td><td class="type">boolean | ((page) =&gt; boolean)</td><td>Voir la note ci-dessus.</td></tr>
-        <tr><td class="name">bookmarkPage.libraryCta</td><td class="type">() =&gt; void</td><td>Appelé sur l'action "voir mes favoris" (ex. ouvrir votre bibliothèque).</td></tr>
-        <tr><td class="name">bookmarkArticle.enabled / .bookmarkedArticles</td><td class="type">boolean / string[]</td><td>Mêmes principes que <code class="inline">bookmarkPage</code>, appliqués aux articles.</td></tr>
-        <tr><td class="name">bookmarkArticle.set / .unset</td><td class="type">boolean | ((articleId) =&gt; boolean)</td><td>Voir la note ci-dessus.</td></tr>
-        <tr><td class="name">share.enabled / .default / .link</td><td class="type">boolean / boolean / string</td><td>Partage de l'édition — <code class="inline">default</code> ouvre le panneau automatiquement, <code class="inline">link</code> est l'URL partagée.</td></tr>
-        <tr><td class="name">share.platforms</td><td class="type">("facebook" | "twitter" | "x" | "linkedin" | "email")[]</td><td>Plateformes proposées.</td></tr>
-        <tr><td class="name">shareArticle</td><td class="type">{ enabled, default, baseUrl?, imagePlaceholder? }</td><td>Même principe que <code class="inline">share</code>, pour un article ouvert depuis le magazine.</td></tr>
-        <tr><td class="name">summary</td><td class="type">{ enabled, default, imagesPlaceholder? }</td><td>Sommaire de l'édition.</td></tr>
-        <tr><td class="name">print.page / .article</td><td class="type">boolean / boolean</td><td>Autorise l'impression d'une page ou d'un article.</td></tr>
-        <tr><td class="name">print.pageCheck</td><td class="type">(data: { currentPage, isDoublePage }) =&gt; Promise&lt;{ enabled, message }&gt;</td><td>Appelé avant impression — permet de la bloquer dynamiquement (retournez <code class="inline">enabled: false</code> + un message).</td></tr>
+        <tr><td class="name">bookmarkPage.enabled</td><td class="type">boolean</td><td>Displays the bookmark button on the pages.</td></tr>
+        <tr><td class="name">bookmarkPage.bookmarkedPages</td><td class="type">number[]</td><td>Page numbers already bookmarked.</td></tr>
+        <tr><td class="name">bookmarkPage.set / .unset</td><td class="type">boolean | ((page) =&gt; boolean)</td><td>See the note above.</td></tr>
+        <tr><td class="name">bookmarkPage.libraryCta</td><td class="type">() =&gt; void</td><td>Called on the "see my bookmarks" action (e.g. to open your library).</td></tr>
+        <tr><td class="name">bookmarkArticle.enabled / .bookmarkedArticles</td><td class="type">boolean / string[]</td><td>Same principles as <code class="inline">bookmarkPage</code>, applied to articles.</td></tr>
+        <tr><td class="name">bookmarkArticle.set / .unset</td><td class="type">boolean | ((articleId) =&gt; boolean)</td><td>See the note above.</td></tr>
+        <tr><td class="name">share.enabled / .default / .link</td><td class="type">boolean / boolean / string</td><td>Issue sharing — <code class="inline">default</code> opens the panel automatically, <code class="inline">link</code> is the shared URL.</td></tr>
+        <tr><td class="name">share.platforms</td><td class="type">("facebook" | "twitter" | "x" | "linkedin" | "email")[]</td><td>Platforms offered.</td></tr>
+        <tr><td class="name">shareArticle</td><td class="type">{ enabled, default, baseUrl?, imagePlaceholder? }</td><td>Same principle as <code class="inline">share</code>, for an article opened from the magazine.</td></tr>
+        <tr><td class="name">summary</td><td class="type">{ enabled, default, imagesPlaceholder? }</td><td>Issue table of contents.</td></tr>
+        <tr><td class="name">print.page / .article</td><td class="type">boolean / boolean</td><td>Allows printing a page or an article.</td></tr>
+        <tr><td class="name">print.pageCheck</td><td class="type">(data: { currentPage, isDoublePage }) =&gt; Promise&lt;{ enabled, message }&gt;</td><td>Called before printing — lets you block it dynamically (return <code class="inline">enabled: false</code> + a message).</td></tr>
       </table></div>
 
-      <h4 class="sub-h4">Recherche, audio &amp; découverte</h4>
+      <h4 class="sub-h4">Search, audio &amp; discovery</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">search.enabled / .default</td><td class="type">boolean / boolean</td><td><code class="inline">default</code> ouvre le panneau de recherche automatiquement.</td></tr>
-        <tr><td class="name">search.onSearch</td><td class="type">(text) =&gt; Promise&lt;{ highlights, mid }[]&gt;</td><td>Votre fonction de recherche — retourne les correspondances à surligner.</td></tr>
-        <tr><td class="name">textToSpeech</td><td class="type">{ enabled, portal? }</td><td>Synthèse vocale des articles du magazine, même principe qu'<a href="#reader-article">ArticleReader</a>.</td></tr>
-        <tr><td class="name">listen</td><td class="type">boolean</td><td>Active la piste audio du magazine, si elle existe.</td></tr>
-        <tr><td class="name">tutorial.enabled</td><td class="type">boolean</td><td>Affiche le tutoriel de prise en main au premier lancement.</td></tr>
+        <tr><td class="name">search.enabled / .default</td><td class="type">boolean / boolean</td><td><code class="inline">default</code> opens the search panel automatically.</td></tr>
+        <tr><td class="name">search.onSearch</td><td class="type">(text) =&gt; Promise&lt;{ highlights, mid }[]&gt;</td><td>Your search function — returns the matches to highlight.</td></tr>
+        <tr><td class="name">textToSpeech</td><td class="type">{ enabled, portal? }</td><td>Text-to-speech for the magazine's articles, same principle as in <a href="#reader-article">ArticleReader</a>.</td></tr>
+        <tr><td class="name">listen</td><td class="type">boolean</td><td>Enables the magazine's audio track, if there is one.</td></tr>
+        <tr><td class="name">tutorial.enabled</td><td class="type">boolean</td><td>Displays the onboarding tutorial on first launch.</td></tr>
       </table></div>
 
       <h4 class="sub-h4">Session &amp; callbacks</h4>
       <div class="table-wrap"><table class="props">
         <tr><th>Option</th><th>Type</th><th>Description</th></tr>
-        <tr><td class="name">renewTicket</td><td class="type">{ enabled, lifetime, headers, url }</td><td>Renouvellement du ticket de lecture avant expiration — voir l'avertissement ci-dessous.</td></tr>
-        <tr><td class="name">closeButton / downloadButton</td><td class="type">() =&gt; void</td><td>Callbacks des boutons de fermeture et de téléchargement.</td></tr>
-        <tr><td class="name">triggerDoublePagesEvent</td><td class="type">boolean</td><td>Émet un évènement dédié lors de l'affichage d'une double page.</td></tr>
-        <tr><td class="name">events.pageOpen</td><td class="type">(data: { currentPage, totalPages, isDoublePage }) =&gt; void</td><td>Appelé à chaque changement de page.</td></tr>
-        <tr><td class="name">events.pageZoomEnter / .pageZoomChange</td><td class="type">(data) =&gt; void / (zoomLevel) =&gt; void</td><td>Appelés à l'entrée en zoom et à chaque changement de niveau.</td></tr>
-        <tr><td class="name">events.articleOpen / .articleClose</td><td class="type">(article) =&gt; void</td><td>Appelés à l'ouverture/fermeture d'un article intégré.</td></tr>
-        <tr><td class="name">events.bookmarkArticle / .bookmarkPage (+ unbookmark…)</td><td class="type">function</td><td>Appelés en miroir des callbacks <code class="inline">set</code>/<code class="inline">unset</code> ci-dessus.</td></tr>
-        <tr><td class="name">events.summaryOpen / .summaryClose</td><td class="type">() =&gt; void</td><td>Appelés à l'ouverture/fermeture du sommaire.</td></tr>
-        <tr><td class="name">events.issueOpen / .issueShared</td><td class="type">(metadata) =&gt; void</td><td>Appelés à l'ouverture de l'édition et lors d'un partage.</td></tr>
-        <tr><td class="name">events.boxClick</td><td class="type">(box) =&gt; void</td><td>Appelé au clic sur un enrichissement de page.</td></tr>
+        <tr><td class="name">renewTicket</td><td class="type">{ enabled, lifetime, headers, url }</td><td>Renews the reading ticket before it expires — see the warning below.</td></tr>
+        <tr><td class="name">closeButton / downloadButton</td><td class="type">() =&gt; void</td><td>Callbacks for the close and download buttons.</td></tr>
+        <tr><td class="name">triggerDoublePagesEvent</td><td class="type">boolean</td><td>Emits a dedicated event when a double page is displayed.</td></tr>
+        <tr><td class="name">events.pageOpen</td><td class="type">(data: { currentPage, totalPages, isDoublePage }) =&gt; void</td><td>Called on every page change.</td></tr>
+        <tr><td class="name">events.pageZoomEnter / .pageZoomChange</td><td class="type">(data) =&gt; void / (zoomLevel) =&gt; void</td><td>Called when zoom is entered and on every zoom level change.</td></tr>
+        <tr><td class="name">events.articleOpen / .articleClose</td><td class="type">(article) =&gt; void</td><td>Called when an embedded article is opened/closed.</td></tr>
+        <tr><td class="name">events.bookmarkArticle / .bookmarkPage (+ unbookmark…)</td><td class="type">function</td><td>Mirror the <code class="inline">set</code>/<code class="inline">unset</code> callbacks above.</td></tr>
+        <tr><td class="name">events.summaryOpen / .summaryClose</td><td class="type">() =&gt; void</td><td>Called when the table of contents is opened/closed.</td></tr>
+        <tr><td class="name">events.issueOpen / .issueShared</td><td class="type">(metadata) =&gt; void</td><td>Called when the issue is opened and when it is shared.</td></tr>
+        <tr><td class="name">events.boxClick</td><td class="type">(box) =&gt; void</td><td>Called when a page enrichment is clicked.</td></tr>
       </table></div>
 
-      <div class="snippet"><div class="bar"><span class="fname">Exemple — toutes les options de config</span></div><pre><span class="tok-com">// Cet objet se passe tel quel via la prop/l'option "config",</span>
-<span class="tok-com">// quel que soit le framework (React, Vue, JavaScript).</span>
-<span class="tok-com">// Toutes les clés sont optionnelles ; elles sont listées ici pour référence.</span>
+      <div class="snippet"><div class="bar"><span class="fname">Example — all config options</span></div><pre><span class="tok-com">// This object is passed as-is via the "config" prop/option,</span>
+<span class="tok-com">// whatever the framework (React, Vue, JavaScript).</span>
+<span class="tok-com">// All keys are optional; they are listed here for reference.</span>
 <span class="tok-kw">const</span> config = {
-  <span class="tok-com">// — Contenu & navigation —</span>
+  <span class="tok-com">// — Content & navigation —</span>
   language: <span class="tok-str">"fr"</span>,
   startPage: <span class="tok-str">1</span>,
-  startArticle: <span class="tok-kw">undefined</span>, <span class="tok-com">// id d'un article à ouvrir directement au montage</span>
+  startArticle: <span class="tok-kw">undefined</span>, <span class="tok-com">// id of an article to open directly on mount</span>
   pageMode: <span class="tok-str">"double"</span>,     <span class="tok-com">// "double" | "single" | "responsive"</span>
   scrollMode: { enabled: <span class="tok-kw">true</span>, default: <span class="tok-str">"vertical"</span> }, <span class="tok-com">// "horizontal" | "vertical"</span>
   flatplan: { enabled: <span class="tok-kw">true</span>, default: <span class="tok-kw">false</span> },
@@ -1452,7 +1446,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
   fonts: [{ family: <span class="tok-str">"Custom Serif"</span>, source: <span class="tok-str">"url(/fonts/custom.woff2)"</span>, descriptors: { weight: <span class="tok-str">"400"</span> } }],
   endpoint: { images: <span class="tok-str">"https://images.example.com"</span> },
 
-  <span class="tok-com">// — Zoom & articles intégrés —</span>
+  <span class="tok-com">// — Zoom & embedded articles —</span>
   zoomMin: <span class="tok-str">1</span>,
   zoomMax: <span class="tok-str">4</span>,
   articles: {
@@ -1463,16 +1457,16 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
     allowTextSelection: <span class="tok-kw">true</span>,
     croppedImages: <span class="tok-kw">true</span>,
   },
-  ambient: { enabled: <span class="tok-kw">true</span>, default: <span class="tok-str">"auto"</span> },        <span class="tok-com">// thème du magazine</span>
-  ambientArticle: { enabled: <span class="tok-kw">true</span>, default: <span class="tok-str">"auto"</span> }, <span class="tok-com">// thème des articles intégrés (indépendant)</span>
-  watermark: { enabled: <span class="tok-kw">true</span>, text: <span class="tok-str">"Copie de démonstration"</span> },
+  ambient: { enabled: <span class="tok-kw">true</span>, default: <span class="tok-str">"auto"</span> },        <span class="tok-com">// magazine theme</span>
+  ambientArticle: { enabled: <span class="tok-kw">true</span>, default: <span class="tok-str">"auto"</span> }, <span class="tok-com">// embedded-article theme (independent)</span>
+  watermark: { enabled: <span class="tok-kw">true</span>, text: <span class="tok-str">"Demo copy"</span> },
 
-  <span class="tok-com">// — Favoris, partage & sommaire —</span>
+  <span class="tok-com">// — Bookmarks, sharing & table of contents —</span>
   bookmarkPage: {
     enabled: <span class="tok-kw">true</span>,
     bookmarkedPages: userPageBookmarks,
-    set: <span class="tok-kw">true</span>,  <span class="tok-com">// booléen : raccourci sans persistance côté SDK…</span>
-    unset: (page) =&gt; { myApi.removePageBookmark(page); <span class="tok-kw">return true</span>; }, <span class="tok-com">// … ou fonction pour brancher votre stockage</span>
+    set: <span class="tok-kw">true</span>,  <span class="tok-com">// boolean: shortcut with no SDK-side persistence…</span>
+    unset: (page) =&gt; { myApi.removePageBookmark(page); <span class="tok-kw">return true</span>; }, <span class="tok-com">// … or a function to plug in your storage</span>
     libraryCta: () =&gt; window.open(<span class="tok-str">"https://example.com/library"</span>, <span class="tok-str">"_blank"</span>),
   },
   bookmarkArticle: {
@@ -1485,7 +1479,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
     enabled: <span class="tok-kw">true</span>,
     default: <span class="tok-kw">false</span>,
     link: <span class="tok-str">"https://www.example.com/issue/17"</span>,
-    platforms: [<span class="tok-str">"facebook"</span>, <span class="tok-str">"twitter"</span>, <span class="tok-str">"x"</span>, <span class="tok-str">"linkedin"</span>, <span class="tok-str">"email"</span>], <span class="tok-com">// toutes les valeurs possibles</span>
+    platforms: [<span class="tok-str">"facebook"</span>, <span class="tok-str">"twitter"</span>, <span class="tok-str">"x"</span>, <span class="tok-str">"linkedin"</span>, <span class="tok-str">"email"</span>], <span class="tok-com">// all possible values</span>
   },
   shareArticle: {
     enabled: <span class="tok-kw">true</span>,
@@ -1504,18 +1498,18 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
     pageCheck: <span class="tok-kw">async</span> ({ currentPage, isDoublePage }) =&gt; ({ enabled: <span class="tok-kw">true</span>, message: <span class="tok-str">""</span> }),
   },
 
-  <span class="tok-com">// — Recherche, audio & découverte —</span>
+  <span class="tok-com">// — Search, audio & discovery —</span>
   search: {
     enabled: <span class="tok-kw">true</span>,
     default: <span class="tok-kw">false</span>,
     onSearch: <span class="tok-kw">async</span> (text) =&gt; myApi.search(text), <span class="tok-com">// -> [{ highlights, mid }]</span>
   },
-  textToSpeech: { enabled: <span class="tok-kw">true</span>, portal: (instance) =&gt; { <span class="tok-com">/* UI personnalisée */</span> } },
+  textToSpeech: { enabled: <span class="tok-kw">true</span>, portal: (instance) =&gt; { <span class="tok-com">/* custom UI */</span> } },
   listen: <span class="tok-kw">true</span>,
   tutorial: { enabled: <span class="tok-kw">true</span> },
 
   <span class="tok-com">// — Session & callbacks —</span>
-  renewTicket: { enabled: <span class="tok-kw">false</span>, lifetime: <span class="tok-str">0</span>, headers: {}, url: <span class="tok-str">""</span> }, <span class="tok-com">// mécanisme non actif, voir l'avertissement plus bas</span>
+  renewTicket: { enabled: <span class="tok-kw">false</span>, lifetime: <span class="tok-str">0</span>, headers: {}, url: <span class="tok-str">""</span> }, <span class="tok-com">// mechanism not active, see the warning below</span>
   closeButton: () =&gt; history.go(-<span class="tok-str">1</span>),
   downloadButton: () =&gt; window.open(downloadUrl, <span class="tok-str">"_blank"</span>),
   triggerDoublePagesEvent: <span class="tok-kw">true</span>,
@@ -1539,13 +1533,13 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
       <div class="note warn">
         <div class="ic">!</div>
-        <p><code class="inline">renewTicket</code> est déclaré dans la configuration mais son mécanisme de renouvellement automatique n'est pas actif dans la version actuelle du moteur — un ticket expiré nécessite aujourd'hui un nouveau <code class="inline">destroy()</code> / <code class="inline">init()</code>. Vérifiez son comportement avant d'en dépendre en production.</p>
+        <p><code class="inline">renewTicket</code> is declared in the configuration, but its automatic renewal mechanism is not active in the current version of the engine — an expired ticket currently requires a fresh <code class="inline">destroy()</code> / <code class="inline">init()</code> cycle. Check its behavior before relying on it in production.</p>
       </div>
     </section>
 
 
     <footer class="pagefoot">
-      CGS SDK · web-cgs v1.2.2 — Documentation d'implémentation, première version. Généré à partir de l'exploration du code source du monorepo (packages/*, ui/, tests/*).
+      CGS SDK · web-cgs v1.2.2 — Implementation guide, first version. Generated from an exploration of the monorepo source code (packages/*, ui/, tests/*).
     </footer>
 
   </main>
@@ -1612,8 +1606,8 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "copy-btn";
-    btn.setAttribute("aria-label", "Copier le code");
-    btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copier</span>';
+    btn.setAttribute("aria-label", "Copy code");
+    btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copy</span>';
 
     var bar = snippet.querySelector(".bar");
     if (bar) {
@@ -1628,24 +1622,17 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
       copyText(pre.textContent).then(function(){
         clearTimeout(resetTimer);
         btn.classList.add("copied");
-        btn.innerHTML = CHECK_ICON + '<span class="copy-btn-label">Copié !</span>';
+        btn.innerHTML = CHECK_ICON + '<span class="copy-btn-label">Copied!</span>';
         resetTimer = setTimeout(function(){
           btn.classList.remove("copied");
-          btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copier</span>';
+          btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copy</span>';
         }, 1800);
       }).catch(function(){
-        btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Échec</span>';
+        btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Failed</span>';
         resetTimer = setTimeout(function(){
-          btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copier</span>';
+          btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copy</span>';
         }, 1800);
       });
-    });
-  });
-
-  document.querySelectorAll(".lang-switch a[data-lang]").forEach(function(a){
-    a.addEventListener("click", function(){
-      try { localStorage.setItem("cgs-docs-lang", a.getAttribute("data-lang")); } catch(e) {}
-      a.href = a.getAttribute("href").split("#")[0] + location.hash;
     });
   });
 

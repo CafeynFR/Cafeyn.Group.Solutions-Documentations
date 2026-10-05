@@ -1,6 +1,565 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CGS Backend — Documentation</title>
-<style>body{margin:0;font:17px/1.55 -apple-system,"Segoe UI",sans-serif;background:#fbfbfa;color:#18181a;display:grid;place-items:center;min-height:100vh;text-align:center;padding:24px}
-@media (prefers-color-scheme:dark){body{background:#131214;color:#f1f0ee}}a{color:#fa1d00}</style>
-</head>
-<body><div><h1 style="font-family:Georgia,serif;font-weight:500">Backend Documentation</h1><p>This documentation is coming soon.</p><p><a href="../">Back to home</a></p></div></body></html>
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>CGS Backend Docs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#fbfbfa;
+    --bg-elevated:#ffffff;
+    --bg-inset:#f5f5f4;
+    --fg:#18181a;
+    --fg-muted:#5c5c60;
+    --fg-faint:#8b8b90;
+    --border:#e3e3e0;
+    --border-strong:#c9c9c6;
+    --brand:#fa1d00;
+    --brand-ink:#ffffff;
+    --brand-wash:#fff0ed;
+    --accent:#2d4dc8;
+    --accent-wash:#ecf0fc;
+    --success:#0d8f5c;
+    --code-bg:#18161a;
+    --code-fg:#f1efe9;
+    --code-border:#2c2a30;
+    --tok-kw:#8457d6;
+    --tok-str:#b5650a;
+    --tok-com:#9a9aa0;
+    --tok-tag:#2158c9;
+    --tok-attr:#6b6660;
+    --shadow-sm:0 1px 2px rgba(20,15,10,.06),0 1px 1px rgba(20,15,10,.04);
+    --shadow-md:0 8px 24px rgba(20,15,10,.08),0 2px 6px rgba(20,15,10,.05);
+    --font-title:"Newsreader",Georgia,serif;
+    --font-text:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --font-mono:"JetBrains Mono","SFMono-Regular",Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#131214;
+      --bg-elevated:#1b1a1d;
+      --bg-inset:#201f22;
+      --fg:#f1f0ee;
+      --fg-muted:#adacb1;
+      --fg-faint:#77767c;
+      --border:#302f33;
+      --border-strong:#403f44;
+      --brand:#ff5138;
+      --brand-ink:#ffffff;
+      --brand-wash:#2c1a17;
+      --accent:#7f9bff;
+      --accent-wash:#1a2036;
+      --success:#3fcb93;
+      --code-bg:#0d0c0e;
+      --code-fg:#f1efe9;
+      --code-border:#2c2a30;
+      --tok-kw:#b498f0;
+      --tok-str:#e3a75c;
+      --tok-com:#87868c;
+      --tok-tag:#6fa8ff;
+      --tok-attr:#c9c5bd;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+      --shadow-md:0 12px 28px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#131214;
+    --bg-elevated:#1b1a1d;
+    --bg-inset:#201f22;
+    --fg:#f1f0ee;
+    --fg-muted:#adacb1;
+    --fg-faint:#77767c;
+    --border:#302f33;
+    --border-strong:#403f44;
+    --brand:#ff5138;
+    --brand-ink:#ffffff;
+    --brand-wash:#2c1a17;
+    --accent:#7f9bff;
+    --accent-wash:#1a2036;
+    --success:#3fcb93;
+    --code-bg:#0d0c0e;
+    --code-fg:#f1efe9;
+    --code-border:#2c2a30;
+    --tok-kw:#b498f0;
+    --tok-str:#e3a75c;
+    --tok-com:#87868c;
+    --tok-tag:#6fa8ff;
+    --tok-attr:#c9c5bd;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    --shadow-md:0 12px 28px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--font-text);
+    font-size:15.5px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  h1,h2,h3,h4{font-family:var(--font-title);font-weight:600;line-height:1.2;text-wrap:balance;color:var(--fg);margin:0;}
+  code{font-family:var(--font-mono);}
+  ::selection{background:var(--brand);color:var(--brand-ink);}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:40;
+    display:flex;align-items:center;gap:16px;
+    padding:12px 20px;padding-left:calc(20px + env(safe-area-inset-left,0px));padding-right:calc(20px + env(safe-area-inset-right,0px));
+    background:color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar .brandmark{
+    display:flex;align-items:center;gap:9px;font-family:var(--font-title);font-weight:700;font-size:17px;letter-spacing:.2px;flex:none;
+  }
+  .brandmark .dot{width:10px;height:10px;border-radius:3px;background:var(--brand);flex:none;}
+  .topbar .ver{font-family:var(--font-mono);font-size:11px;color:var(--fg-faint);border:1px solid var(--border);border-radius:20px;padding:2px 8px;flex:none;}
+  .topbar .tagline{margin-left:auto;color:var(--fg-faint);font-size:12.5px;flex:none;}
+  .menu-toggle{
+    display:none;flex:none;width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
+    background:var(--bg-elevated);color:var(--fg);align-items:center;justify-content:center;cursor:pointer;
+  }
+
+  /* ---------- shell / sidebar ---------- */
+  .shell{display:flex;align-items:flex-start;}
+  .sidebar{
+    width:258px;flex:none;position:sticky;
+    top:calc(53px + env(safe-area-inset-top,0px));
+    height:calc(100dvh - 53px - env(safe-area-inset-top,0px));
+    overflow-y:auto;border-right:1px solid var(--border);
+    padding:22px 14px 40px calc(14px + env(safe-area-inset-left,0px));
+    background:var(--bg);
+  }
+  .sidebar h5{
+    font-family:var(--font-text);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--fg-faint);margin:20px 10px 6px;
+  }
+  .sidebar h5:first-child{margin-top:2px;}
+  .sidebar a{
+    display:block;padding:6px 10px;border-radius:7px;color:var(--fg-muted);font-size:13.5px;font-weight:500;
+    border-left:2px solid transparent;
+  }
+  .sidebar a.sub{padding-left:22px;font-size:13px;font-weight:400;}
+  .sidebar a:hover{background:var(--bg-inset);color:var(--fg);text-decoration:none;}
+  .sidebar a.active{background:var(--brand-wash);color:var(--brand);font-weight:600;border-left-color:var(--brand);}
+
+  .content{flex:1;min-width:0;max-width:860px;margin:0 auto;padding:0 28px 120px;padding-left:calc(28px + env(safe-area-inset-left,0px));padding-right:calc(28px + env(safe-area-inset-right,0px));}
+
+  .backdrop{display:none;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:52px 0 34px;border-bottom:1px solid var(--border);margin-bottom:44px;}
+  .hero .kicker{
+    display:inline-flex;align-items:center;gap:6px;font:600 11.5px var(--font-text);letter-spacing:.06em;text-transform:uppercase;
+    color:var(--brand);background:var(--brand-wash);border-radius:20px;padding:4px 11px;margin-bottom:16px;
+  }
+  .hero h1{font-size:40px;margin-bottom:14px;}
+  .hero p.lede{font-size:17px;color:var(--fg-muted);max-width:56ch;margin-bottom:22px;}
+  .hero .pkgpills{display:flex;flex-wrap:wrap;gap:8px;}
+  .pkgpill{
+    font-family:var(--font-mono);font-size:11.5px;color:var(--fg-muted);background:var(--bg-inset);
+    border:1px solid var(--border);border-radius:6px;padding:4px 9px;
+  }
+  .pkgpill b{color:var(--fg);font-weight:600;}
+
+  /* ---------- sections / prose ---------- */
+  section{margin-bottom:64px;scroll-margin-top:70px;}
+  section .eyebrow{font:700 11.5px var(--font-text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  section h2{font-size:27px;margin-bottom:6px;}
+  section .dek{color:var(--fg-muted);font-size:15.5px;max-width:62ch;margin-bottom:26px;}
+  h3.sub-h{font-size:19px;margin:34px 0 10px;font-weight:600;}
+  h4.sub-h4{font-family:var(--font-text);font-size:14px;font-weight:700;color:var(--fg-muted);margin:22px 0 8px;letter-spacing:.02em;text-transform:uppercase;}
+  .prose p{margin:0 0 14px;max-width:70ch;color:var(--fg);}
+  .prose ul,.prose ol{margin:0 0 14px;padding-left:22px;max-width:66ch;}
+  .prose li{margin-bottom:5px;}
+  .prose strong{font-weight:600;}
+
+  /* ---------- component card wrapper (reused here for endpoint cards) ---------- */
+  .component{
+    border:1px solid var(--border);border-radius:14px;background:var(--bg-elevated);padding:26px 26px 22px;margin-top:22px;box-shadow:var(--shadow-sm);
+  }
+  .component-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px;}
+  .component-head h4{font-family:var(--font-mono);font-size:17px;font-weight:600;color:var(--fg);}
+  .ctx-badge{font:600 10.5px var(--font-text);letter-spacing:.03em;border-radius:20px;padding:3px 9px;flex:none;}
+  .ctx-badge.needs{color:var(--brand);background:var(--brand-wash);}
+  .ctx-badge.pure{color:var(--success);background:color-mix(in srgb, var(--success) 14%, transparent);}
+  .component p.desc{color:var(--fg-muted);font-size:14px;margin:6px 0 18px;max-width:64ch;}
+
+  /* ---------- tables ---------- */
+  .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin:14px 0 6px;}
+  table.props{width:100%;border-collapse:collapse;font-size:13.5px;min-width:480px;}
+  table.props th{
+    text-align:left;font:600 11px var(--font-text);letter-spacing:.04em;text-transform:uppercase;color:var(--fg-faint);
+    background:var(--bg-inset);padding:9px 14px;border-bottom:1px solid var(--border);
+  }
+  table.props td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--fg-muted);}
+  table.props tr:last-child td{border-bottom:none;}
+  table.props td.name{font-family:var(--font-mono);color:var(--fg);font-weight:600;white-space:nowrap;}
+  table.props td.type{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);}
+
+  /* ---------- code blocks ---------- */
+  .snippet{position:relative;margin:14px 0 6px;border-radius:11px;overflow:hidden;border:1px solid var(--code-border);box-shadow:var(--shadow-sm);}
+  .snippet .bar{
+    display:flex;align-items:center;gap:8px;padding:7px 16px;background:#100f11;border-bottom:1px solid var(--code-border);
+  }
+  .snippet .bar .fname{font:500 11.5px var(--font-mono);color:#8a8890;}
+  .snippet pre{
+    margin:0;padding:16px 18px;background:var(--code-bg);color:var(--code-fg);overflow-x:auto;
+    font:13px/1.65 var(--font-mono);
+  }
+
+  /* ---------- copy button ---------- */
+  .copy-btn{
+    font:600 11px var(--font-text);color:#a8a6ad;background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:4px 8px 4px 6px;
+    cursor:pointer;display:flex;align-items:center;gap:5px;line-height:1;
+    transition:opacity .15s ease, color .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .copy-btn svg{width:12px;height:12px;flex:none;}
+  .copy-btn:hover{color:#f1efe9;background:rgba(255,255,255,.13);}
+  .copy-btn.copied{color:#5fd99a;border-color:rgba(95,217,154,.4);background:rgba(95,217,154,.1);}
+  .snippet .bar .copy-btn{margin-left:auto;}
+  .snippet-floating-copy{position:absolute;top:8px;right:10px;z-index:3;opacity:0;}
+  .snippet:hover .snippet-floating-copy,
+  .snippet-floating-copy:focus-visible,
+  .snippet-floating-copy.copied{opacity:1;}
+  @media (max-width: 959px){
+    .snippet-floating-copy{opacity:1;}
+  }
+  .tok-kw{color:var(--tok-kw);}
+  .tok-str{color:var(--tok-str);}
+  .tok-com{color:var(--tok-com);font-style:italic;}
+  .tok-tag{color:var(--tok-tag);}
+  .tok-attr{color:var(--tok-attr);}
+  code.inline{
+    background:var(--bg-inset);border:1px solid var(--border);border-radius:5px;padding:1.5px 6px;font-size:.9em;color:var(--fg);
+  }
+
+  /* ---------- notes / callouts ---------- */
+  .note{border-radius:10px;padding:14px 16px;margin:18px 0;font-size:13.8px;border:1px solid;display:flex;gap:10px;}
+  .note .ic{flex:none;font-weight:700;font-size:13px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .note.info{background:var(--accent-wash);border-color:color-mix(in srgb, var(--accent) 35%, transparent);}
+  .note.info .ic{background:var(--accent);color:#fff;}
+  .note.warn{background:var(--brand-wash);border-color:color-mix(in srgb, var(--brand) 35%, transparent);}
+  .note.warn .ic{background:var(--brand);color:#fff;}
+  .note p{margin:0;color:var(--fg);}
+  .note strong{font-weight:700;}
+
+  footer.pagefoot{border-top:1px solid var(--border);padding-top:24px;margin-top:70px;color:var(--fg-faint);font-size:12.5px;}
+
+  @media (max-width: 959px){
+    .sidebar{
+      position:fixed;top:0;left:0;height:100dvh;height:100vh;width:270px;z-index:60;
+      padding-top:calc(22px + env(safe-area-inset-top,0px));
+      transform:translateX(-100%);transition:transform .22s ease;box-shadow:var(--shadow-md);
+    }
+    .sidebar.open{transform:translateX(0);}
+    .menu-toggle{display:flex;}
+    .backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:50;}
+    .backdrop.open{display:block;}
+    .content{max-width:640px;padding:0 18px 100px;}
+    .hero h1{font-size:32px;}
+    .topbar .tagline{display:none;}
+  }
+</style>
+
+<div class="topbar">
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+  <div class="brandmark"><span class="dot"></span>CGS Backend</div>
+  <span class="tagline">External API contracts for partner integrations</span>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <h5>Introduction</h5>
+    <a href="#overview" class="nav-link">Overview</a>
+    <a href="#download" class="nav-link sub">Download (.md)</a>
+
+    <h5>Generic driver</h5>
+    <a href="#auth-model" class="nav-link">Authentication model</a>
+    <a href="#endpoints" class="nav-link">Endpoints</a>
+    <a href="#ep-authenticate" class="nav-link sub">GET /cgs/authenticate</a>
+    <a href="#ep-profiles" class="nav-link sub">GET /cgs/profiles</a>
+    <a href="#call-sequence" class="nav-link">Call sequence</a>
+    <a href="#configuration" class="nav-link">Configuration</a>
+  </nav>
+
+  <main class="content">
+
+    <div class="hero">
+      <span class="kicker">Integration guide</span>
+      <h1>CGS Backend</h1>
+      <p class="lede">The HTTP endpoints an external system must expose to integrate with the Cafeyn CGS SDK as an authentication and entitlements partner.</p>
+      <div class="pkgpills">
+        <span class="pkgpill"><b>driver</b> Generic</span>
+      </div>
+    </div>
+
+    <!-- ================= OVERVIEW ================= -->
+    <section id="overview">
+      <div class="eyebrow">Introduction</div>
+      <h2>Overview</h2>
+      <p class="dek">This document describes the HTTP endpoints that an external system must expose to integrate with the <strong>Cafeyn CGS</strong> SDK using the <code class="inline">Generic</code> driver type.</p>
+      <div class="prose">
+        <p>The CGS SDK communicates with the external system using a <code class="inline">BaseUrl</code> configured per point-of-sale in the CGS database (<code class="inline">PointOfSaleDriver.BaseUrl</code>). All paths described in this guide are relative to that base URL.</p>
+      </div>
+
+      <h3 class="sub-h" id="download">Download this document</h3>
+      <div class="prose"><p>The full specification is also available as a single Markdown file, for sharing with a partner's integration team.</p></div>
+      <div class="table-wrap"><table class="props">
+        <tr><th>File</th><th>Contents</th></tr>
+        <tr><td class="name"><a style="color:var(--brand)" href="generic-driver-api-contract.md" download>generic-driver-api-contract.md</a></td><td>This document (Generic driver external API contract)</td></tr>
+      </table></div>
+    </section>
+
+    <!-- ================= AUTH MODEL ================= -->
+    <section id="auth-model">
+      <div class="eyebrow">Generic driver</div>
+      <h2>Authentication model</h2>
+      <p class="dek">Every request made by the CGS SDK to your system carries the user's external JWT token in the <code class="inline">Authorization</code> header.</p>
+
+      <div class="snippet"><div class="bar"><span class="fname">request headers</span></div><pre>Authorization: Bearer &lt;external-jwt-token&gt;
+Accept: application/json</pre></div>
+
+      <div class="prose">
+        <p>The external API is responsible for validating this token on every call.</p>
+      </div>
+    </section>
+
+    <!-- ================= ENDPOINTS ================= -->
+    <section id="endpoints">
+      <div class="eyebrow">Generic driver</div>
+      <h2>Endpoints</h2>
+      <p class="dek">Two endpoints to implement, both authenticated with the external JWT described above.</p>
+
+      <div class="component" id="ep-authenticate">
+        <div class="component-head">
+          <h4>GET /cgs/authenticate</h4>
+          <span class="ctx-badge pure">GET</span>
+        </div>
+        <p class="desc">Validates an external token and returns both the canonical user identifier and the user's rights/entitlements in a single call.</p>
+
+        <h4 class="sub-h4">When it is called</h4>
+        <div class="prose"><p>During the CGS authentication flow, when a user presents their external token to the CGS SDK. This is the entry point of the integration — it combines token introspection and rights resolution in one round trip.</p></div>
+
+        <h4 class="sub-h4">Prerequisites</h4>
+        <div class="prose"><ul>
+          <li>The <code class="inline">Authorization</code> header contains a valid, non-expired JWT issued by the external system.</li>
+        </ul></div>
+
+        <h4 class="sub-h4">Expected response — 200 OK</h4>
+        <div class="snippet"><div class="bar"><span class="fname">response.json</span></div><pre>{
+  <span class="tok-tag">"identifier"</span>: <span class="tok-str">"string"</span>,
+  <span class="tok-tag">"rights"</span>: {}
+}</pre></div>
+
+        <div class="table-wrap"><table class="props">
+          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          <tr><td class="name">identifier</td><td class="type">string</td><td>Stable, unique identifier for the user in the external system. Used by CGS to create or match the user account.</td></tr>
+          <tr><td class="name">rights</td><td class="type">any JSON</td><td>The user's rights/entitlements. Any valid JSON value — object, array, or primitive. CGS stores and forwards this as-is.</td></tr>
+        </table></div>
+
+        <div class="note info">
+          <div class="ic">i</div>
+          <p>The token expiry is read from the JWT <code class="inline">exp</code> claim by CGS; the external API does not need to return it.</p>
+        </div>
+
+        <div class="note warn">
+          <div class="ic">!</div>
+          <p><strong>Error handling:</strong> any non-2xx response causes CGS to reject the authentication attempt with an <code class="inline">Unauthorized</code> error.</p>
+        </div>
+      </div>
+
+      <div class="component" id="ep-profiles">
+        <div class="component-head">
+          <h4>GET /cgs/profiles</h4>
+          <span class="ctx-badge pure">GET</span>
+        </div>
+        <p class="desc">Returns the list of reading profiles associated with the user's account.</p>
+
+        <h4 class="sub-h4">When it is called</h4>
+        <div class="prose"><p>After successful authentication, when CGS builds account information or fetches profiles explicitly.</p></div>
+
+        <h4 class="sub-h4">Prerequisites</h4>
+        <div class="prose"><ul>
+          <li>The user has previously been authenticated via <code class="inline">GET /cgs/authenticate</code>.</li>
+          <li>The <code class="inline">Authorization</code> header contains a valid external JWT for that user.</li>
+        </ul></div>
+
+        <h4 class="sub-h4">Expected response — 200 OK</h4>
+        <div class="prose"><p>A JSON array of profile objects:</p></div>
+        <div class="snippet"><div class="bar"><span class="fname">response.json</span></div><pre>[
+  {
+    <span class="tok-tag">"externalId"</span>: <span class="tok-str">"string"</span>,
+    <span class="tok-tag">"ageGroup"</span>: <span class="tok-str">"string"</span>,
+    <span class="tok-tag">"concepts"</span>: [<span class="tok-str">"string"</span>],
+    <span class="tok-tag">"locales"</span>: [<span class="tok-str">"string"</span>]
+  }
+]</pre></div>
+
+        <div class="table-wrap"><table class="props">
+          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          <tr><td class="name">externalId</td><td class="type">string</td><td>Stable unique identifier for this profile in the external system.</td></tr>
+          <tr><td class="name">ageGroup</td><td class="type">string</td><td>Age group for this profile (e.g. <code class="inline">"adult"</code>, <code class="inline">"child"</code>).</td></tr>
+          <tr><td class="name">concepts</td><td class="type">string[]</td><td>Content concepts/topics this profile is interested in.</td></tr>
+          <tr><td class="name">locales</td><td class="type">string[]</td><td>Preferred locales/languages (e.g. <code class="inline">["fr-FR", "en-US"]</code>).</td></tr>
+        </table></div>
+
+        <div class="prose"><p>An empty array <code class="inline">[]</code> is valid if the user has no profiles.</p></div>
+
+        <div class="note warn">
+          <div class="ic">!</div>
+          <p><strong>Error handling:</strong> any non-2xx response causes CGS to return an <code class="inline">Unauthorized</code> error to the client.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CALL SEQUENCE ================= -->
+    <section id="call-sequence">
+      <div class="eyebrow">Generic driver</div>
+      <h2>Call sequence</h2>
+      <p class="dek">How a client-side login turns into the two calls above, end to end.</p>
+
+      <div class="snippet"><div class="bar"><span class="fname">sequence</span></div><pre>Client                     CGS                        External API
+  |                          |                              |
+  |-- POST /auth/token ------&gt;|                              |
+  |   { externalToken }      |-- GET /cgs/authenticate ---->|
+  |                          |   Authorization: Bearer ...  |
+  |                          |&lt;-- 200 { identifier,         |
+  |                          |         rights } ------------|
+  |&lt;-- CGS session token ----|                              |
+  |                          |                              |
+  |-- GET /account/info ----&gt;|                              |
+  |   Authorization: Bearer  |-- GET /cgs/profiles -------->|
+  |   &lt;CGS-token&gt;            |&lt;-- 200 [ ... ] -------------|
+  |&lt;-- account data +--------|                              |
+  |    profiles              |                              |</pre></div>
+    </section>
+
+    <!-- ================= CONFIGURATION ================= -->
+    <section id="configuration">
+      <div class="eyebrow">Generic driver</div>
+      <h2>Configuration</h2>
+      <p class="dek">The external API base URL is configured per <strong>External Partner</strong> record in the CGS database (<code class="inline">PointOfSaleDriver.BaseUrl</code> field).</p>
+
+      <div class="snippet"><div class="bar"><span class="fname">example</span></div><pre>BaseUrl: https://api.your-system.example.com
+→ calls https://api.your-system.example.com/cgs/authenticate
+→ calls https://api.your-system.example.com/cgs/profiles</pre></div>
+    </section>
+
+    <footer class="pagefoot">
+      CGS Backend · Generic driver — External API contract, first version.
+    </footer>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  var COPY_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5.5" y="5.5" width="8.5" height="8.5" rx="1.6"/><path d="M10.5 5.5V3.6A1.6 1.6 0 0 0 8.9 2H3.6A1.6 1.6 0 0 0 2 3.6v5.3A1.6 1.6 0 0 0 3.6 10.5H5.5"/></svg>';
+  var CHECK_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.5l3 3 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function copyText(text){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).catch(function(){ return legacyCopy(text); });
+    }
+    return legacyCopy(text);
+  }
+
+  function legacyCopy(text){
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok ? Promise.resolve() : Promise.reject();
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+
+  document.querySelectorAll(".snippet").forEach(function(snippet){
+    var pre = snippet.querySelector("pre");
+    if (!pre) return;
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "copy-btn";
+    btn.setAttribute("aria-label", "Copy code");
+    btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copy</span>';
+
+    var bar = snippet.querySelector(".bar");
+    if (bar) {
+      bar.appendChild(btn);
+    } else {
+      btn.classList.add("snippet-floating-copy");
+      snippet.appendChild(btn);
+    }
+
+    var resetTimer;
+    btn.addEventListener("click", function(){
+      copyText(pre.textContent).then(function(){
+        clearTimeout(resetTimer);
+        btn.classList.add("copied");
+        btn.innerHTML = CHECK_ICON + '<span class="copy-btn-label">Copied!</span>';
+        resetTimer = setTimeout(function(){
+          btn.classList.remove("copied");
+          btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copy</span>';
+        }, 1800);
+      }).catch(function(){
+        btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Failed</span>';
+        resetTimer = setTimeout(function(){
+          btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copy</span>';
+        }, 1800);
+      });
+    });
+  });
+
+  var sidebar = document.getElementById("sidebar");
+  var backdrop = document.getElementById("backdrop");
+  var toggle = document.getElementById("menuToggle");
+  function closeMenu(){ sidebar.classList.remove("open"); backdrop.classList.remove("open"); }
+  toggle.addEventListener("click", function(){
+    sidebar.classList.toggle("open");
+    backdrop.classList.toggle("open");
+  });
+  backdrop.addEventListener("click", closeMenu);
+  document.querySelectorAll(".sidebar a").forEach(function(a){
+    a.addEventListener("click", closeMenu);
+  });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav-link"));
+  var sections = links
+    .map(function(a){ return document.getElementById(a.getAttribute("href").slice(1)); })
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window && sections.length) {
+    var current = null;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          current = entry.target.id;
+        }
+      });
+      if (current) {
+        links.forEach(function(a){
+          a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+        });
+      }
+    }, { rootMargin: "-15% 0px -70% 0px", threshold: 0 });
+    sections.forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+
+</body></html>

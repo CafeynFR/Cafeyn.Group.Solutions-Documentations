@@ -179,10 +179,12 @@
   .component{
     border:1px solid var(--border);border-radius:14px;background:var(--bg-elevated);padding:26px 26px 22px;margin-top:22px;box-shadow:var(--shadow-sm);
   }
+  .component-head .badges{display:flex;gap:6px;flex-wrap:wrap;}
   .component-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px;}
   .component-head h4{font-family:var(--font-mono);font-size:17px;font-weight:600;color:var(--fg);}
   .ctx-badge{font:600 10.5px var(--font-text);letter-spacing:.03em;border-radius:20px;padding:3px 9px;flex:none;}
   .ctx-badge.needs{color:var(--brand);background:var(--brand-wash);}
+  .ctx-badge.fw{color:var(--fg-muted);background:var(--bg-inset);border:1px solid var(--border);}
   .ctx-badge.pure{color:var(--success);background:color-mix(in srgb, var(--success) 14%, transparent);}
   .component p.desc{color:var(--fg-muted);font-size:14px;margin:6px 0 18px;max-width:64ch;}
 
@@ -261,7 +263,7 @@
   .note.info .ic{background:var(--accent);color:#fff;}
   .note.warn{background:var(--brand-wash);border-color:color-mix(in srgb, var(--brand) 35%, transparent);}
   .note.warn .ic{background:var(--brand);color:#fff;}
-  .note p{margin:0;color:var(--fg);}
+  .note p{margin:0;color:var(--fg);min-width:0;overflow-wrap:anywhere;}
   .note strong{font-weight:700;}
 
   /* ---------- architecture diagram ---------- */
@@ -276,6 +278,28 @@
   .d-box.core{border-color:var(--brand);}
   .d-box.core .t{color:var(--brand);}
   .d-arrow{display:flex;align-items:center;justify-content:center;color:var(--fg-faint);font-size:20px;margin:6px 0;}
+
+  /* ---------- component previews ---------- */
+  .preview{border:1px solid var(--border);border-radius:11px;overflow:hidden;margin:0 0 18px;}
+  .preview-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 12px;background:var(--bg-inset);border-bottom:1px solid var(--border);}
+  .preview-label{font:700 10.5px var(--font-text);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-faint);}
+  .variant-switch{display:flex;gap:2px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:7px;padding:2px;}
+  .variant-switch button{font:500 12px var(--font-mono);color:var(--fg-muted);background:transparent;border:none;border-radius:5px;padding:3px 9px;cursor:pointer;}
+  .variant-switch button:hover{color:var(--fg);}
+  .variant-switch button[aria-pressed="true"]{background:var(--brand-wash);color:var(--brand);font-weight:600;}
+  .preview-stage{background:#f5f5f7;padding:12px;display:flex;justify-content:center;overflow:hidden;}
+  .preview-stage figure{margin:0;display:none;max-width:100%;}
+  .preview-stage figure.active{display:block;}
+  .preview-stage img{display:block;max-width:100%;height:auto;}
+  .preview-stage .shot-dark{display:none;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .preview-stage{background:#2c2c2e;}
+    :root:not([data-theme="light"]) .preview-stage .shot-light{display:none;}
+    :root:not([data-theme="light"]) .preview-stage .shot-dark{display:block;}
+  }
+  :root[data-theme="dark"] .preview-stage{background:#2c2c2e;}
+  :root[data-theme="dark"] .preview-stage .shot-light{display:none;}
+  :root[data-theme="dark"] .preview-stage .shot-dark{display:block;}
 
   footer.pagefoot{border-top:1px solid var(--border);padding-top:24px;margin-top:70px;color:var(--fg-faint);font-size:12.5px;}
 
@@ -326,13 +350,14 @@
     <a href="#core-reader" class="nav-link sub">Reader tickets</a>
 
     <h5>Components</h5>
-    <a href="#comp-headerblock" class="nav-link sub">HeaderBlock</a>
+    <a href="#comp-headersection" class="nav-link sub">HeaderSection</a>
     <a href="#comp-contentinfo" class="nav-link sub">ContentInfo</a>
     <a href="#comp-articlecell" class="nav-link sub">ArticleCell</a>
-    <a href="#comp-articleblock" class="nav-link sub">ArticleBlock</a>
+    <a href="#comp-articlesection" class="nav-link sub">ArticleSection</a>
     <a href="#comp-issuecell" class="nav-link sub">IssueCell</a>
-    <a href="#comp-issueblock" class="nav-link sub">IssueBlock</a>
+    <a href="#comp-issuesection" class="nav-link sub">IssueSection</a>
     <a href="#comp-issuehighlighted" class="nav-link sub">IssueHighlighted</a>
+    <a href="#comp-addinsection" class="nav-link sub">AddInSection</a>
 
     <h5>Readers</h5>
     <a href="#reader-article" class="nav-link sub">Article Reader</a>
@@ -363,7 +388,7 @@
         <p>The SDK can be used at two levels:</p>
         <ul>
           <li><strong>The core (<code class="inline">core</code>)</strong> — a single <code class="inline">CGS</code> class that handles authentication and exposes the content API (articles, issues, publications, media, videos). It is used by all the other packages and can also be consumed directly.</li>
-          <li><strong>The component libraries (<code class="inline">react</code>, <code class="inline">vue</code>, <code class="inline">vanilla</code>)</strong> — the same catalog of 9 components (blocks, cells, headers, readers) implemented in all three ecosystems with the same props API.</li>
+          <li><strong>The component libraries (<code class="inline">react</code>, <code class="inline">vue</code>, <code class="inline">vanilla</code>)</strong> — the same catalog of 9 components (sections, cells, headers, readers) implemented in all three ecosystems with the same props API. The vanilla library adds <code class="inline">AddInSection</code> and a <code class="inline">timeline</code> article variant.</li>
         </ul>
         <p>Two specialized reading engines, <strong>articlereader</strong> and <strong>pdfreader</strong>, are packaged independently (Svelte, compiled into standalone scripts) and embedded by the <code class="inline">ArticleReader</code> / <code class="inline">PDFReader</code> components — or usable directly, without a framework.</p>
       </div>
@@ -637,6 +662,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
         <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
         <tr><td class="name">getIssue(issueId)</td><td class="type">Promise&lt;Issue&gt;</td><td>A full issue (magazine).</td></tr>
         <tr><td class="name">getIssues(filter, orderBy?, paging?)</td><td class="type">Promise&lt;IssueContentPage&gt;</td><td>Paginated search. <code class="inline">filter</code> requires <code class="inline">ids</code>, <code class="inline">publicationIds</code> or <code class="inline">topicIds</code>.</td></tr>
+        <tr><td class="name">getAddIns(issueId, paging?)</td><td class="type">Promise&lt;IssueContentPage&gt;</td><td>Add-ins (supplements) published with an issue.</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
         <tr><th>Type</th><th>Shape</th></tr>
@@ -818,20 +844,45 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
     <section id="components-intro">
       <div class="eyebrow">Components</div>
       <h2>Component catalog</h2>
-      <p class="dek">The same 9 components exist in JavaScript, React and Vue, with identical props. Those that query the catalog require the app to have initialized CGS (<a href="#gs-init">step 2</a>); two components are purely presentational.</p>
+      <p class="dek">The same 9 components exist in JavaScript, React and Vue, with identical props; items marked <em>Vanilla only</em> exist only in the JavaScript library. Those that query the catalog require the app to have initialized CGS (<a href="#gs-init">step 2</a>); two components are purely presentational.</p>
+      <div class="note info"><div class="ic">i</div><p>Each preview is a capture of the component rendered by the <strong>vanilla SDK</strong> with demo data, in the light and dark themes (it follows this page's theme). Use the switch above a preview to compare variants.</p></div>
     </section>
 
-    <section id="comp-headerblock">
+    <section id="comp-headersection">
       <div class="component">
-        <div class="component-head"><h4>HeaderBlock</h4><span class="ctx-badge pure">Presentational</span></div>
+        <div class="component-head"><h4>HeaderSection</h4><span class="ctx-badge pure">Presentational</span></div>
         <p class="desc">Section header: title, badge, metadata and optional link.</p>
+        <div class="preview">
+          <div class="preview-bar"><span class="preview-label">Preview</span>
+            <div class="variant-switch" role="group" aria-label="variant and size">
+              <button type="button" data-v="md" aria-pressed="true">default · md</button>
+              <button type="button" data-v="lg" aria-pressed="false">default · lg</button>
+              <button type="button" data-v="filled" aria-pressed="false">filled</button>
+            </div>
+          </div>
+          <div class="preview-stage">
+            <figure class="shot active" data-v="md">
+              <img class="shot-light" src="assets/components/headersection-md-light.webp" width="874" height="64" alt="HeaderSection rendered with the vanilla SDK (md)" loading="lazy">
+              <img class="shot-dark" src="assets/components/headersection-md-dark.webp" width="874" height="64" alt="HeaderSection rendered with the vanilla SDK (md)" loading="lazy">
+            </figure>
+            <figure class="shot" data-v="lg">
+              <img class="shot-light" src="assets/components/headersection-lg-light.webp" width="874" height="96" alt="HeaderSection rendered with the vanilla SDK (lg)" loading="lazy">
+              <img class="shot-dark" src="assets/components/headersection-lg-dark.webp" width="874" height="96" alt="HeaderSection rendered with the vanilla SDK (lg)" loading="lazy">
+            </figure>
+            <figure class="shot" data-v="filled">
+              <img class="shot-light" src="assets/components/headersection-filled-light.webp" width="874" height="88" alt="HeaderSection rendered with the vanilla SDK (filled)" loading="lazy">
+              <img class="shot-dark" src="assets/components/headersection-filled-dark.webp" width="874" height="88" alt="HeaderSection rendered with the vanilla SDK (filled)" loading="lazy">
+            </figure>
+          </div>
+        </div>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">title<span class="req">required</span></td><td class="type">string</td><td>Section title.</td></tr>
           <tr><td class="name">badgeLabel</td><td class="type">string?</td><td>Badge displayed next to the title.</td></tr>
           <tr><td class="name">infos</td><td class="type">string[]?</td><td>List of short metadata items.</td></tr>
           <tr><td class="name">linkLabel / to</td><td class="type">string?</td><td>Optional link (both props are required to display it).</td></tr>
-          <tr><td class="name">size</td><td class="type">"md" | "lg"</td><td>Block size — default <code class="inline">"md"</code>.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"default" | "filled"</td><td>Visual style — <code class="inline">"filled"</code> shows the title only, uppercase on a tinted background. Default <code class="inline">"default"</code>.</td></tr>
+          <tr><td class="name">size</td><td class="type">"md" | "lg"</td><td>Title size — default <code class="inline">"md"</code>.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -839,9 +890,9 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
             <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
             <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
           </div>
-          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderBlock</span> <span class="tok-attr">title</span>=<span class="tok-str">"Top stories"</span> <span class="tok-attr">linkLabel</span>=<span class="tok-str">"See all"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderBlock</span> <span class="tok-attr">title</span>=<span class="tok-str">"Top stories"</span> <span class="tok-attr">link-label</span>=<span class="tok-str">"See all"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.headerBlock({
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderSection</span> <span class="tok-attr">title</span>=<span class="tok-str">"Top stories"</span> <span class="tok-attr">linkLabel</span>=<span class="tok-str">"See all"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderSection</span> <span class="tok-attr">title</span>=<span class="tok-str">"Top stories"</span> <span class="tok-attr">link-label</span>=<span class="tok-str">"See all"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.headerSection({
   selector: <span class="tok-str">"section-head"</span>,
   title: <span class="tok-str">"Top stories"</span>,
   linkLabel: <span class="tok-str">"See all"</span>,
@@ -855,6 +906,16 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
       <div class="component">
         <div class="component-head"><h4>ContentInfo</h4><span class="ctx-badge pure">Presentational</span></div>
         <p class="desc">Presentation block with title, metadata and action button — typically at the top of a publication page.</p>
+        <div class="preview">
+          <div class="preview-bar"><span class="preview-label">Preview</span>
+          </div>
+          <div class="preview-stage">
+            <figure class="shot active">
+              <img class="shot-light" src="assets/components/contentinfo-light.webp" width="874" height="148" alt="ContentInfo rendered with the vanilla SDK" loading="lazy">
+              <img class="shot-dark" src="assets/components/contentinfo-dark.webp" width="874" height="148" alt="ContentInfo rendered with the vanilla SDK" loading="lazy">
+            </figure>
+          </div>
+        </div>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">title<span class="req">required</span></td><td class="type">string</td><td>Main title.</td></tr>
@@ -882,11 +943,39 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
       <div class="component">
         <div class="component-head"><h4>ArticleCell</h4><span class="ctx-badge needs">Requires CGS</span></div>
         <p class="desc">Loads and displays a single article via <code class="inline">core.articles.getArticle(articleId)</code>. A shimmer is shown while loading.</p>
+        <div class="preview">
+          <div class="preview-bar"><span class="preview-label">Preview</span>
+            <div class="variant-switch" role="group" aria-label="variant">
+              <button type="button" data-v="leading" aria-pressed="true">leading</button>
+              <button type="button" data-v="standard" aria-pressed="false">standard</button>
+              <button type="button" data-v="rich" aria-pressed="false">rich</button>
+              <button type="button" data-v="timeline" aria-pressed="false">timeline</button>
+            </div>
+          </div>
+          <div class="preview-stage">
+            <figure class="shot active" data-v="leading">
+              <img class="shot-light" src="assets/components/articlecell-leading-light.webp" width="874" height="180" alt="ArticleCell rendered with the vanilla SDK (leading)" loading="lazy">
+              <img class="shot-dark" src="assets/components/articlecell-leading-dark.webp" width="874" height="180" alt="ArticleCell rendered with the vanilla SDK (leading)" loading="lazy">
+            </figure>
+            <figure class="shot" data-v="standard">
+              <img class="shot-light" src="assets/components/articlecell-standard-light.webp" width="874" height="200" alt="ArticleCell rendered with the vanilla SDK (standard)" loading="lazy">
+              <img class="shot-dark" src="assets/components/articlecell-standard-dark.webp" width="874" height="200" alt="ArticleCell rendered with the vanilla SDK (standard)" loading="lazy">
+            </figure>
+            <figure class="shot" data-v="rich">
+              <img class="shot-light" src="assets/components/articlecell-rich-light.webp" width="440" height="476" alt="ArticleCell rendered with the vanilla SDK (rich)" loading="lazy">
+              <img class="shot-dark" src="assets/components/articlecell-rich-dark.webp" width="440" height="476" alt="ArticleCell rendered with the vanilla SDK (rich)" loading="lazy">
+            </figure>
+            <figure class="shot" data-v="timeline">
+              <img class="shot-light" src="assets/components/articlecell-timeline-light.webp" width="640" height="80" alt="ArticleCell rendered with the vanilla SDK (timeline)" loading="lazy">
+              <img class="shot-dark" src="assets/components/articlecell-timeline-dark.webp" width="640" height="80" alt="ArticleCell rendered with the vanilla SDK (timeline)" loading="lazy">
+            </figure>
+          </div>
+        </div>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">articleId<span class="req">required</span></td><td class="type">string</td><td>Article identifier.</td></tr>
           <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated article links.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich"</td><td>Visual template — default <code class="inline">"standard"</code>.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich" | "timeline"</td><td>Visual template — default <code class="inline">"standard"</code>. <code class="inline">"timeline"</code> is vanilla only.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -906,10 +995,20 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
       </div>
     </section>
 
-    <section id="comp-articleblock">
+    <section id="comp-articlesection">
       <div class="component">
-        <div class="component-head"><h4>ArticleBlock</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <div class="component-head"><h4>ArticleSection</h4><span class="ctx-badge needs">Requires CGS</span></div>
         <p class="desc">Paginated article grid via <code class="inline">core.articles.getArticles(filter, orderBy, paging)</code>. <code class="inline">loadMore</code> enables infinite loading via an <em>intersection observer</em>.</p>
+        <div class="preview">
+          <div class="preview-bar"><span class="preview-label">Preview</span>
+          </div>
+          <div class="preview-stage">
+            <figure class="shot active">
+              <img class="shot-light" src="assets/components/articlesection-light.webp" width="884" height="441" alt="ArticleSection rendered with the vanilla SDK" loading="lazy">
+              <img class="shot-dark" src="assets/components/articlesection-dark.webp" width="884" height="441" alt="ArticleSection rendered with the vanilla SDK" loading="lazy">
+            </figure>
+          </div>
+        </div>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">filter<span class="req">required</span></td><td class="type">ArticleFilter</td><td>Search criteria (see <a href="#core-articles">Core → Articles</a>).</td></tr>
@@ -918,7 +1017,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
           <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll.</td></tr>
           <tr><td class="name">header</td><td class="type">{ title: string }?</td><td>Optional section title.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich"</td><td>Cell template — default <code class="inline">"standard"</code>.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich" | "timeline"</td><td>Cell template — default <code class="inline">"standard"</code>. <code class="inline">"timeline"</code> is vanilla only.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -926,7 +1025,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
             <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
             <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
           </div>
-          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;ArticleBlock</span>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;ArticleSection</span>
   <span class="tok-attr">header</span>={{ title: <span class="tok-str">"Latest articles"</span> }}
   <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/articles/"</span>
   <span class="tok-attr">filter</span>={{ publicationIds: [<span class="tok-str">"73"</span>] }}
@@ -934,7 +1033,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
   <span class="tok-attr">loadMore</span>
   <span class="tok-attr">variant</span>=<span class="tok-str">"leading"</span>
 <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;ArticleBlock</span>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;ArticleSection</span>
   <span class="tok-attr">:header</span>=<span class="tok-str">"{ title: 'Latest articles' }"</span>
   <span class="tok-attr">base-url</span>=<span class="tok-str">"/articles/"</span>
   <span class="tok-attr">:filter</span>=<span class="tok-str">"{ publicationIds: ['73'] }"</span>
@@ -942,7 +1041,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
   <span class="tok-attr">load-more</span>
   <span class="tok-attr">variant</span>=<span class="tok-str">"leading"</span>
 <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.articleBlock({
+          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.articleSection({
   selector: <span class="tok-str">"latest-articles"</span>,
   header: { title: <span class="tok-str">"Latest articles"</span> },
   baseUrl: <span class="tok-str">"/articles/"</span>,
@@ -959,6 +1058,29 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
       <div class="component">
         <div class="component-head"><h4>IssueCell</h4><span class="ctx-badge needs">Requires CGS</span></div>
         <p class="desc">Loads and displays a single issue via <code class="inline">core.issues.getIssue(issueId)</code>.</p>
+        <div class="preview">
+          <div class="preview-bar"><span class="preview-label">Preview</span>
+            <div class="variant-switch" role="group" aria-label="variant">
+              <button type="button" data-v="standard" aria-pressed="true">standard</button>
+              <button type="button" data-v="branded" aria-pressed="false">branded</button>
+              <button type="button" data-v="rich" aria-pressed="false">rich</button>
+            </div>
+          </div>
+          <div class="preview-stage">
+            <figure class="shot active" data-v="standard">
+              <img class="shot-light" src="assets/components/issuecell-standard-light.webp" width="290" height="450" alt="IssueCell rendered with the vanilla SDK (standard)" loading="lazy">
+              <img class="shot-dark" src="assets/components/issuecell-standard-dark.webp" width="290" height="450" alt="IssueCell rendered with the vanilla SDK (standard)" loading="lazy">
+            </figure>
+            <figure class="shot" data-v="branded">
+              <img class="shot-light" src="assets/components/issuecell-branded-light.webp" width="290" height="426" alt="IssueCell rendered with the vanilla SDK (branded)" loading="lazy">
+              <img class="shot-dark" src="assets/components/issuecell-branded-dark.webp" width="290" height="426" alt="IssueCell rendered with the vanilla SDK (branded)" loading="lazy">
+            </figure>
+            <figure class="shot" data-v="rich">
+              <img class="shot-light" src="assets/components/issuecell-rich-light.webp" width="398" height="235" alt="IssueCell rendered with the vanilla SDK (rich)" loading="lazy">
+              <img class="shot-dark" src="assets/components/issuecell-rich-dark.webp" width="398" height="235" alt="IssueCell rendered with the vanilla SDK (rich)" loading="lazy">
+            </figure>
+          </div>
+        </div>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">issueId<span class="req">required</span></td><td class="type">string</td><td>Issue identifier.</td></tr>
@@ -983,10 +1105,20 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
       </div>
     </section>
 
-    <section id="comp-issueblock">
+    <section id="comp-issuesection">
       <div class="component">
-        <div class="component-head"><h4>IssueBlock</h4><span class="ctx-badge needs">Requires CGS</span></div>
+        <div class="component-head"><h4>IssueSection</h4><span class="ctx-badge needs">Requires CGS</span></div>
         <p class="desc">Paginated issue grid via <code class="inline">core.issues.getIssues(filter, orderBy, paging)</code>.</p>
+        <div class="preview">
+          <div class="preview-bar"><span class="preview-label">Preview</span>
+          </div>
+          <div class="preview-stage">
+            <figure class="shot active">
+              <img class="shot-light" src="assets/components/issuesection-light.webp" width="884" height="473" alt="IssueSection rendered with the vanilla SDK" loading="lazy">
+              <img class="shot-dark" src="assets/components/issuesection-dark.webp" width="884" height="473" alt="IssueSection rendered with the vanilla SDK" loading="lazy">
+            </figure>
+          </div>
+        </div>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">filter<span class="req">required</span></td><td class="type">IssueFilter</td><td>Search criteria (see <a href="#core-issues">Core → Issues</a>).</td></tr>
@@ -994,6 +1126,7 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
           <tr><td class="name">orderBy</td><td class="type">IssueSort[]?</td><td>Result sorting.</td></tr>
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
           <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll.</td></tr>
+          <tr><td class="name">header</td><td class="type">{ title: string }?</td><td>Optional section title.</td></tr>
           <tr><td class="name">gridLayout</td><td class="type">"horizontalList" | "verticalColumns"</td><td>Grid layout — default <code class="inline">"horizontalList"</code>.</td></tr>
           <tr><td class="name">variant</td><td class="type">"branded" | "rich" | "standard"</td><td>Cell template — default <code class="inline">"standard"</code>.</td></tr>
         </table></div>
@@ -1003,17 +1136,17 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
             <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
             <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
           </div>
-          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;IssueBlock</span>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;IssueSection</span>
   <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/pdf-reader/"</span>
   <span class="tok-attr">filter</span>={{ ids: [<span class="tok-str">"17"</span>, <span class="tok-str">"22"</span>, <span class="tok-str">"41"</span>] }}
   <span class="tok-attr">gridLayout</span>=<span class="tok-str">"verticalColumns"</span>
 <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;IssueBlock</span>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;IssueSection</span>
   <span class="tok-attr">base-url</span>=<span class="tok-str">"/pdf-reader/"</span>
   <span class="tok-attr">:filter</span>=<span class="tok-str">"{ ids: ['17', '22', '41'] }"</span>
   <span class="tok-attr">grid-layout</span>=<span class="tok-str">"verticalColumns"</span>
 <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.issueBlock({
+          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.issueSection({
   selector: <span class="tok-str">"issue-archives"</span>,
   baseUrl: <span class="tok-str">"/pdf-reader/"</span>,
   filter: { ids: [<span class="tok-str">"17"</span>, <span class="tok-str">"22"</span>, <span class="tok-str">"41"</span>] },
@@ -1027,6 +1160,16 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
       <div class="component">
         <div class="component-head"><h4>IssueHighlighted</h4><span class="ctx-badge needs">Requires CGS</span></div>
         <p class="desc">Highlights a single issue — large-format cover and action button — via <code class="inline">core.issues.getIssue(issueId)</code>.</p>
+        <div class="preview">
+          <div class="preview-bar"><span class="preview-label">Preview</span>
+          </div>
+          <div class="preview-stage">
+            <figure class="shot active">
+              <img class="shot-light" src="assets/components/issuehighlighted-light.webp" width="380" height="638" alt="IssueHighlighted rendered with the vanilla SDK" loading="lazy">
+              <img class="shot-dark" src="assets/components/issuehighlighted-dark.webp" width="380" height="638" alt="IssueHighlighted rendered with the vanilla SDK" loading="lazy">
+            </figure>
+          </div>
+        </div>
         <div class="table-wrap"><table class="props">
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">issueId<span class="req">required</span></td><td class="type">string</td><td>Issue identifier.</td></tr>
@@ -1048,6 +1191,27 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
   buttonLabel: <span class="tok-str">"Read this issue"</span>,
 });</pre></div></div>
         </div>
+      </div>
+    </section>
+
+    <section id="comp-addinsection">
+      <div class="component">
+        <div class="component-head"><h4>AddInSection</h4><div class="badges"><span class="ctx-badge fw">Vanilla only</span><span class="ctx-badge needs">Requires CGS</span></div></div>
+        <p class="desc">Lists the add-ins (supplements) of an issue via <code class="inline">core.issues.getAddIns(issueId, paging)</code>, as standard issue cells. Renders nothing when the issue has no add-ins.</p>
+        <div class="table-wrap"><table class="props">
+          <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
+          <tr><td class="name">issueId<span class="req">required</span></td><td class="type">string</td><td>Identifier of the parent issue.</td></tr>
+          <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated links.</td></tr>
+          <tr><td class="name">header</td><td class="type">{ title: string }?</td><td>Optional section title.</td></tr>
+          <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Pagination.</td></tr>
+          <tr><td class="name">gridLayout</td><td class="type">"horizontalList" | "verticalColumns"</td><td>Grid layout — default <code class="inline">"horizontalList"</code>.</td></tr>
+        </table></div>
+        <div class="snippet"><div class="bar"><span class="fname">index.html</span></div><pre>cgsComponents.addInSection({
+  selector: <span class="tok-str">"issue-addins"</span>,
+  issueId: <span class="tok-str">"211"</span>,
+  baseUrl: <span class="tok-str">"/pdf-reader/"</span>,
+  header: { title: <span class="tok-str">"With this issue"</span> },
+});</pre></div>
       </div>
     </section>
 
@@ -1632,6 +1796,18 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
         resetTimer = setTimeout(function(){
           btn.innerHTML = COPY_ICON + '<span class="copy-btn-label">Copy</span>';
         }, 1800);
+      });
+    });
+  });
+
+  document.querySelectorAll(".preview").forEach(function(preview){
+    var buttons = preview.querySelectorAll(".variant-switch button");
+    buttons.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        buttons.forEach(function(b){ b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+        preview.querySelectorAll(".preview-stage figure").forEach(function(fig){
+          fig.classList.toggle("active", fig.getAttribute("data-v") === btn.getAttribute("data-v"));
+        });
       });
     });
   });

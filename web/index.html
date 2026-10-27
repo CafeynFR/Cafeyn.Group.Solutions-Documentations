@@ -342,7 +342,9 @@
     <a href="#gs-first" class="nav-link sub">4. First component</a>
 
     <h5>Customization</h5>
-    <a href="#theming" class="nav-link">Theming</a>
+    <a href="#config" class="nav-link">Configuration</a>
+    <a href="#config-pass" class="nav-link sub">Passing the config</a>
+    <a href="#config-options" class="nav-link sub">Options</a>    <a href="#theming" class="nav-link">Theming</a>
     <a href="#theming-dark" class="nav-link sub">Light and dark mode</a>
     <a href="#theming-brand" class="nav-link sub">Brand colors</a>
     <a href="#theming-readers" class="nav-link sub">Reading engines</a>
@@ -381,9 +383,10 @@
       <p class="lede">The development kit for integrating Cafeyn content — articles, magazines and issues — into any web product: authentication, content catalog, ready-to-use components and embeddable reading engines.</p>
       <div class="pkgpills">
         <span class="pkgpill"><b>core</b> 0.1.4</span>
-        <span class="pkgpill"><b>articlereader</b> 1.0.0-alpha.1</span>
+        <span class="pkgpill"><b>articlereader</b> 1.0.0-alpha.2</span>
         <span class="pkgpill"><b>pdfreader</b> 1.0.0-alpha.3</span>
-        <span class="pkgpill"><b>react</b> · <b>vue</b> · <b>vanilla</b> 0.1.0</span>
+        <span class="pkgpill"><b>react</b> 0.1.1</span>
+        <span class="pkgpill"><b>vue</b> · <b>vanilla</b> 0.1.0</span>
       </div>
     </div>
 
@@ -396,7 +399,7 @@
         <p>The SDK can be used at two levels:</p>
         <ul>
           <li><strong>The core (<code class="inline">core</code>)</strong> — a single <code class="inline">CGS</code> class that handles authentication and exposes the content API (articles, issues, publications, media, videos). It is used by all the other packages and can also be consumed directly.</li>
-          <li><strong>The component libraries (<code class="inline">react</code>, <code class="inline">vue</code>, <code class="inline">vanilla</code>)</strong> — the same catalog of 9 components (sections, cells, headers, readers) implemented in all three ecosystems with the same props API. The vanilla library adds <code class="inline">AddInSection</code>, <code class="inline">PublicationCell</code>, <code class="inline">PublicationSection</code> and a <code class="inline">timeline</code> article variant.</li>
+          <li><strong>The component libraries (<code class="inline">react</code>, <code class="inline">vue</code>, <code class="inline">vanilla</code>)</strong> — the same catalog of 12 components (sections, cells, headers, readers) implemented in all three ecosystems with the same props API.</li>
         </ul>
         <p>Two specialized reading engines, <strong>articlereader</strong> and <strong>pdfreader</strong>, are packaged independently (Svelte, compiled into standalone scripts) and embedded by the <code class="inline">ArticleReader</code> / <code class="inline">PDFReader</code> components — or usable directly, without a framework.</p>
       </div>
@@ -487,7 +490,7 @@ ReactDOM.createRoot(document.getElementById(<span class="tok-str">"root"</span>)
 
 <span class="tok-kw">const</span> app = createApp(App);
 
-app.use(createCgs({ licenseKey: <span class="tok-str">"YOUR_LICENSE_KEY"</span>, env: <span class="tok-str">"production"</span> }));
+app.use(createCgs({ licenseKey: <span class="tok-str">"YOUR_LICENSE_KEY"</span> }));
 app.mount(<span class="tok-str">"#app"</span>);</pre></div>
         </div>
         <div class="snippet-group active" data-fw="vanilla">
@@ -502,8 +505,9 @@ app.mount(<span class="tok-str">"#app"</span>);</pre></div>
 
       <div class="note info">
         <div class="ic">i</div>
-        <p><code class="inline">env</code> is optional everywhere (default <code class="inline">"production"</code>), <strong>except for <code class="inline">createCgs</code></strong> (Vue): its type makes it required, even though <code class="inline">CGS</code> falls back to <code class="inline">"production"</code> internally.</p>
+        <p><code class="inline">env</code> is optional in all three frameworks and defaults to <code class="inline">"production"</code>: the second argument of <code class="inline">new CGSComponents(licenseKey, env?)</code>, the <code class="inline">env</code> prop of <code class="inline">&lt;CGSProvider&gt;</code> (React) and the <code class="inline">env</code> option of <code class="inline">createCgs()</code> (Vue). Only set it to target another environment (<code class="inline">"development"</code>, <code class="inline">"staging"</code> or <code class="inline">"preprod"</code>).</p>
       </div>
+      <div class="prose"><p>All three entry points also accept an optional <code class="inline">config</code> object to customize the SDK's behavior — see <a style="color:var(--brand)" href="#config">Configuration</a>.</p></div>
 
       <h3 class="sub-h" id="gs-auth">3. Authentication</h3>
       <div class="prose"><p>CGS does not handle user sign-in itself: your application authenticates the user (credentials, SSO…) against <strong>your own backend</strong>, then passes the resulting token to CGS to open a session.</p></div>
@@ -638,6 +642,48 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
       </div>
     </section>
 
+    <!-- ================= CONFIGURATION ================= -->
+    <section id="config">
+      <div class="eyebrow">Customization</div>
+      <h2>Configuration</h2>
+      <p class="dek">An optional <code class="inline">config</code> object, of type <code class="inline">CGSConfig</code>, customizes the SDK's behavior. It is passed once, when CGS is initialized, and every option has a default value: omit the object entirely to keep the defaults.</p>
+
+      <h3 class="sub-h" id="config-pass">Passing the config</h3>
+      <div class="prose"><p>The config is the third argument of <code class="inline">new CGSComponents(licenseKey, env?, config?)</code> in JavaScript, the <code class="inline">config</code> prop of <code class="inline">&lt;CGSProvider&gt;</code> in React and the <code class="inline">config</code> option of <code class="inline">createCgs()</code> in Vue.</p></div>
+      <div class="code-tabs">
+        <div class="snippet-tabbar">
+          <button class="tab-btn" data-fw="vanilla" aria-pressed="true"><span class="fw-dot"></span>JavaScript</button>
+          <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
+          <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
+        </div>
+        <div class="snippet-group" data-fw="react">
+          <div class="snippet"><div class="bar"><span class="fname">main.tsx</span></div><pre><span class="tok-tag">&lt;CGSProvider</span> <span class="tok-attr">licenseKey</span>=<span class="tok-str">"YOUR_LICENSE_KEY"</span> <span class="tok-attr">config</span>={{ theme: <span class="tok-str">"auto"</span> }}<span class="tok-tag">&gt;</span>
+  <span class="tok-tag">&lt;App</span> <span class="tok-tag">/&gt;</span>
+<span class="tok-tag">&lt;/CGSProvider&gt;</span></pre></div>
+        </div>
+        <div class="snippet-group" data-fw="vue">
+          <div class="snippet"><div class="bar"><span class="fname">main.ts</span></div><pre>app.use(createCgs({
+  licenseKey: <span class="tok-str">"YOUR_LICENSE_KEY"</span>,
+  config: { theme: <span class="tok-str">"auto"</span> },
+}));</pre></div>
+        </div>
+        <div class="snippet-group active" data-fw="vanilla">
+          <div class="snippet"><div class="bar"><span class="fname">index.html</span></div><pre><span class="tok-com">// env is positional: pass it to reach the config argument</span>
+<span class="tok-kw">const</span> cgsComponents = <span class="tok-kw">new</span> CGSComponents(<span class="tok-str">"YOUR_LICENSE_KEY"</span>, <span class="tok-str">"production"</span>, { theme: <span class="tok-str">"auto"</span> });</pre></div>
+        </div>
+      </div>
+
+      <h3 class="sub-h" id="config-options">Options</h3>
+      <div class="table-wrap"><table class="props">
+        <tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        <tr><td class="name">theme</td><td class="type">"auto" | "light" | "dark"</td><td class="type">"auto"</td><td>Color theme of the components. <code class="inline">"auto"</code> follows <code class="inline">prefers-color-scheme</code> and reacts to system changes. See <a style="color:var(--brand)" href="#theming-dark">Light and dark mode</a>.</td></tr>
+      </table></div>
+      <div class="note info">
+        <div class="ic">i</div>
+        <p><strong>React</strong>: the <code class="inline">config</code> prop of <code class="inline">&lt;CGSProvider&gt;</code> is only read when the CGS instance is created (it is recreated when <code class="inline">licenseKey</code> or <code class="inline">env</code> change). Updating the prop afterwards has no effect — options that can change at runtime expose a dedicated method, such as <a style="color:var(--brand)" href="#theming-dark"><code class="inline">setTheme()</code></a>. The <code class="inline">CGSConfig</code>, <code class="inline">Config</code> and <code class="inline">Theme</code> types are exported by both <code class="inline">@cafeyn/web-cgs-react</code> and <code class="inline">@cafeyn/web-cgs-vue</code>; <code class="inline">CGSConfig</code> and <code class="inline">Theme</code> by the vanilla build.</p>
+      </div>
+    </section>
+
     <!-- ================= THEMING ================= -->
     <section id="theming">
       <div class="eyebrow">Customization</div>
@@ -646,17 +692,39 @@ onMounted(<span class="tok-kw">async</span> () =&gt; {
 
       <h3 class="sub-h" id="theming-dark">Light and dark mode</h3>
       <div class="prose"><p>The dark theme is enabled by the <code class="inline">cgs-data-theme="dark"</code> attribute, set on <code class="inline">&lt;html&gt;</code> or on any ancestor of the components. Without the attribute (or with <code class="inline">"light"</code>), the light theme applies.</p></div>
-      <div class="note warn">
-        <div class="ic">!</div>
-        <p>The components do <strong>not</strong> follow <code class="inline">prefers-color-scheme</code> by themselves: it is up to your application to set the attribute, typically from its own theme setting or from the system theme.</p>
+      <div class="prose"><p>The SDK manages the attribute for you, in all three frameworks. Set the <a style="color:var(--brand)" href="#config-options"><code class="inline">theme</code> config option</a> (default <code class="inline">"auto"</code>, which follows <code class="inline">prefers-color-scheme</code> and reacts to system changes), and switch it at runtime with <code class="inline">setTheme()</code> — exposed by <code class="inline">CGSComponents</code> in JavaScript, and by <code class="inline">config.setTheme()</code> on the CGS instance in React (<code class="inline">Context</code>) and Vue (<code class="inline">useCgs()</code>).</p></div>
+      <div class="code-tabs">
+        <div class="snippet-tabbar">
+          <button class="tab-btn" data-fw="vanilla" aria-pressed="true"><span class="fw-dot"></span>JavaScript</button>
+          <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
+          <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
+        </div>
+        <div class="snippet-group" data-fw="react">
+          <div class="snippet"><div class="bar"><span class="fname">main.tsx</span></div><pre><span class="tok-tag">&lt;CGSProvider</span> <span class="tok-attr">licenseKey</span>=<span class="tok-str">"YOUR_LICENSE_KEY"</span> <span class="tok-attr">config</span>={{ theme: <span class="tok-str">"auto"</span> }}<span class="tok-tag">&gt;</span>
+  <span class="tok-tag">&lt;App</span> <span class="tok-tag">/&gt;</span>
+<span class="tok-tag">&lt;/CGSProvider&gt;</span>
+
+<span class="tok-com">// later, e.g. from your own theme toggle</span>
+<span class="tok-kw">const</span> cgs = useContext(Context);
+cgs.config.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-com">// "auto" | "light" | "dark"</span></pre></div>
+        </div>
+        <div class="snippet-group" data-fw="vue">
+          <div class="snippet"><div class="bar"><span class="fname">main.ts</span></div><pre>app.use(createCgs({
+  licenseKey: <span class="tok-str">"YOUR_LICENSE_KEY"</span>,
+  config: { theme: <span class="tok-str">"auto"</span> },
+}));
+
+<span class="tok-com">// later, e.g. from your own theme toggle</span>
+<span class="tok-kw">const</span> cgs = useCgs();
+cgs.config.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-com">// "auto" | "light" | "dark"</span></pre></div>
+        </div>
+        <div class="snippet-group active" data-fw="vanilla">
+          <div class="snippet"><div class="bar"><span class="fname">index.html</span></div><pre><span class="tok-kw">const</span> cgsComponents = <span class="tok-kw">new</span> CGSComponents(<span class="tok-str">"YOUR_LICENSE_KEY"</span>, <span class="tok-str">"production"</span>, { theme: <span class="tok-str">"auto"</span> });
+
+<span class="tok-com">// later, e.g. from your own theme toggle</span>
+cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-com">// "auto" | "light" | "dark"</span></pre></div>
+        </div>
       </div>
-      <div class="snippet"><div class="bar"><span class="fname">theme.js — follow the system theme</span></div><pre><span class="tok-kw">const</span> media = window.matchMedia(<span class="tok-str">"(prefers-color-scheme: dark)"</span>);
-
-<span class="tok-kw">const</span> applyTheme = (dark) =&gt;
-  document.documentElement.setAttribute(<span class="tok-str">"cgs-data-theme"</span>, dark ? <span class="tok-str">"dark"</span> : <span class="tok-str">"light"</span>);
-
-applyTheme(media.matches);
-media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyTheme(e.matches));</pre></div>
       <div class="prose"><p>Because the attribute is inherited through the DOM, you can also scope it: <code class="inline">&lt;div cgs-data-theme="dark"&gt;</code> renders only the components it contains in dark mode.</p></div>
 
       <h3 class="sub-h" id="theming-brand">Brand colors</h3>
@@ -693,7 +761,7 @@ media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyThe
       </div>
 
       <h3 class="sub-h" id="theming-readers">Reading engines</h3>
-      <div class="prose"><p><code class="inline">ArticleReader</code> and <code class="inline">PDFReader</code> manage their own reading theme through their <code class="inline">ambient</code> option (see <a href="#reader-article">Article Reader</a> and <a href="#reader-pdf">PDF Reader</a>). The two settings are independent: changing the theme in a reader does not change <code class="inline">cgs-data-theme</code>, and vice versa — use <code class="inline">ambient.callback</code> if you want to keep them in sync.</p></div>
+      <div class="prose"><p><code class="inline">ArticleReader</code> and <code class="inline">PDFReader</code> manage their own reading theme through their <code class="inline">ambient</code> option (see <a href="#reader-article">Article Reader</a> and <a href="#reader-pdf">PDF Reader</a>). While a reader is open, it writes its current reading theme to <code class="inline">cgs-data-theme</code> on <code class="inline">&lt;html&gt;</code> (on open, on each change in its picker, and on system changes in <code class="inline">"auto"</code>), so the CGS components around it follow the reader. Use <code class="inline">ambient.callback</code> if your own application theme should follow it too.</p></div>
     </section>
 
     <!-- ================= CORE ================= -->
@@ -916,7 +984,7 @@ media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyThe
     <section id="components-intro">
       <div class="eyebrow">Components</div>
       <h2>Component catalog</h2>
-      <p class="dek">The same 9 components exist in JavaScript, React and Vue, with identical props; items marked <em>Vanilla only</em> exist only in the JavaScript library. Those that query the catalog require the app to have initialized CGS (<a href="#gs-init">step 2</a>); two components are purely presentational.</p>
+      <p class="dek">The same 12 components exist in JavaScript, React and Vue, with identical props. Those that query the catalog require the app to have initialized CGS (<a href="#gs-init">step 2</a>); two components are purely presentational.</p>
       <div class="note info"><div class="ic">i</div><p>Each preview is a capture of the component rendered by the <strong>vanilla SDK</strong> with demo data, in the light and dark themes (it follows this page's theme). Use the switch above a preview to compare variants.</p></div>
     </section>
 
@@ -1059,7 +1127,7 @@ media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyThe
           <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">articleId<span class="req">required</span></td><td class="type">string</td><td>Article identifier.</td></tr>
           <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated article links.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich" | "timeline"</td><td>Visual template — default <code class="inline">"standard"</code>. <code class="inline">"timeline"</code> is vanilla only.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich" | "timeline"</td><td>Visual template — default <code class="inline">"standard"</code>.</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -1086,19 +1154,19 @@ media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyThe
         <div class="preview">
           <div class="preview-bar"><span class="preview-label">Preview</span>
             <div class="variant-switch" role="group" aria-label="grid layout and variant">
-              <button type="button" data-v="columns" aria-pressed="true">verticalColumns</button>
-              <button type="button" data-v="horizontal" aria-pressed="false">horizontalList · rich</button>
+              <button type="button" data-v="columns" aria-pressed="true">vertical</button>
+              <button type="button" data-v="horizontal" aria-pressed="false">horizontal · rich</button>
               <button type="button" data-v="timeline" aria-pressed="false">timeline</button>
             </div>
           </div>
           <div class="preview-stage">
             <figure class="shot active" data-v="columns">
-              <img class="shot-light" src="assets/components/articlesection-light.webp" width="894" height="526" alt="ArticleSection rendered with the vanilla SDK (verticalColumns)" loading="lazy">
-              <img class="shot-dark" src="assets/components/articlesection-dark.webp" width="894" height="526" alt="ArticleSection rendered with the vanilla SDK (verticalColumns)" loading="lazy">
+              <img class="shot-light" src="assets/components/articlesection-light.webp" width="894" height="526" alt="ArticleSection rendered with the vanilla SDK (vertical)" loading="lazy">
+              <img class="shot-dark" src="assets/components/articlesection-dark.webp" width="894" height="526" alt="ArticleSection rendered with the vanilla SDK (vertical)" loading="lazy">
             </figure>
             <figure class="shot" data-v="horizontal">
-              <img class="shot-light" src="assets/components/articlesection-horizontal-light.webp" width="894" height="420" alt="ArticleSection rendered with the vanilla SDK (horizontalList, rich)" loading="lazy">
-              <img class="shot-dark" src="assets/components/articlesection-horizontal-dark.webp" width="894" height="420" alt="ArticleSection rendered with the vanilla SDK (horizontalList, rich)" loading="lazy">
+              <img class="shot-light" src="assets/components/articlesection-horizontal-light.webp" width="894" height="420" alt="ArticleSection rendered with the vanilla SDK (horizontal, rich)" loading="lazy">
+              <img class="shot-dark" src="assets/components/articlesection-horizontal-dark.webp" width="894" height="420" alt="ArticleSection rendered with the vanilla SDK (horizontal, rich)" loading="lazy">
             </figure>
             <figure class="shot" data-v="timeline">
               <img class="shot-light" src="assets/components/articlesection-timeline-light.webp" width="608" height="384" alt="ArticleSection rendered with the vanilla SDK (timeline)" loading="lazy">
@@ -1112,10 +1180,10 @@ media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyThe
           <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated links.</td></tr>
           <tr><td class="name">orderBy</td><td class="type">ArticleSort[]?</td><td>Result sorting.</td></tr>
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
-          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll — ignored with <code class="inline">gridLayout: "horizontalList"</code>.</td></tr>
+          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll — ignored with <code class="inline">gridLayout: "horizontal"</code>.</td></tr>
           <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to?, variant? }?</td><td>Optional section header, rendered by <a href="#comp-headersection">HeaderSection</a> (size <code class="inline">lg</code>) — same props, <code class="inline">variant</code> included.</td></tr>
-          <tr><td class="name">gridLayout</td><td class="type">"verticalColumns" | "horizontalList"</td><td>Layout — default <code class="inline">"verticalColumns"</code> (1 to 3 columns depending on the container width); <code class="inline">"horizontalList"</code> shows a scrollable carousel with navigation buttons.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich" | "timeline"</td><td>Cell template — default <code class="inline">"standard"</code>. <code class="inline">"timeline"</code> is vanilla only and always renders a single column (max. 568px).</td></tr>
+          <tr><td class="name">gridLayout</td><td class="type">"vertical" | "horizontal"</td><td>Layout — default <code class="inline">"vertical"</code> (1 to 3 columns depending on the container width); <code class="inline">"horizontal"</code> shows a scrollable carousel with navigation buttons.</td></tr>
+          <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich" | "timeline"</td><td>Cell template — default <code class="inline">"standard"</code>. <code class="inline">"timeline"</code> always renders a single column (max. 568px).</td></tr>
         </table></div>
         <div class="code-tabs">
           <div class="snippet-tabbar">
@@ -1128,7 +1196,7 @@ media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyThe
   <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/articles/"</span>
   <span class="tok-attr">filter</span>={{ publicationIds: [<span class="tok-str">"73"</span>] }}
   <span class="tok-attr">paging</span>={{ limit: <span class="tok-str">12</span> }}
-  <span class="tok-attr">gridLayout</span>=<span class="tok-str">"horizontalList"</span>
+  <span class="tok-attr">gridLayout</span>=<span class="tok-str">"horizontal"</span>
   <span class="tok-attr">variant</span>=<span class="tok-str">"rich"</span>
 <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;ArticleSection</span>
@@ -1136,7 +1204,7 @@ media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyThe
   <span class="tok-attr">base-url</span>=<span class="tok-str">"/articles/"</span>
   <span class="tok-attr">:filter</span>=<span class="tok-str">"{ publicationIds: ['73'] }"</span>
   <span class="tok-attr">:paging</span>=<span class="tok-str">"{ limit: 12 }"</span>
-  <span class="tok-attr">grid-layout</span>=<span class="tok-str">"horizontalList"</span>
+  <span class="tok-attr">grid-layout</span>=<span class="tok-str">"horizontal"</span>
   <span class="tok-attr">variant</span>=<span class="tok-str">"rich"</span>
 <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.articleSection({
@@ -1145,7 +1213,7 @@ media.addEventListener(<span class="tok-str">"change"</span>, (e) =&gt; applyThe
   baseUrl: <span class="tok-str">"/articles/"</span>,
   filter: { publicationIds: [<span class="tok-str">"73"</span>] },
   paging: { limit: <span class="tok-str">12</span> },
-  gridLayout: <span class="tok-str">"horizontalList"</span>,
+  gridLayout: <span class="tok-str">"horizontal"</span>,
   variant: <span class="tok-str">"rich"</span>,
 });
 
@@ -1220,18 +1288,18 @@ cgsComponents.articleSection({
         <div class="preview">
           <div class="preview-bar"><span class="preview-label">Preview</span>
             <div class="variant-switch" role="group" aria-label="grid layout">
-              <button type="button" data-v="horizontal" aria-pressed="true">horizontalList</button>
-              <button type="button" data-v="columns" aria-pressed="false">verticalColumns</button>
+              <button type="button" data-v="horizontal" aria-pressed="true">horizontal</button>
+              <button type="button" data-v="columns" aria-pressed="false">vertical</button>
             </div>
           </div>
           <div class="preview-stage">
             <figure class="shot active" data-v="horizontal">
-              <img class="shot-light" src="assets/components/issuesection-light.webp" width="894" height="455" alt="IssueSection rendered with the vanilla SDK (horizontalList)" loading="lazy">
-              <img class="shot-dark" src="assets/components/issuesection-dark.webp" width="894" height="455" alt="IssueSection rendered with the vanilla SDK (horizontalList)" loading="lazy">
+              <img class="shot-light" src="assets/components/issuesection-light.webp" width="894" height="455" alt="IssueSection rendered with the vanilla SDK (horizontal)" loading="lazy">
+              <img class="shot-dark" src="assets/components/issuesection-dark.webp" width="894" height="455" alt="IssueSection rendered with the vanilla SDK (horizontal)" loading="lazy">
             </figure>
             <figure class="shot" data-v="columns">
-              <img class="shot-light" src="assets/components/issuesection-columns-light.webp" width="894" height="779" alt="IssueSection rendered with the vanilla SDK (verticalColumns)" loading="lazy">
-              <img class="shot-dark" src="assets/components/issuesection-columns-dark.webp" width="894" height="779" alt="IssueSection rendered with the vanilla SDK (verticalColumns)" loading="lazy">
+              <img class="shot-light" src="assets/components/issuesection-columns-light.webp" width="894" height="779" alt="IssueSection rendered with the vanilla SDK (vertical)" loading="lazy">
+              <img class="shot-dark" src="assets/components/issuesection-columns-dark.webp" width="894" height="779" alt="IssueSection rendered with the vanilla SDK (vertical)" loading="lazy">
             </figure>
           </div>
         </div>
@@ -1241,10 +1309,10 @@ cgsComponents.articleSection({
           <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated links.</td></tr>
           <tr><td class="name">orderBy</td><td class="type">IssueSort[]?</td><td>Result sorting.</td></tr>
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
-          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite loading at the end of the carousel — only taken into account when <code class="inline">gridLayout</code> is explicitly set to <code class="inline">"horizontalList"</code>.</td></tr>
+          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite loading at the end of the carousel — only taken into account when <code class="inline">gridLayout</code> is explicitly set to <code class="inline">"horizontal"</code>.</td></tr>
           <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to? }?</td><td>Optional section header, rendered by <a href="#comp-headersection">HeaderSection</a>.</td></tr>
-          <tr><td class="name">gridLayout</td><td class="type">"horizontalList" | "verticalColumns"</td><td>Layout — default <code class="inline">"horizontalList"</code> (scrollable carousel with navigation buttons).</td></tr>
-          <tr><td class="name">columns</td><td class="type">{ base, md?, lg?, xl? }</td><td>Number of columns (1 to 6) per container breakpoint, for <code class="inline">"verticalColumns"</code> — default <code class="inline">{ base: 2, md: 3, lg: 4, xl: 5 }</code>.</td></tr>
+          <tr><td class="name">gridLayout</td><td class="type">"horizontal" | "vertical"</td><td>Layout — default <code class="inline">"horizontal"</code> (scrollable carousel with navigation buttons).</td></tr>
+          <tr><td class="name">columns</td><td class="type">{ base, md?, lg?, xl? }</td><td>Number of columns (1 to 6) per container breakpoint, for <code class="inline">"vertical"</code> — default <code class="inline">{ base: 2, md: 3, lg: 4, xl: 5 }</code>.</td></tr>
           <tr><td class="name">variant</td><td class="type">"branded" | "rich" | "standard"</td><td>Cell template — default <code class="inline">"standard"</code>.</td></tr>
         </table></div>
         <div class="code-tabs">
@@ -1256,20 +1324,20 @@ cgsComponents.articleSection({
           <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;IssueSection</span>
   <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/pdf-reader/"</span>
   <span class="tok-attr">filter</span>={{ ids: [<span class="tok-str">"17"</span>, <span class="tok-str">"22"</span>, <span class="tok-str">"41"</span>] }}
-  <span class="tok-attr">gridLayout</span>=<span class="tok-str">"verticalColumns"</span>
+  <span class="tok-attr">gridLayout</span>=<span class="tok-str">"vertical"</span>
   <span class="tok-attr">columns</span>={{ base: <span class="tok-str">2</span>, md: <span class="tok-str">3</span>, lg: <span class="tok-str">4</span>, xl: <span class="tok-str">6</span> }}
 <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;IssueSection</span>
   <span class="tok-attr">base-url</span>=<span class="tok-str">"/pdf-reader/"</span>
   <span class="tok-attr">:filter</span>=<span class="tok-str">"{ ids: ['17', '22', '41'] }"</span>
-  <span class="tok-attr">grid-layout</span>=<span class="tok-str">"verticalColumns"</span>
+  <span class="tok-attr">grid-layout</span>=<span class="tok-str">"vertical"</span>
   <span class="tok-attr">:columns</span>=<span class="tok-str">"{ base: 2, md: 3, lg: 4, xl: 6 }"</span>
 <span class="tok-tag">/&gt;</span></pre></div></div>
           <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.issueSection({
   selector: <span class="tok-str">"issue-archives"</span>,
   baseUrl: <span class="tok-str">"/pdf-reader/"</span>,
   filter: { ids: [<span class="tok-str">"17"</span>, <span class="tok-str">"22"</span>, <span class="tok-str">"41"</span>] },
-  gridLayout: <span class="tok-str">"verticalColumns"</span>,
+  gridLayout: <span class="tok-str">"vertical"</span>,
   columns: { base: <span class="tok-str">2</span>, md: <span class="tok-str">3</span>, lg: <span class="tok-str">4</span>, xl: <span class="tok-str">6</span> },
 });</pre></div></div>
         </div>
@@ -1325,7 +1393,7 @@ cgsComponents.articleSection({
 
     <section id="comp-addinsection">
       <div class="component">
-        <div class="component-head"><h4>AddInSection</h4><div class="badges"><span class="ctx-badge fw">Vanilla only</span><span class="ctx-badge needs">Requires CGS</span></div></div>
+        <div class="component-head"><h4>AddInSection</h4><span class="ctx-badge needs">Requires CGS</span></div>
         <p class="desc">Lists the add-ins (supplements) of an issue via <code class="inline">core.issues.getAddIns(issueId, paging)</code>, as standard issue cells. Renders nothing when the issue has no add-ins.</p>
         <div class="preview">
           <div class="preview-bar"><span class="preview-label">Preview</span>
@@ -1343,21 +1411,38 @@ cgsComponents.articleSection({
           <tr><td class="name">baseUrl<span class="req">required</span></td><td class="type">string</td><td>Base URL for the generated links.</td></tr>
           <tr><td class="name">header</td><td class="type">{ title: string }?</td><td>Optional section title.</td></tr>
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Pagination.</td></tr>
-          <tr><td class="name">gridLayout</td><td class="type">"horizontalList" | "verticalColumns"</td><td>Layout — default <code class="inline">"horizontalList"</code>.</td></tr>
-          <tr><td class="name">columns</td><td class="type">{ base, md?, lg?, xl? }</td><td>Columns per breakpoint for <code class="inline">"verticalColumns"</code> — same as <a href="#comp-issuesection">IssueSection</a>.</td></tr>
+          <tr><td class="name">gridLayout</td><td class="type">"horizontal" | "vertical"</td><td>Layout — default <code class="inline">"horizontal"</code>.</td></tr>
+          <tr><td class="name">columns</td><td class="type">{ base, md?, lg?, xl? }</td><td>Columns per breakpoint for <code class="inline">"vertical"</code> — same as <a href="#comp-issuesection">IssueSection</a>.</td></tr>
         </table></div>
-        <div class="snippet"><div class="bar"><span class="fname">index.html</span></div><pre>cgsComponents.addInSection({
+        <div class="code-tabs">
+          <div class="snippet-tabbar">
+            <button class="tab-btn" data-fw="vanilla" aria-pressed="true"><span class="fw-dot"></span>JavaScript</button>
+            <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
+            <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
+          </div>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;AddInSection</span>
+  <span class="tok-attr">issueId</span>=<span class="tok-str">"211"</span>
+  <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/pdf-reader/"</span>
+  <span class="tok-attr">header</span>={{ title: <span class="tok-str">"With this issue"</span> }}
+<span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;AddInSection</span>
+  <span class="tok-attr">issue-id</span>=<span class="tok-str">"211"</span>
+  <span class="tok-attr">base-url</span>=<span class="tok-str">"/pdf-reader/"</span>
+  <span class="tok-attr">:header</span>=<span class="tok-str">"{ title: 'With this issue' }"</span>
+<span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.addInSection({
   selector: <span class="tok-str">"issue-addins"</span>,
   issueId: <span class="tok-str">"211"</span>,
   baseUrl: <span class="tok-str">"/pdf-reader/"</span>,
   header: { title: <span class="tok-str">"With this issue"</span> },
-});</pre></div>
+});</pre></div></div>
+        </div>
       </div>
     </section>
 
     <section id="comp-publicationcell">
       <div class="component">
-        <div class="component-head"><h4>PublicationCell</h4><div class="badges"><span class="ctx-badge fw">Vanilla only</span><span class="ctx-badge needs">Requires CGS</span></div></div>
+        <div class="component-head"><h4>PublicationCell</h4><div class="badges"><span class="ctx-badge needs">Requires CGS</span></div></div>
         <p class="desc">Loads and displays a single publication (the title/brand) via <code class="inline">core.publications.getPublication(publicationId)</code>. A shimmer is shown while loading; the initial of the title is shown when the publication has no logo.</p>
         <div class="preview">
           <div class="preview-bar"><span class="preview-label">Preview</span>
@@ -1383,34 +1468,51 @@ cgsComponents.articleSection({
           <tr><td class="name">baseUrl</td><td class="type">string?</td><td>Base URL for the generated link (<code class="inline">baseUrl + publicationId</code>). Without it, the cell is not clickable; with it, the <code class="inline">inline</code> variant also shows a chevron.</td></tr>
           <tr><td class="name">variant</td><td class="type">"item" | "inline"</td><td>Visual template — default <code class="inline">"item"</code> (square logo with title below); <code class="inline">"inline"</code> is a horizontal row.</td></tr>
         </table></div>
-        <div class="snippet"><div class="bar"><span class="fname">index.html</span></div><pre>cgsComponents.publicationCell({
+        <div class="code-tabs">
+          <div class="snippet-tabbar">
+            <button class="tab-btn" data-fw="vanilla" aria-pressed="true"><span class="fw-dot"></span>JavaScript</button>
+            <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
+            <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
+          </div>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;PublicationCell</span>
+  <span class="tok-attr">publicationId</span>=<span class="tok-str">"73"</span>
+  <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/publication/"</span>
+  <span class="tok-attr">variant</span>=<span class="tok-str">"inline"</span>
+<span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;PublicationCell</span>
+  <span class="tok-attr">publication-id</span>=<span class="tok-str">"73"</span>
+  <span class="tok-attr">base-url</span>=<span class="tok-str">"/publication/"</span>
+  <span class="tok-attr">variant</span>=<span class="tok-str">"inline"</span>
+<span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.publicationCell({
   selector: <span class="tok-str">"publication-73"</span>,
   publicationId: <span class="tok-str">"73"</span>,
   baseUrl: <span class="tok-str">"/publication/"</span>,
   variant: <span class="tok-str">"inline"</span>,
-});</pre></div>
+});</pre></div></div>
+        </div>
       </div>
     </section>
 
     <section id="comp-publicationsection">
       <div class="component">
-        <div class="component-head"><h4>PublicationSection</h4><div class="badges"><span class="ctx-badge fw">Vanilla only</span><span class="ctx-badge needs">Requires CGS</span></div></div>
+        <div class="component-head"><h4>PublicationSection</h4><div class="badges"><span class="ctx-badge needs">Requires CGS</span></div></div>
         <p class="desc">Paginated publication list via <code class="inline">core.publications.getPublications(filter, orderBy, paging)</code>, as a carousel of <code class="inline">item</code> cells or a grid of <code class="inline">inline</code> cells.</p>
         <div class="preview">
           <div class="preview-bar"><span class="preview-label">Preview</span>
-            <div class="variant-switch" role="group" aria-label="variant">
-              <button type="button" data-v="horizontal" aria-pressed="true">horizontalList</button>
-              <button type="button" data-v="columns" aria-pressed="false">verticalColumns</button>
+            <div class="variant-switch" role="group" aria-label="grid layout">
+              <button type="button" data-v="horizontal" aria-pressed="true">horizontal</button>
+              <button type="button" data-v="columns" aria-pressed="false">vertical</button>
             </div>
           </div>
           <div class="preview-stage">
             <figure class="shot active" data-v="horizontal">
-              <img class="shot-light" src="assets/components/publicationsection-light.webp" width="894" height="186" alt="PublicationSection rendered with the vanilla SDK (horizontalList)" loading="lazy">
-              <img class="shot-dark" src="assets/components/publicationsection-dark.webp" width="894" height="186" alt="PublicationSection rendered with the vanilla SDK (horizontalList)" loading="lazy">
+              <img class="shot-light" src="assets/components/publicationsection-light.webp" width="894" height="186" alt="PublicationSection rendered with the vanilla SDK (horizontal)" loading="lazy">
+              <img class="shot-dark" src="assets/components/publicationsection-dark.webp" width="894" height="186" alt="PublicationSection rendered with the vanilla SDK (horizontal)" loading="lazy">
             </figure>
             <figure class="shot" data-v="columns">
-              <img class="shot-light" src="assets/components/publicationsection-columns-light.webp" width="894" height="420" alt="PublicationSection rendered with the vanilla SDK (verticalColumns, cropped)" loading="lazy">
-              <img class="shot-dark" src="assets/components/publicationsection-columns-dark.webp" width="894" height="420" alt="PublicationSection rendered with the vanilla SDK (verticalColumns, cropped)" loading="lazy">
+              <img class="shot-light" src="assets/components/publicationsection-columns-light.webp" width="894" height="420" alt="PublicationSection rendered with the vanilla SDK (vertical, cropped)" loading="lazy">
+              <img class="shot-dark" src="assets/components/publicationsection-columns-dark.webp" width="894" height="420" alt="PublicationSection rendered with the vanilla SDK (vertical, cropped)" loading="lazy">
             </figure>
           </div>
         </div>
@@ -1420,21 +1522,44 @@ cgsComponents.articleSection({
           <tr><td class="name">baseUrl</td><td class="type">string?</td><td>Base URL for the generated links; cells are not clickable without it.</td></tr>
           <tr><td class="name">orderBy</td><td class="type">PublicationSort[]?</td><td>Result sorting.</td></tr>
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
-          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll.</td></tr>
+          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll — only taken into account when <code class="inline">gridLayout</code> is explicitly set to <code class="inline">"vertical"</code>.</td></tr>
           <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to? }?</td><td>Optional section header, rendered by <a href="#comp-headersection">HeaderSection</a>.</td></tr>
-          <tr><td class="name">variant</td><td class="type">"horizontalList" | "verticalColumns"</td><td>Layout — default <code class="inline">"horizontalList"</code> (carousel of <code class="inline">item</code> cells); <code class="inline">"verticalColumns"</code> wraps <code class="inline">inline</code> cells.</td></tr>
+          <tr><td class="name">gridLayout</td><td class="type">"horizontal" | "vertical"</td><td>Layout — default <code class="inline">"horizontal"</code> (carousel of <code class="inline">item</code> cells); <code class="inline">"vertical"</code> shows a grid of <code class="inline">inline</code> cells.</td></tr>
+          <tr><td class="name">columns</td><td class="type">{ base, md?, lg?, xl? }</td><td>Number of columns (1 to 4) per container breakpoint, for <code class="inline">"vertical"</code> — default <code class="inline">{ base: 1, md: 2, lg: 3 }</code>.</td></tr>
         </table></div>
-        <div class="note warn">
-          <div class="ic">!</div>
-          <p>Unlike <code class="inline">ArticleSection</code> and <code class="inline">IssueSection</code>, the layout is set through <code class="inline">variant</code>, not <code class="inline">gridLayout</code>.</p>
+        <div class="note info">
+          <div class="ic">i</div>
+          <p>The former <code class="inline">variant</code> prop has been replaced by <code class="inline">gridLayout</code>, aligned with <code class="inline">ArticleSection</code> and <code class="inline">IssueSection</code>.</p>
         </div>
-        <div class="snippet"><div class="bar"><span class="fname">index.html</span></div><pre>cgsComponents.publicationSection({
+        <div class="code-tabs">
+          <div class="snippet-tabbar">
+            <button class="tab-btn" data-fw="vanilla" aria-pressed="true"><span class="fw-dot"></span>JavaScript</button>
+            <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
+            <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
+          </div>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;PublicationSection</span>
+  <span class="tok-attr">header</span>={{ title: <span class="tok-str">"Publications"</span> }}
+  <span class="tok-attr">baseUrl</span>=<span class="tok-str">"/publication/"</span>
+  <span class="tok-attr">paging</span>={{ limit: <span class="tok-str">10</span> }}
+  <span class="tok-attr">gridLayout</span>=<span class="tok-str">"vertical"</span>
+  <span class="tok-attr">columns</span>={{ base: <span class="tok-str">1</span>, md: <span class="tok-str">2</span>, lg: <span class="tok-str">3</span> }}
+<span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;PublicationSection</span>
+  <span class="tok-attr">:header</span>=<span class="tok-str">"{ title: 'Publications' }"</span>
+  <span class="tok-attr">base-url</span>=<span class="tok-str">"/publication/"</span>
+  <span class="tok-attr">:paging</span>=<span class="tok-str">"{ limit: 10 }"</span>
+  <span class="tok-attr">grid-layout</span>=<span class="tok-str">"vertical"</span>
+  <span class="tok-attr">:columns</span>=<span class="tok-str">"{ base: 1, md: 2, lg: 3 }"</span>
+<span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.publicationSection({
   selector: <span class="tok-str">"publications"</span>,
   header: { title: <span class="tok-str">"Publications"</span> },
   baseUrl: <span class="tok-str">"/publication/"</span>,
   paging: { limit: <span class="tok-str">10</span> },
-  variant: <span class="tok-str">"verticalColumns"</span>,
-});</pre></div>
+  gridLayout: <span class="tok-str">"vertical"</span>,
+  columns: { base: <span class="tok-str">1</span>, md: <span class="tok-str">2</span>, lg: <span class="tok-str">3</span> },
+});</pre></div></div>
+        </div>
       </div>
     </section>
 

@@ -355,10 +355,11 @@
     <a href="#core-issues" class="nav-link sub">Issues</a>
     <a href="#core-catalog" class="nav-link sub">Publications · Media · Videos</a>
     <a href="#core-articles" class="nav-link sub">Articles</a>
+    <a href="#core-skeletons" class="nav-link sub">Skeletons</a>
     <a href="#core-reader" class="nav-link sub">Reader tickets</a>
 
     <h5>Components</h5>
-    <a href="#comp-headersection" class="nav-link sub">HeaderSection</a>
+    <a href="#comp-header" class="nav-link sub">Section header</a>
     <a href="#comp-contentinfo" class="nav-link sub">ContentInfo</a>
     <a href="#comp-articlecell" class="nav-link sub">ArticleCell</a>
     <a href="#comp-articlesection" class="nav-link sub">ArticleSection</a>
@@ -368,6 +369,7 @@
     <a href="#comp-addinsection" class="nav-link sub">AddInSection</a>
     <a href="#comp-publicationcell" class="nav-link sub">PublicationCell</a>
     <a href="#comp-publicationsection" class="nav-link sub">PublicationSection</a>
+    <a href="#comp-skeleton" class="nav-link sub">Skeleton</a>
 
     <h5>Readers</h5>
     <a href="#reader-article" class="nav-link sub">Article Reader</a>
@@ -382,11 +384,10 @@
       <h1>CGS SDK</h1>
       <p class="lede">The development kit for integrating Cafeyn content — articles, magazines and issues — into any web product: authentication, content catalog, ready-to-use components and embeddable reading engines.</p>
       <div class="pkgpills">
-        <span class="pkgpill"><b>core</b> 0.1.4</span>
-        <span class="pkgpill"><b>articlereader</b> 1.0.0-alpha.2</span>
-        <span class="pkgpill"><b>pdfreader</b> 1.0.0-alpha.3</span>
-        <span class="pkgpill"><b>react</b> 0.1.1</span>
-        <span class="pkgpill"><b>vue</b> · <b>vanilla</b> 0.1.0</span>
+        <span class="pkgpill"><b>core</b> 0.2.0</span>
+        <span class="pkgpill"><b>articlereader</b> 1.0.0-alpha.3</span>
+        <span class="pkgpill"><b>pdfreader</b> 1.0.0-alpha.4</span>
+        <span class="pkgpill"><b>react</b> · <b>vue</b> · <b>vanilla</b> 0.2.0</span>
       </div>
     </div>
 
@@ -399,7 +400,7 @@
         <p>The SDK can be used at two levels:</p>
         <ul>
           <li><strong>The core (<code class="inline">core</code>)</strong> — a single <code class="inline">CGS</code> class that handles authentication and exposes the content API (articles, issues, publications, media, videos). It is used by all the other packages and can also be consumed directly.</li>
-          <li><strong>The component libraries (<code class="inline">react</code>, <code class="inline">vue</code>, <code class="inline">vanilla</code>)</strong> — the same catalog of 12 components (sections, cells, headers, readers) implemented in all three ecosystems with the same props API.</li>
+          <li><strong>The component libraries (<code class="inline">react</code>, <code class="inline">vue</code>, <code class="inline">vanilla</code>)</strong> — the same catalog of 12 components (sections, cells, readers, skeleton) implemented in all three ecosystems with the same props API.</li>
         </ul>
         <p>Two specialized reading engines, <strong>articlereader</strong> and <strong>pdfreader</strong>, are packaged independently (Svelte, compiled into standalone scripts) and embedded by the <code class="inline">ArticleReader</code> / <code class="inline">PDFReader</code> components — or usable directly, without a framework.</p>
       </div>
@@ -506,6 +507,10 @@ app.mount(<span class="tok-str">"#app"</span>);</pre></div>
       <div class="note info">
         <div class="ic">i</div>
         <p><code class="inline">env</code> is optional in all three frameworks and defaults to <code class="inline">"production"</code>: the second argument of <code class="inline">new CGSComponents(licenseKey, env?)</code>, the <code class="inline">env</code> prop of <code class="inline">&lt;CGSProvider&gt;</code> (React) and the <code class="inline">env</code> option of <code class="inline">createCgs()</code> (Vue). Only set it to target another environment (<code class="inline">"development"</code>, <code class="inline">"staging"</code> or <code class="inline">"preprod"</code>).</p>
+      </div>
+      <div class="note warn">
+        <div class="ic">!</div>
+        <p>Vue: <code class="inline">createCgs()</code> installs its own <a href="https://tanstack.com/query">TanStack Query</a> client on your app, under vue-query's default key. If your app also uses <code class="inline">@tanstack/vue-query</code>, install your own <code class="inline">VueQueryPlugin</code> with a custom <code class="inline">queryClientKey</code> to keep the two clients separate.</p>
       </div>
       <div class="prose"><p>All three entry points also accept an optional <code class="inline">config</code> object to customize the SDK's behavior — see <a style="color:var(--brand)" href="#config">Configuration</a>.</p></div>
 
@@ -780,6 +785,7 @@ cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-co
   medias: Medias
   videos: Videos
   reader: Reader
+  skeletons: Skeletons
 }
 
 <span class="tok-kw">type</span> Env = <span class="tok-str">"development"</span> | <span class="tok-str">"staging"</span> | <span class="tok-str">"preprod"</span> | <span class="tok-str">"production"</span>;</pre></div>
@@ -807,6 +813,7 @@ cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-co
         <tr><td class="name">IssueFilter</td><td class="type">{ ids?, publicationIds?, topicIds?: string[] }</td></tr>
         <tr><td class="name">IssueSort</td><td class="type">"releaseDateAsc" | "releaseDateDesc" | "title"</td></tr>
       </table></div>
+      <div class="prose"><p>Each <code class="inline">IssueShort</code> returned by <code class="inline">getIssues</code> and <code class="inline">getAddIns</code> carries its resolved <code class="inline">publication</code>, which is optional: issues whose publication is not part of the page are still returned, with <code class="inline">publication</code> set to <code class="inline">undefined</code>.</p></div>
 
       <h3 class="sub-h" id="core-catalog">Publications · Media · Videos</h3>
       <div class="prose"><p>Three additional catalog resources, with the same <code class="inline">get{X}</code> / <code class="inline">get{X}s</code> pair — but they do not all return the same level of detail for a single item; see below.</p></div>
@@ -825,6 +832,7 @@ cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-co
         <tr><th>Type</th><th>Shape</th></tr>
         <tr><td class="name">PublicationFilter</td><td class="type">{ ids?, topicIds?: string[] }</td></tr>
         <tr><td class="name">PublicationSort</td><td class="type">"releaseDateAsc" | "releaseDateDesc" | "title"</td></tr>
+        <tr><td class="name">PublicationContentPage</td><td class="type">{ items: PublicationShort[], medias: MediaReference[], nextPageToken?, prevPageToken? }</td></tr>
       </table></div>
       <div class="table-wrap"><table class="props">
         <tr><th>Field (PublicationShort)</th><th>Type</th><th>Description</th></tr>
@@ -835,7 +843,9 @@ cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-co
         <tr><td class="name">topicIds</td><td class="type">string[]</td><td>Associated topics.</td></tr>
         <tr><td class="name">releaseFrequencyId</td><td class="type">string</td><td>Release frequency (internal identifier).</td></tr>
         <tr><td class="name">mediaId</td><td class="type">string?</td><td>Media the publication belongs to, if applicable.</td></tr>
+        <tr><td class="name">media</td><td class="type">MediaReference?</td><td>That media, already resolved (name, color, logo) — see <code class="inline">MediaReference</code> under Media below. Set on the items of <code class="inline">getPublications</code> and <code class="inline">getPublicationBlock</code>, not by <code class="inline">getPublication</code>.</td></tr>
       </table></div>
+      <div class="prose"><p>Each <code class="inline">PublicationShort</code> returned by <code class="inline">getPublications</code> already carries its resolved <code class="inline">media</code>: no need to join <code class="inline">items</code> with the page's <code class="inline">medias</code> array yourself.</p></div>
 
       <h4 class="sub-h4">Media</h4>
       <div class="table-wrap"><table class="props">
@@ -847,6 +857,7 @@ cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-co
         <tr><th>Type</th><th>Shape</th></tr>
         <tr><td class="name">MediaFilter</td><td class="type">{ ids?, publicationIds?, topicIds?: string[] }</td></tr>
         <tr><td class="name">MediaSort</td><td class="type">"title"</td></tr>
+        <tr><td class="name">MediaReference</td><td class="type">{ id, name: string, color?, logoUrl?: string }</td></tr>
       </table></div>
       <div class="note warn">
         <div class="ic">!</div>
@@ -910,6 +921,33 @@ cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-co
         <tr><td class="name">ArticleContentPage</td><td class="type">{ items: ArticleShort[], publications, issues, nextPageToken?, prevPageToken? }</td></tr>
       </table></div>
       <div class="prose"><p>Each <code class="inline">ArticleShort</code> returned by <code class="inline">getArticles</code> already carries its resolved <code class="inline">publication</code> (<code class="inline">PublicationReference</code>) and <code class="inline">issue</code> (<code class="inline">IssueReferenceRaw</code>), both optional: no need to join <code class="inline">items</code> with the page's <code class="inline">publications</code> / <code class="inline">issues</code> arrays yourself.</p></div>
+
+      <h3 class="sub-h" id="core-skeletons">Skeletons</h3>
+      <div class="prose"><p>A <strong>skeleton</strong> is a page layout configured on the Cafeyn side: an ordered list of content <strong>blocks</strong> (articles, issues, publications or videos), each with its header, layout hints and first page of content. Use <code class="inline">getSkeleton</code> to build a page, then <code class="inline">getArticleBlock</code> / <code class="inline">getIssueBlock</code> / <code class="inline">getPublicationBlock</code> / <code class="inline">getVideoBlock</code> to load the next pages of a block, using its <code class="inline">provider.contentIdentifier</code>.</p></div>
+      <div class="table-wrap"><table class="props">
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td class="name">getSkeleton(skeletonId, paging?)</td><td class="type">Promise&lt;BlockContentPage&gt;</td><td>The blocks of a skeleton, paginated.</td></tr>
+        <tr><td class="name">getArticleBlock(contentIdentifier, paging?)</td><td class="type">Promise&lt;ArticleContentPage&gt;</td><td>A page of an articles block. Each <code class="inline">ArticleShort</code> carries its resolved <code class="inline">publication</code> and <code class="inline">issue</code>.</td></tr>
+        <tr><td class="name">getIssueBlock(contentIdentifier, paging?)</td><td class="type">Promise&lt;IssueContentPage&gt;</td><td>A page of an issues block. Each <code class="inline">IssueShort</code> carries its resolved <code class="inline">publication</code>.</td></tr>
+        <tr><td class="name">getPublicationBlock(contentIdentifier, paging?)</td><td class="type">Promise&lt;PublicationContentPage&gt;</td><td>A page of a publications block. Each <code class="inline">PublicationShort</code> carries its resolved <code class="inline">media</code>.</td></tr>
+        <tr><td class="name">getVideoBlock(contentIdentifier, paging?)</td><td class="type">Promise&lt;VideoContentPage&gt;</td><td>A page of a videos block. Each <code class="inline">VideoShort</code> carries its resolved <code class="inline">publication</code>.</td></tr>
+      </table></div>
+      <div class="table-wrap"><table class="props">
+        <tr><th>Type</th><th>Shape</th></tr>
+        <tr><td class="name">BlockContentPage</td><td class="type">{ items: (ArticlesBlock | IssuesBlock | PublicationsBlock | VideosBlock)[], nextPageToken?, prevPageToken? }</td></tr>
+        <tr><td class="name">ArticlesBlock</td><td class="type">{ type: "articles", firstPage: ArticleContentPage, … }</td></tr>
+        <tr><td class="name">IssuesBlock</td><td class="type">{ type: "issues", firstPage: IssueContentPage, … }</td></tr>
+        <tr><td class="name">PublicationsBlock</td><td class="type">{ type: "publications", firstPage: PublicationContentPage, … }</td></tr>
+        <tr><td class="name">VideosBlock</td><td class="type">{ type: "videos", firstPage: VideoContentPage, … }</td></tr>
+      </table></div>
+      <div class="table-wrap"><table class="props">
+        <tr><th>Field (common to all blocks)</th><th>Type</th><th>Description</th></tr>
+        <tr><td class="name">id</td><td class="type">string</td><td>Block identifier.</td></tr>
+        <tr><td class="name">provider.contentIdentifier</td><td class="type">string</td><td>Identifier to pass to <code class="inline">getArticleBlock</code> / <code class="inline">getIssueBlock</code> / <code class="inline">getPublicationBlock</code> / <code class="inline">getVideoBlock</code> to load more content.</td></tr>
+        <tr><td class="name">header.title / header.subtitle</td><td class="type">{ key?, raw: string } / { key?, raw: string }?</td><td>Block title and optional subtitle; <code class="inline">raw</code> is the text to display.</td></tr>
+        <tr><td class="name">header.action</td><td class="type">{ display: "chevron" | "plus", destination }?</td><td>Optional "see more" action; <code class="inline">destination</code> holds a title and a nested list of blocks.</td></tr>
+        <tr><td class="name">layout</td><td class="type">{ cell: { kind, style: string }, axis: "horizontal" | "vertical", displayCap?: number }</td><td>Display hints: cell style, list direction and maximum number of items to show.</td></tr>
+      </table></div>
 
       <h3 class="sub-h" id="core-reader">Reader tickets</h3>
       <div class="prose"><p>The <code class="inline">reader</code> module issues a reading <strong>ticket</strong> for an issue — this is the mechanism used internally by <a href="#reader-pdf">PDFReader</a> (see its <a href="#reader-pdf">how-it-works flow</a>) to load an issue's pages, articles and enrichments. You can also call it directly if you are building your own display.</p></div>
@@ -984,61 +1022,55 @@ cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-co
     <section id="components-intro">
       <div class="eyebrow">Components</div>
       <h2>Component catalog</h2>
-      <p class="dek">The same 12 components exist in JavaScript, React and Vue, with identical props. Those that query the catalog require the app to have initialized CGS (<a href="#gs-init">step 2</a>); two components are purely presentational.</p>
+      <p class="dek">The same 12 components exist in JavaScript, React and Vue, with identical props. Those that query the catalog require the app to have initialized CGS (<a href="#gs-init">step 2</a>); one component is purely presentational. The sections also share a common <a href="#comp-header">header</a>, configured through their <code class="inline">header</code> prop.</p>
       <div class="note info"><div class="ic">i</div><p>Each preview is a capture of the component rendered by the <strong>vanilla SDK</strong> with demo data, in the light and dark themes (it follows this page's theme). Use the switch above a preview to compare variants.</p></div>
     </section>
 
-    <section id="comp-headersection">
+    <section id="comp-header">
       <div class="component">
-        <div class="component-head"><h4>HeaderSection</h4><span class="ctx-badge pure">Presentational</span></div>
-        <p class="desc">Section header: title, badge, metadata and optional link.</p>
+        <div class="component-head"><h4>Section header</h4></div>
+        <p class="desc">Header displayed above <a href="#comp-articlesection">ArticleSection</a>, <a href="#comp-issuesection">IssueSection</a> and <a href="#comp-publicationsection">PublicationSection</a>: title, badge, metadata and optional link. It is not a standalone component — set it through the <code class="inline">header</code> prop of these sections.</p>
         <div class="preview">
           <div class="preview-bar"><span class="preview-label">Preview</span>
-            <div class="variant-switch" role="group" aria-label="variant and size">
-              <button type="button" data-v="md" aria-pressed="true">default · md</button>
-              <button type="button" data-v="lg" aria-pressed="false">default · lg</button>
+            <div class="variant-switch" role="group" aria-label="variant">
+              <button type="button" data-v="default" aria-pressed="true">default</button>
               <button type="button" data-v="filled" aria-pressed="false">filled</button>
             </div>
           </div>
           <div class="preview-stage">
-            <figure class="shot active" data-v="md">
-              <img class="shot-light" src="assets/components/headersection-md-light.webp" width="894" height="64" alt="HeaderSection rendered with the vanilla SDK (md)" loading="lazy">
-              <img class="shot-dark" src="assets/components/headersection-md-dark.webp" width="894" height="64" alt="HeaderSection rendered with the vanilla SDK (md)" loading="lazy">
-            </figure>
-            <figure class="shot" data-v="lg">
-              <img class="shot-light" src="assets/components/headersection-lg-light.webp" width="894" height="96" alt="HeaderSection rendered with the vanilla SDK (lg)" loading="lazy">
-              <img class="shot-dark" src="assets/components/headersection-lg-dark.webp" width="894" height="96" alt="HeaderSection rendered with the vanilla SDK (lg)" loading="lazy">
+            <figure class="shot active" data-v="default">
+              <img class="shot-light" src="assets/components/headersection-md-light.webp" width="894" height="64" alt="Section header rendered with the vanilla SDK (default)" loading="lazy">
+              <img class="shot-dark" src="assets/components/headersection-md-dark.webp" width="894" height="64" alt="Section header rendered with the vanilla SDK (default)" loading="lazy">
             </figure>
             <figure class="shot" data-v="filled">
-              <img class="shot-light" src="assets/components/headersection-filled-light.webp" width="894" height="88" alt="HeaderSection rendered with the vanilla SDK (filled)" loading="lazy">
-              <img class="shot-dark" src="assets/components/headersection-filled-dark.webp" width="894" height="88" alt="HeaderSection rendered with the vanilla SDK (filled)" loading="lazy">
+              <img class="shot-light" src="assets/components/headersection-filled-light.webp" width="894" height="88" alt="Section header rendered with the vanilla SDK (filled)" loading="lazy">
+              <img class="shot-dark" src="assets/components/headersection-filled-dark.webp" width="894" height="88" alt="Section header rendered with the vanilla SDK (filled)" loading="lazy">
             </figure>
           </div>
         </div>
         <div class="table-wrap"><table class="props">
-          <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
+          <tr><th>Field (<code class="inline">header</code>)</th><th>Type</th><th>Description</th></tr>
           <tr><td class="name">title<span class="req">required</span></td><td class="type">string</td><td>Section title.</td></tr>
           <tr><td class="name">badgeLabel</td><td class="type">string?</td><td>Badge displayed next to the title.</td></tr>
-          <tr><td class="name">infos</td><td class="type">string[]?</td><td>List of short metadata items.</td></tr>
-          <tr><td class="name">linkLabel / to</td><td class="type">string?</td><td>Optional link (both props are required to display it).</td></tr>
-          <tr><td class="name">variant</td><td class="type">"default" | "filled"</td><td>Visual style — <code class="inline">"filled"</code> shows the title only, uppercase on a tinted background. Default <code class="inline">"default"</code>.</td></tr>
-          <tr><td class="name">size</td><td class="type">"md" | "lg"</td><td>Title size — default <code class="inline">"md"</code>.</td></tr>
+          <tr><td class="name">infos</td><td class="type">string[]?</td><td>List of short metadata items, shown under the title.</td></tr>
+          <tr><td class="name">linkLabel / to</td><td class="type">string?</td><td>Optional link (both fields are required to display it).</td></tr>
+          <tr><td class="name">variant</td><td class="type">"default" | "filled"</td><td><a href="#comp-articlesection">ArticleSection</a> only. Visual style — <code class="inline">"filled"</code> shows the title only, uppercase on a tinted background. Default <code class="inline">"default"</code>.</td></tr>
         </table></div>
-        <div class="code-tabs">
-          <div class="snippet-tabbar">
-            <button class="tab-btn" data-fw="vanilla" aria-pressed="true"><span class="fw-dot"></span>JavaScript</button>
-            <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
-            <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
-          </div>
-          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderSection</span> <span class="tok-attr">title</span>=<span class="tok-str">"Top stories"</span> <span class="tok-attr">linkLabel</span>=<span class="tok-str">"See all"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;HeaderSection</span> <span class="tok-attr">title</span>=<span class="tok-str">"Top stories"</span> <span class="tok-attr">link-label</span>=<span class="tok-str">"See all"</span> <span class="tok-attr">to</span>=<span class="tok-str">"/articles"</span> <span class="tok-tag">/&gt;</span></pre></div></div>
-          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre>cgsComponents.headerSection({
-  selector: <span class="tok-str">"section-head"</span>,
-  title: <span class="tok-str">"Top stories"</span>,
-  linkLabel: <span class="tok-str">"See all"</span>,
-  to: <span class="tok-str">"/articles"</span>,
-});</pre></div></div>
+        <div class="note info">
+          <div class="ic">i</div>
+          <p>The standalone <code class="inline">HeaderSection</code> component (<code class="inline">cgsComponents.headerSection</code>, <code class="inline">&lt;HeaderSection&gt;</code>) is no longer exported: use the <code class="inline">header</code> prop of a section instead.</p>
         </div>
+        <div class="snippet"><pre>cgsComponents.articleSection({
+  selector: <span class="tok-str">"top-stories"</span>,
+  filter: { publicationIds: [<span class="tok-str">"73"</span>] },
+  baseUrl: <span class="tok-str">"/article/"</span>,
+  header: {
+    title: <span class="tok-str">"Top stories"</span>,
+    infos: [<span class="tok-str">"Updated every hour"</span>],
+    linkLabel: <span class="tok-str">"See all"</span>,
+    to: <span class="tok-str">"/articles"</span>,
+  },
+});</pre></div>
       </div>
     </section>
 
@@ -1181,7 +1213,7 @@ cgsComponents.setTheme(<span class="tok-str">"dark"</span>); <span class="tok-co
           <tr><td class="name">orderBy</td><td class="type">ArticleSort[]?</td><td>Result sorting.</td></tr>
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
           <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll — ignored with <code class="inline">gridLayout: "horizontal"</code>.</td></tr>
-          <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to?, variant? }?</td><td>Optional section header, rendered by <a href="#comp-headersection">HeaderSection</a> (size <code class="inline">lg</code>) — same props, <code class="inline">variant</code> included.</td></tr>
+          <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to?, variant? }?</td><td>Optional section header — see <a href="#comp-header">Section header</a>, <code class="inline">variant</code> included.</td></tr>
           <tr><td class="name">gridLayout</td><td class="type">"vertical" | "horizontal"</td><td>Layout — default <code class="inline">"vertical"</code> (1 to 3 columns depending on the container width); <code class="inline">"horizontal"</code> shows a scrollable carousel with navigation buttons.</td></tr>
           <tr><td class="name">variant</td><td class="type">"leading" | "standard" | "rich" | "timeline"</td><td>Cell template — default <code class="inline">"standard"</code>. <code class="inline">"timeline"</code> always renders a single column (max. 568px).</td></tr>
         </table></div>
@@ -1310,7 +1342,7 @@ cgsComponents.articleSection({
           <tr><td class="name">orderBy</td><td class="type">IssueSort[]?</td><td>Result sorting.</td></tr>
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
           <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite loading at the end of the carousel — only taken into account when <code class="inline">gridLayout</code> is explicitly set to <code class="inline">"horizontal"</code>.</td></tr>
-          <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to? }?</td><td>Optional section header, rendered by <a href="#comp-headersection">HeaderSection</a>.</td></tr>
+          <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to? }?</td><td>Optional section header — see <a href="#comp-header">Section header</a>.</td></tr>
           <tr><td class="name">gridLayout</td><td class="type">"horizontal" | "vertical"</td><td>Layout — default <code class="inline">"horizontal"</code> (scrollable carousel with navigation buttons).</td></tr>
           <tr><td class="name">columns</td><td class="type">{ base, md?, lg?, xl? }</td><td>Number of columns (1 to 6) per container breakpoint, for <code class="inline">"vertical"</code> — default <code class="inline">{ base: 2, md: 3, lg: 4, xl: 5 }</code>.</td></tr>
           <tr><td class="name">variant</td><td class="type">"branded" | "rich" | "standard"</td><td>Cell template — default <code class="inline">"standard"</code>.</td></tr>
@@ -1523,7 +1555,7 @@ cgsComponents.articleSection({
           <tr><td class="name">orderBy</td><td class="type">PublicationSort[]?</td><td>Result sorting.</td></tr>
           <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination.</td></tr>
           <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll — only taken into account when <code class="inline">gridLayout</code> is explicitly set to <code class="inline">"vertical"</code>.</td></tr>
-          <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to? }?</td><td>Optional section header, rendered by <a href="#comp-headersection">HeaderSection</a>.</td></tr>
+          <tr><td class="name">header</td><td class="type">{ title, badgeLabel?, infos?, linkLabel?, to? }?</td><td>Optional section header — see <a href="#comp-header">Section header</a>.</td></tr>
           <tr><td class="name">gridLayout</td><td class="type">"horizontal" | "vertical"</td><td>Layout — default <code class="inline">"horizontal"</code> (carousel of <code class="inline">item</code> cells); <code class="inline">"vertical"</code> shows a grid of <code class="inline">inline</code> cells.</td></tr>
           <tr><td class="name">columns</td><td class="type">{ base, md?, lg?, xl? }</td><td>Number of columns (1 to 4) per container breakpoint, for <code class="inline">"vertical"</code> — default <code class="inline">{ base: 1, md: 2, lg: 3 }</code>.</td></tr>
         </table></div>
@@ -1558,6 +1590,70 @@ cgsComponents.articleSection({
   paging: { limit: <span class="tok-str">10</span> },
   gridLayout: <span class="tok-str">"vertical"</span>,
   columns: { base: <span class="tok-str">1</span>, md: <span class="tok-str">2</span>, lg: <span class="tok-str">3</span> },
+});</pre></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comp-skeleton">
+      <div class="component">
+        <div class="component-head"><h4>Skeleton</h4><div class="badges"><span class="ctx-badge needs">Requires CGS</span></div></div>
+        <p class="desc">Renders a full page from a skeleton configured on the Cafeyn side, via <code class="inline">core.skeletons.getSkeleton(skeletonId, paging)</code> (see <a href="#core-skeletons">Core → Skeletons</a>). Each articles block is rendered as an <a href="#comp-articlesection">ArticleSection</a>, each issues block as an <a href="#comp-issuesection">IssueSection</a> and each publications block as a <a href="#comp-publicationsection">PublicationSection</a>, with the title and layout defined by the block. Videos blocks are not rendered yet.</p>
+        <div class="table-wrap"><table class="props">
+          <tr><th>Prop</th><th>Type</th><th>Description</th></tr>
+          <tr><td class="name">skeletonId<span class="req">required</span></td><td class="type">string</td><td>Identifier of the skeleton to render.</td></tr>
+          <tr><td class="name">getBaseUrl<span class="req">required</span></td><td class="type">(item: ArticlesBlock | IssuesBlock | PublicationsBlock) =&gt; string</td><td>Called for each block of the skeleton: returns the base URL for the links generated by the cells of that block (the content id is appended to it). Lets you choose a destination per block, e.g. from <code class="inline">item.type</code>, <code class="inline">item.id</code> or <code class="inline">item.layout.cell.style</code>.</td></tr>
+          <tr><td class="name">paging</td><td class="type">{ limit?, pageToken? }</td><td>Initial pagination of the blocks.</td></tr>
+          <tr><td class="name">loadMore</td><td class="type">boolean?</td><td>Enables infinite scroll: the next blocks of the skeleton are loaded when the end of the page is reached.</td></tr>
+        </table></div>
+        <div class="code-tabs">
+          <div class="snippet-tabbar">
+            <button class="tab-btn" data-fw="vanilla" aria-pressed="true"><span class="fw-dot"></span>JavaScript</button>
+            <button class="tab-btn" data-fw="react" aria-pressed="false"><span class="fw-dot"></span>React</button>
+            <button class="tab-btn" data-fw="vue" aria-pressed="false"><span class="fw-dot"></span>Vue</button>
+          </div>
+          <div class="snippet-group" data-fw="react"><div class="snippet"><pre><span class="tok-kw">const</span> baseUrls = {
+  articles: <span class="tok-str">"/article-reader/"</span>,
+  issues: <span class="tok-str">"/pdf-reader/"</span>,
+  publications: <span class="tok-str">"/publication/"</span>,
+};
+
+<span class="tok-tag">&lt;Skeleton</span>
+  <span class="tok-attr">skeletonId</span>=<span class="tok-str">"my-skeleton-id"</span>
+  <span class="tok-attr">getBaseUrl</span>={(item) =&gt; baseUrls[item.type]}
+  <span class="tok-attr">paging</span>={{ limit: <span class="tok-str">5</span> }}
+  <span class="tok-attr">loadMore</span>
+<span class="tok-tag">/&gt;</span></pre></div></div>
+          <div class="snippet-group" data-fw="vue"><div class="snippet"><pre><span class="tok-tag">&lt;script</span> <span class="tok-attr">setup</span> <span class="tok-attr">lang</span>=<span class="tok-str">"ts"</span><span class="tok-tag">&gt;</span>
+<span class="tok-kw">import</span> { Skeleton } <span class="tok-kw">from</span> <span class="tok-str">"@cafeyn/web-cgs-vue"</span>;
+
+<span class="tok-kw">const</span> baseUrls = {
+  articles: <span class="tok-str">"/article-reader/"</span>,
+  issues: <span class="tok-str">"/pdf-reader/"</span>,
+  publications: <span class="tok-str">"/publication/"</span>,
+};
+<span class="tok-tag">&lt;/script&gt;</span>
+
+<span class="tok-tag">&lt;template&gt;</span>
+  <span class="tok-tag">&lt;Skeleton</span>
+    <span class="tok-attr">skeleton-id</span>=<span class="tok-str">"my-skeleton-id"</span>
+    <span class="tok-attr">:get-base-url</span>=<span class="tok-str">"(item) =&gt; baseUrls[item.type]"</span>
+    <span class="tok-attr">:paging</span>=<span class="tok-str">"{ limit: 5 }"</span>
+    <span class="tok-attr">load-more</span>
+  <span class="tok-tag">/&gt;</span>
+<span class="tok-tag">&lt;/template&gt;</span></pre></div></div>
+          <div class="snippet-group active" data-fw="vanilla"><div class="snippet"><pre><span class="tok-kw">const</span> baseUrls = {
+  articles: <span class="tok-str">"/article-reader/"</span>,
+  issues: <span class="tok-str">"/pdf-reader/"</span>,
+  publications: <span class="tok-str">"/publication/"</span>,
+};
+
+cgsComponents.skeleton({
+  selector: <span class="tok-str">"home"</span>,
+  skeletonId: <span class="tok-str">"my-skeleton-id"</span>,
+  getBaseUrl: (item) =&gt; baseUrls[item.type],
+  paging: { limit: <span class="tok-str">5</span> },
+  loadMore: <span class="tok-kw">true</span>,
 });</pre></div></div>
         </div>
       </div>

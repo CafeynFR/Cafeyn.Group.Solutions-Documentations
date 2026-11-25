@@ -282,6 +282,8 @@
     <a href="#auth-model" class="nav-link">Authentication model</a>
     <a href="#endpoints" class="nav-link">Endpoints</a>
     <a href="#ep-authenticate" class="nav-link sub">GET /cgs/authenticate</a>
+    <a href="#rights" class="nav-link sub">rights</a>
+    <a href="#issue-filters" class="nav-link sub">issueFilters</a>
     <a href="#ep-profiles" class="nav-link sub">GET /cgs/profiles</a>
     <a href="#call-sequence" class="nav-link">Call sequence</a>
     <a href="#configuration" class="nav-link">Configuration</a>
@@ -292,7 +294,7 @@
     <div class="hero">
       <span class="kicker">Integration guide</span>
       <h1>CGS Backend</h1>
-      <p class="lede">The HTTP endpoints an external system must expose to integrate with the Cafeyn CGS SDK as an authentication and entitlements partner.</p>
+      <p class="lede">The HTTP endpoints an external system must expose to integrate with the Cafeyn CGS as an authentication and entitlements partner.</p>
       <div class="pkgpills">
         <span class="pkgpill"><b>driver</b> Generic</span>
       </div>
@@ -302,9 +304,9 @@
     <section id="overview">
       <div class="eyebrow">Introduction</div>
       <h2>Overview</h2>
-      <p class="dek">This document describes the HTTP endpoints that an external system must expose to integrate with the <strong>Cafeyn CGS</strong> SDK using the <code class="inline">Generic</code> driver type.</p>
+      <p class="dek">This document describes the HTTP endpoints that an external system must expose to integrate with the <strong>Cafeyn CGS</strong> using the <code class="inline">Generic</code> driver type.</p>
       <div class="prose">
-        <p>The CGS SDK communicates with the external system using a <code class="inline">BaseUrl</code> configured per point-of-sale in the CGS database (<code class="inline">PointOfSaleDriver.BaseUrl</code>). All paths described in this guide are relative to that base URL.</p>
+        <p>The CGS calls your API under a base URL that you provide to Cafeyn. All paths described in this guide are relative to that base URL (see <a style="color:var(--brand)" href="#configuration">Configuration</a>).</p>
       </div>
 
       <h3 class="sub-h" id="download">Download this document</h3>
@@ -319,7 +321,7 @@
     <section id="auth-model">
       <div class="eyebrow">Generic driver</div>
       <h2>Authentication model</h2>
-      <p class="dek">Every request made by the CGS SDK to your system carries the user's external JWT token in the <code class="inline">Authorization</code> header.</p>
+      <p class="dek">Every request made by CGS to your system carries the user's external JWT token in the <code class="inline">Authorization</code> header.</p>
 
       <div class="snippet"><div class="bar"><span class="fname">request headers</span></div><pre>Authorization: Bearer &lt;external-jwt-token&gt;
 Accept: application/json</pre></div>
@@ -333,7 +335,7 @@ Accept: application/json</pre></div>
     <section id="endpoints">
       <div class="eyebrow">Generic driver</div>
       <h2>Endpoints</h2>
-      <p class="dek">Two endpoints to implement, both authenticated with the external JWT described above.</p>
+      <p class="dek">Two endpoints, both authenticated with the external JWT described above. <code class="inline">GET /cgs/profiles</code> is only needed when Cafeyn has not set a default profile for your integration.</p>
 
       <div class="component" id="ep-authenticate">
         <div class="component-head">
@@ -343,7 +345,7 @@ Accept: application/json</pre></div>
         <p class="desc">Validates an external token and returns both the canonical user identifier and the user's rights/entitlements in a single call.</p>
 
         <h4 class="sub-h4">When it is called</h4>
-        <div class="prose"><p>During the CGS authentication flow, when a user presents their external token to the CGS SDK. This is the entry point of the integration — it combines token introspection and rights resolution in one round trip.</p></div>
+        <div class="prose"><p>When a user signs in to a Cafeyn application with their external token. This is the entry point of the integration — it combines token introspection and rights resolution in one round trip.</p></div>
 
         <h4 class="sub-h4">Prerequisites</h4>
         <div class="prose"><ul>
@@ -353,19 +355,123 @@ Accept: application/json</pre></div>
         <h4 class="sub-h4">Expected response — 200 OK</h4>
         <div class="snippet"><div class="bar"><span class="fname">response.json</span></div><pre>{
   <span class="tok-tag">"identifier"</span>: <span class="tok-str">"string"</span>,
-  <span class="tok-tag">"rights"</span>: {}
+  <span class="tok-tag">"rights"</span>: {
+    <span class="tok-tag">"articleIds"</span>: [],
+    <span class="tok-tag">"issueIds"</span>: [],
+    <span class="tok-tag">"publicationIds"</span>: [],
+    <span class="tok-tag">"podcastIds"</span>: [],
+    <span class="tok-tag">"videoIds"</span>: [],
+    <span class="tok-tag">"bundleIds"</span>: [3, 5],
+    <span class="tok-tag">"issueFilters"</span>: [
+      {
+        <span class="tok-tag">"publication_id_0001"</span>: {
+          <span class="tok-tag">"dates"</span>: [
+            <span class="tok-str">"2026-05-21"</span>,
+            <span class="tok-str">"2026-07-12"</span>
+          ],
+          <span class="tok-tag">"dateRanges"</span>: [
+            {
+              <span class="tok-tag">"start"</span>: <span class="tok-str">"2025-01-01"</span>,
+              <span class="tok-tag">"end"</span>: <span class="tok-str">"2025-06-01"</span>
+            },
+            {
+              <span class="tok-tag">"start"</span>: <span class="tok-str">"2026-09-01"</span>,
+              <span class="tok-tag">"end"</span>: <span class="tok-str">"2027-02-01"</span>
+            },
+            {
+              <span class="tok-tag">"start"</span>: <span class="tok-str">"2025-01-01"</span>
+            }
+          ]
+        }
+      },
+      {
+        <span class="tok-tag">"publication_id_0002"</span>: {
+          <span class="tok-tag">"dateRanges"</span>: [
+            {
+              <span class="tok-tag">"start"</span>: <span class="tok-str">"2026-10-01"</span>
+            }
+          ]
+        }
+      },
+      {
+        <span class="tok-tag">"publication_id_0003"</span>: {
+          <span class="tok-tag">"numbers"</span>: [1, 2, 8],
+          <span class="tok-tag">"numberRanges"</span>: [
+            {
+              <span class="tok-tag">"start"</span>: 10,
+              <span class="tok-tag">"end"</span>: 20
+            },
+            {
+              <span class="tok-tag">"start"</span>: 30
+            }
+          ]
+        }
+      }
+    ],
+    <span class="tok-tag">"capabilities"</span>: {
+      <span class="tok-tag">"Alerts"</span>: <span class="tok-kw">true</span>
+    }
+  }
 }</pre></div>
 
         <div class="table-wrap"><table class="props">
-          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
-          <tr><td class="name">identifier</td><td class="type">string</td><td>Stable, unique identifier for the user in the external system. Used by CGS to create or match the user account.</td></tr>
-          <tr><td class="name">rights</td><td class="type">any JSON</td><td>The user's rights/entitlements. Any valid JSON value — object, array, or primitive. CGS stores and forwards this as-is.</td></tr>
+          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+          <tr><td class="name">identifier</td><td class="type">string</td><td><strong>Mandatory</strong></td><td>Stable, unique identifier for the user in the external system. Used by CGS to create or match the user account.</td></tr>
+          <tr><td class="name">rights</td><td class="type">JSON object</td><td><strong>Optional</strong></td><td>The user's rights/entitlements. Can be omitted when Cafeyn has set default rights for your integration (see the notes below).</td></tr>
         </table></div>
 
-        <div class="note info">
-          <div class="ic">i</div>
-          <p>The token expiry is read from the JWT <code class="inline">exp</code> claim by CGS; the external API does not need to return it.</p>
+        <div class="note warn">
+          <div class="ic">!</div>
+          <p><strong><code class="inline">identifier</code> is mandatory; <code class="inline">rights</code> is optional.</strong> A response without <code class="inline">identifier</code> is not a valid authentication. <code class="inline">rights</code> can be left out, but only safely when Cafeyn has set default rights for your integration: without them, omitting it may result in a <code class="inline">400</code> error.</p>
         </div>
+
+        <h4 class="sub-h4" id="rights">Typical rights content</h4>
+        <div class="table-wrap"><table class="props">
+          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          <tr><td class="name">articleIds</td><td class="type">string[]</td><td>Articles the user can read.</td></tr>
+          <tr><td class="name">issueIds</td><td class="type">string[]</td><td>Issues the user can read.</td></tr>
+          <tr><td class="name">publicationIds</td><td class="type">string[]</td><td>Publications the user can read entirely (all their issues).</td></tr>
+          <tr><td class="name">podcastIds</td><td class="type">string[]</td><td>Podcasts the user can access.</td></tr>
+          <tr><td class="name">videoIds</td><td class="type">string[]</td><td>Videos the user can access.</td></tr>
+          <tr><td class="name">bundleIds</td><td class="type">integer[]</td><td>Bundles the user has access to.</td></tr>
+          <tr><td class="name">issueFilters</td><td class="type">object[]</td><td>Access to part of a publication's issues, by date or number (see <a style="color:var(--brand)" href="#issue-filters">issueFilters</a>).</td></tr>
+          <tr><td class="name">capabilities</td><td class="type">object of booleans</td><td>Features enabled for the user, keyed by feature name (e.g. <code class="inline">Alerts</code>).</td></tr>
+        </table></div>
+
+        <h4 class="sub-h4" id="issue-filters">issueFilters</h4>
+        <div class="prose"><p>Each object in <code class="inline">issueFilters</code> has a single key, the publication id, whose value holds the issues of that publication the user can read. Each of <code class="inline">dates</code>, <code class="inline">dateRanges</code>, <code class="inline">numbers</code> and <code class="inline">numberRanges</code> can hold several entries, and a publication can use any of them together:</p></div>
+        <div class="table-wrap"><table class="props">
+          <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+          <tr><td class="name">dates</td><td class="type">date[]</td><td>Issues whose release date for the point of sale is exactly one of these dates (<code class="inline">yyyy-MM-dd</code>).</td></tr>
+          <tr><td class="name">dateRanges</td><td class="type">{ start, end }[] (dates)</td><td>Issues whose release date for the point of sale is within any of these date ranges (<code class="inline">yyyy-MM-dd</code>).</td></tr>
+          <tr><td class="name">numbers</td><td class="type">integer[]</td><td>Issues whose number is exactly one of these.</td></tr>
+          <tr><td class="name">numberRanges</td><td class="type">{ start, end }[] (integers)</td><td>Issues whose number is within any of these ranges.</td></tr>
+        </table></div>
+
+        <div class="prose">
+          <p>In a range, only <code class="inline">start</code> is required. <code class="inline">end</code> can be left out or set to <code class="inline">null</code>: the range then has no end. Both bounds are inclusive: an issue dated on <code class="inline">start</code> or <code class="inline">end</code>, or numbered <code class="inline">start</code> or <code class="inline">end</code>, is part of the range.</p>
+          <p><code class="inline">issueFilters</code> only refers to publications and issues <strong>not already referenced</strong> in <code class="inline">publicationIds</code> or <code class="inline">issueIds</code>: a publication readable entirely belongs in <code class="inline">publicationIds</code>, a single issue in <code class="inline">issueIds</code>, and neither is repeated in <code class="inline">issueFilters</code>.</p>
+          <p>The filters in the example above:</p>
+        </div>
+        <div class="table-wrap"><table class="props">
+          <tr><th>Filter</th><th>Access</th></tr>
+          <tr><td><code class="inline">publication_id_0001</code>, <code class="inline">dates: ["2026-05-21", "2026-07-12"]</code></td><td>Issues of the publication published on 2026-05-21 or 2026-07-12.</td></tr>
+          <tr><td><code class="inline">publication_id_0001</code>, <code class="inline">{ "start": "2025-01-01", "end": "2025-06-01" }</code></td><td>Issues of the publication published from 2025-01-01 to 2025-06-01.</td></tr>
+          <tr><td><code class="inline">publication_id_0001</code>, <code class="inline">{ "start": "2026-09-01", "end": "2027-02-01" }</code></td><td>Issues of the publication published from 2026-09-01 to 2027-02-01.</td></tr>
+          <tr><td><code class="inline">publication_id_0001</code>, <code class="inline">{ "start": "2025-01-01" }</code></td><td>Issues of the publication published from 2025-01-01 on, with no end.</td></tr>
+          <tr><td><code class="inline">publication_id_0002</code>, <code class="inline">{ "start": "2026-10-01" }</code></td><td>Issues of the publication published from 2026-10-01 on, with no end.</td></tr>
+          <tr><td><code class="inline">publication_id_0003</code>, <code class="inline">numbers: [1, 2, 8]</code></td><td>Issues of the publication numbered 1, 2 or 8.</td></tr>
+          <tr><td><code class="inline">publication_id_0003</code>, <code class="inline">{ "start": 10, "end": 20 }</code></td><td>Issues of the publication numbered 10 to 20.</td></tr>
+          <tr><td><code class="inline">publication_id_0003</code>, <code class="inline">{ "start": 30 }</code></td><td>Issues of the publication from number 30 on, with no upper bound.</td></tr>
+        </table></div>
+
+        <h4 class="sub-h4">Notes</h4>
+        <div class="prose"><ul>
+          <li><code class="inline">rights</code> must be a JSON <strong>object</strong>, written as JSON. A string containing JSON (e.g. <code class="inline">"rights": "{\"issueIds\":[\"1245\"]}"</code>), an array or a primitive is not accepted, and the user is then treated as having no rights.</li>
+          <li>The response must be strict JSON: no comments, no trailing commas. A response that has either cannot be read, and the authentication fails.</li>
+          <li>The token expiry is read from the JWT <code class="inline">exp</code> claim; the external API does not need to return it.</li>
+          <li>Cafeyn can set default rights for your integration. When it does, they replace the returned <code class="inline">rights</code> for every user, so <code class="inline">rights</code> does not need to be returned; the call is still made, for the identifier. When no default rights are set, <code class="inline">rights</code> must be returned: omitting it may result in a <code class="inline">400</code> error.</li>
+        </ul></div>
 
         <div class="note warn">
           <div class="ic">!</div>
@@ -380,8 +486,13 @@ Accept: application/json</pre></div>
         </div>
         <p class="desc">Returns the list of reading profiles associated with the user's account.</p>
 
+        <div class="note info">
+          <div class="ic">i</div>
+          <p><strong>Implementing this endpoint is not mandatory.</strong> Cafeyn can set a default profile for your integration; when it does, that profile is used instead of calling this endpoint. Implement this endpoint only if no default profile is set.</p>
+        </div>
+
         <h4 class="sub-h4">When it is called</h4>
-        <div class="prose"><p>After successful authentication, when CGS builds account information or fetches profiles explicitly.</p></div>
+        <div class="prose"><p>Right after <code class="inline">GET /cgs/authenticate</code>, each time a user signs in or their profiles are requested.</p></div>
 
         <h4 class="sub-h4">Prerequisites</h4>
         <div class="prose"><ul>
@@ -421,37 +532,55 @@ Accept: application/json</pre></div>
     <section id="call-sequence">
       <div class="eyebrow">Generic driver</div>
       <h2>Call sequence</h2>
-      <p class="dek">How a client-side login turns into the two calls above, end to end.</p>
+      <p class="dek">How a sign-in to a Cafeyn application turns into the two calls above, end to end.</p>
 
-      <div class="snippet"><div class="bar"><span class="fname">sequence</span></div><pre>Client                     CGS                        External API
-  |                          |                              |
-  |-- POST /auth/token ------&gt;|                              |
-  |   { externalToken }      |-- GET /cgs/authenticate ---->|
-  |                          |   Authorization: Bearer ...  |
-  |                          |&lt;-- 200 { identifier,         |
-  |                          |         rights } ------------|
-  |&lt;-- CGS session token ----|                              |
-  |                          |                              |
-  |-- GET /account/info ----&gt;|                              |
-  |   Authorization: Bearer  |-- GET /cgs/profiles -------->|
-  |   &lt;CGS-token&gt;            |&lt;-- 200 [ ... ] -------------|
-  |&lt;-- account data +--------|                              |
-  |    profiles              |                              |</pre></div>
+      <div class="snippet"><div class="bar"><span class="fname">sequence</span></div><pre>Cafeyn app                      CGS                        External API
+  |                               |                              |
+  |-- sign in with the            |                              |
+  |   external token ------------&gt;|                              |
+  |                               |-- GET /cgs/authenticate ----&gt;|
+  |                               |   Authorization: Bearer ...  |
+  |                               |&lt;-- 200 { identifier,         |
+  |                               |         rights } ------------|
+  |                               |-- GET /cgs/profiles --------&gt;|
+  |                               |   Authorization: Bearer ...  |
+  |                               |&lt;-- 200 [ ... ] --------------|
+  |&lt;-- session + rights           |                              |
+  |    + profiles ----------------|                              |</pre></div>
+
+      <div class="prose"><p>When Cafeyn has set a default profile for your integration, the <code class="inline">GET /cgs/profiles</code> call is skipped.</p></div>
     </section>
 
     <!-- ================= CONFIGURATION ================= -->
     <section id="configuration">
       <div class="eyebrow">Generic driver</div>
       <h2>Configuration</h2>
-      <p class="dek">The external API base URL is configured per <strong>External Partner</strong> record in the CGS database (<code class="inline">PointOfSaleDriver.BaseUrl</code> field).</p>
+      <p class="dek">To set up the integration, provide Cafeyn with:</p>
 
-      <div class="snippet"><div class="bar"><span class="fname">example</span></div><pre>BaseUrl: https://api.your-system.example.com
+      <div class="table-wrap"><table class="props">
+        <tr><th>Setting</th><th>Description</th></tr>
+        <tr><td class="name">Base URL</td><td>Base URL of your API. Required.</td></tr>
+        <tr><td class="name">Default rights (optional)</td><td>Rights applied to every user instead of those returned by <code class="inline">GET /cgs/authenticate</code>.</td></tr>
+        <tr><td class="name">Default profile (optional)</td><td>Profile used for every user instead of calling <code class="inline">GET /cgs/profiles</code>.</td></tr>
+      </table></div>
+
+      <div class="snippet"><div class="bar"><span class="fname">example</span></div><pre>Base URL: https://api.your-system.example.com
 → calls https://api.your-system.example.com/cgs/authenticate
 → calls https://api.your-system.example.com/cgs/profiles</pre></div>
+
+      <div class="prose"><p>A base URL that has a path must end with <code class="inline">/</code>; otherwise its last segment is dropped:</p></div>
+
+      <div class="snippet"><div class="bar"><span class="fname">base URL with a path</span></div><pre>Base URL: https://partner.example.com/api/
+→ calls https://partner.example.com/api/cgs/authenticate
+→ calls https://partner.example.com/api/cgs/profiles
+
+Base URL: https://partner.example.com/api
+→ calls https://partner.example.com/cgs/authenticate
+→ calls https://partner.example.com/cgs/profiles</pre></div>
     </section>
 
     <footer class="pagefoot">
-      CGS Backend · Generic driver — External API contract, first version.
+      CGS Backend · Generic driver — External API contract, updated November 2026.
     </footer>
 
   </main>
